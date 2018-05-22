@@ -1,0 +1,195 @@
+body {
+	font-family: 'Poppins', arial;
+}
+
+.GoBystrok-spacer {
+	height: 140px;
+}
+
+.demo-card-square.mdl-card {
+  width: 320px;
+  height: 320px;
+}
+.demo-card-square > .mdl-card__title {
+  color: #fff;
+  background:
+    url('') bottom right 15% no-repeat #46B6AC;
+}
+
+/* ==================== NAVBAR/TOPO/ESQUERDA ========================== */
+
+.GoBystrok-navbar {
+	background-color: #FF5A00 !important;
+}
+
+.GoBystrok-navbar-right {
+	background-color: #FF5A00 !important;
+}
+
+nav.GoBystrok-navigation-color > a {
+	color: white !important;
+	font-family: 'Poppins', arial;
+	font-size: 14px;
+	margin-right: 8px !important;
+}
+
+nav.GoBystrok-navigation-color > a:hover {
+	border-color: white !important;
+}
+
+.GoBystrok-brand {
+	color: white !important;
+	font-family: 'Poppins', arial;
+	font-size: 25px;
+}
+
+.GoBystrok-slogan {
+	font-family: 'Sorts Mill Goudy', helvetica, arial;
+	color: white;
+	position: relative;
+}
+
+.GoBystrok-sub-slogan {
+	font-family: 'Merriweather', helvetica, arial;
+	color: white;
+	position: relative;
+	font-size: 16px;
+}
+
+/* ==================== FORM PASSAGEM ========================== */
+
+.color-orange {
+	background-color: #E64E07 !important;
+	opacity: .9;
+}
+
+.color-white {
+	color: white;
+}
+
+.color-grey-light {
+	color: #F0F0F0;
+}
+
+.padding-form {
+	padding: 20px 20px 50px 20px !important;
+}
+
+.margin-top {
+	margin-top: 50px !important;
+}
+
+.layout-center {
+	justify-content: center !important;
+}
+
+div .mdl-textfield__label:after {
+  background: white;
+  color: white;
+}
+
+.mdl-color-modifier:focus{
+    color: white;
+}
+
+.mdl-textfield__input{
+    border-bottom: 1px solid #fff;
+}
+
+
+.padding-sale {
+	padding-right: 80px;
+	padding-left: 80px;
+}
+
+.margin-negative {
+	margin-right: -50px !important;
+}
+
+.GoBystrok-title-section {
+	padding: 30px 0px;
+	color: #150067;
+}
+
+.GoBystrok-fab {
+  position: absolute;
+  right: 22%;
+  margin-top: 10px;
+  z-index: 3;
+  /* background: white !important; */
+  color: black !important;
+}
+
+.color-white-t {
+	background-color: white !important;
+	opacity: .9;
+}
+
+
+
+.GoBystrok-title {
+  font-size: 40px !important;
+  padding-top: 50px !important;
+  font-family: 'Poppins', arial;
+}
+
+.GoBystrok-title {
+    font-size: 26px;
+    margin: 0 16px;
+    padding-top: 24px;
+}
+
+form {
+    padding: 20px;
+    width: 100% !important;
+}
+.left-side {
+    margin-right: 100px;
+    display: inline-block;
+}
+.left-side div {
+    display: block;
+}
+.left-side fieldset {
+    margin: 20px 0;
+}
+.left-side fieldset > label {
+    padding-right: 20px;
+}
+.right-side {
+    vertical-align: top;
+    display: inline-block;
+}
+.toolbar-section {
+    width: 80%;
+    /* margin-top: 20px; */
+    margin-left: 26%;
+}
+.info-section {
+    margin: 15px 0;
+}
+.info-section > * {
+    display: inline-block;
+    vertical-align: top;
+}
+.info-section table {
+    margin-right: 200px;
+}
+.info-section ul li {
+    padding: 0;
+}
+
+.col-tam {
+	width: 50%;
+    margin-left: 26%;
+    left: auto;
+    right: auto;
+}
+
+.contact-form {
+    margin-left: -20px;
+}
+
+.mdl-grid.center-items {
+  justify-content: center !important;
+}
