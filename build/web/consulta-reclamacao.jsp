@@ -11,7 +11,7 @@
             <div class="formulario color-orange">     
                 <div class="mdl-grid center-items color-orange">
                     <div class="logo-font GoBystrok-title GoBystrok-slogan">Acompanhar Reclamação</div>
-                    <form method="POST" name="reclamacaoForm" class="" onsubmit="return verificarCamposReclamacao()">
+                    <form action="ConsultarReclamacao" method="POST" name="reclamacaoForm" class="" onsubmit="return verificarCamposReclamacao()">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
                             <input class="mdl-textfield__input color-white" type="text" name="codPassagem" id="sample3">
                             <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Código da Passagem</label>

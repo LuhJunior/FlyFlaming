@@ -1,9 +1,15 @@
 package Modelo;
 
+import Banco.PassagemDAO;
+import Banco.ReclamacaoDAO;
+import java.util.Calendar;
+
 public class Passagem {
+    int codigo;
     String assento;
-    boolean paga, checkin;
+    boolean paga, checkin, cancelada;
     float valor;
+    String horaCompra;
     Programacao programacao;
     Cliente cliente;
     Reclamacao reclamacao;
@@ -21,6 +27,22 @@ public class Passagem {
         this.reclamacao = reclamacao;
     }
 
+    public boolean isCancelada() {
+        return cancelada;
+    }
+
+    public void setCancelada(boolean cancelada) {
+        this.cancelada = cancelada;
+    }
+
+    public String getHoraCompra() {
+        return horaCompra;
+    }
+
+    public void setHoraCompra(String horaCompra) {
+        this.horaCompra = horaCompra;
+    }
+
     public String getAssento() {
         return assento;
     }
@@ -31,6 +53,14 @@ public class Passagem {
 
     public boolean isPaga() {
         return paga;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int Codigo) {
+        this.codigo = Codigo;
     }
 
     public void setPaga(boolean paga) {
@@ -77,31 +107,37 @@ public class Passagem {
         this.reclamacao = reclamacao;
     }
     
-    boolean cancelar(){
+    public boolean cancelar(){
         return true;
     }
     
-    boolean checkin(){
+    public boolean checkin(){
         return true;
     }
     
-    boolean pagar(){
+    public boolean pagar(){
         return true;
     }
     
-    boolean fazerReclamcao(String reclamacao){
+    public boolean fazerReclamcao(String reclamacao){
         return true;
     }
     
-    Reclamacao consultarReclamacao(String codReclamacao){
-        return new Reclamacao();
-    }
-    
-    boolean addOnDb(){ 
+    public boolean consultarReclamacao(){
+        this.setReclamacao(new Reclamacao());
+        this.getReclamacao().getFromDb(this.codigo);
         return true;
     }
     
-    boolean getFromDb(){
+    public boolean addOnDb(){ 
+        return true;
+    }
+    
+    public boolean getFromDb(){
+        this.setCliente(new Cliente());
+        this.setProgramacao(new Programacao());
+        PassagemDAO p = new PassagemDAO();
+        p.pesquisar(this);
         return true;
     }
 }
