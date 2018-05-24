@@ -1,10 +1,28 @@
 package Modelo;
 
+import Banco.ReclamacaoDAO;
+
 public class Reclamacao {
-    String descricao;
+    String descricao, dataHora, codReclamacao;
     char estado; //Em aberto/ Resolucao/ Resolvido
 
     public Reclamacao() {
+    }
+
+    public String getCodReclamacao() {
+        return codReclamacao;
+    }
+
+    public void setCodReclamacao(String codReclamacao) {
+        this.codReclamacao = codReclamacao;
+    }
+
+    public String getDataHora() {
+        return dataHora;
+    }
+
+    public void setDataHora(String dataHora) {
+        this.dataHora = dataHora;
     }
 
     public Reclamacao(String descricao, char estado) {
@@ -28,21 +46,25 @@ public class Reclamacao {
         this.estado = estado;
     }
     
-    boolean ordemResolucao(){
+    public boolean ordemResolucao(){
         this.setEstado('E');
         return true;
     }
     
-    boolean resolver(){
+    public boolean resolver(){
         this.setEstado('R');
         return true;
     }
    
-    boolean addOnDb(){ 
-        return true;
+    public boolean addOnDb(String id){
+        ReclamacaoDAO r = new ReclamacaoDAO(); 
+        return r.inserir(this, Integer.parseInt(id));
     }
     
-    boolean getFromDb(){
+    public boolean getFromDb(int id){
+        ReclamacaoDAO r = new ReclamacaoDAO();
+        r.pesquisar(this, id);
         return true;
     }
+
 }

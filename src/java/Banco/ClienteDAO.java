@@ -1,4 +1,4 @@
-package dados;
+package Banco;
 
 import Modelo.Cliente;
 import java.sql.Connection;

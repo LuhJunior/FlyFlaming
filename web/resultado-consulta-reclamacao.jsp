@@ -11,6 +11,7 @@
             <div class="formulario color-orange">     
                 <div class="mdl-grid center-items color-orange">
                     <div class="logo-font GoBystrok-title GoBystrok-slogan">Reclamações</div>
+                    <% Modelo.Reclamacao r = (Modelo.Reclamacao) request.getAttribute("reclamacao"); %>
                         <table style="margin-top: 20px;" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp ">
                             <thead>
                                 <tr>
@@ -20,16 +21,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="mdl-data-table__cell--non-numeric">1935</td>
-                                    <td>Bagagem danificada</td>
-                                    <td>Em resolução</td>
-                                </tr>
-                                <tr>
-                                    <td class="mdl-data-table__cell--non-numeric">2169</td>
-                                    <td>Bagagem extraviada</td>
-                                    <td>Resolvido</td>
-                                </tr>
+                                <%if(r != null){ %>
+                                    <tr>
+                                        <td class="mdl-data-table__cell--non-numeric"><%=r.getCodReclamacao() %></td>
+                                        <td><%=r.getDescricao()%></td>
+                                        <%
+                                            String situacao;
+                                            if(r.getEstado() == 'A') situacao = "Aberto";
+                                            else situacao = "Resolvido";
+                                        %>
+                                        <td><%=situacao%></td>
+                                    </tr>
+                                <%}else{%>
+                                    <script>alert("Deu ruim");</script>
+                                <%}%>
                             </tbody>
                         </table>
                     <div class="toolbar-section">

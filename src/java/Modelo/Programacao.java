@@ -40,15 +40,16 @@ public class Programacao {
         this.voo = voo;
     }
     
-    boolean reservarAssento(String assento){
+    public boolean reservarAssento(String assento){
         return true;
     }
     
-    boolean addOnDb(){ 
+    public boolean addOnDb(){ 
         return true;
     }
     
-    boolean getFromDb(){
+    public boolean getFromDb(int id){
+        
         return true;
     }
 }
