@@ -1,6 +1,6 @@
 package dados;
 
-import flyflaming.Companhia;
+import Modelo.Companhia;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

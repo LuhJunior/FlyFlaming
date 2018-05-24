@@ -1,4 +1,4 @@
-package flyflaming;
+package Modelo;
 
 public class Companhia {
     String cnpj, nome, endereco, email, telefone;

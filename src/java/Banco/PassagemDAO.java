@@ -1,6 +1,6 @@
 package dados;
 
-import flyflaming.Passagem;
+import Modelo.Passagem;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

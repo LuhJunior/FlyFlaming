@@ -1,4 +1,6 @@
-package flyflaming;
+package Modelo;
+
+import Modelo.Companhia;
 
 public class Aeronave {
     String prefixo;

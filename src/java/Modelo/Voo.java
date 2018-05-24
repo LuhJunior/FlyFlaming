@@ -1,4 +1,4 @@
-package flyflaming;
+package Modelo;
 
 public class Voo {
     String origem, destino;

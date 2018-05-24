@@ -1,5 +1,6 @@
-package flyflaming;
+package Modelo;
 
+import Modelo.Voo;
 import java.util.Calendar;
 
 public class Programacao {

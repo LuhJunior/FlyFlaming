@@ -1,6 +1,6 @@
 package dados;
 
-import flyflaming.Reclamacao;
+import Modelo.Reclamacao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -1,4 +1,4 @@
-package flyflaming;
+package Modelo;
 
 public class Passagem {
     String assento;
