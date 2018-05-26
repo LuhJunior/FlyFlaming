@@ -1,6 +1,6 @@
-package dados;
+package Banco;
 
-import flyflaming.Aeronave;
+import Modelo.Aeronave;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

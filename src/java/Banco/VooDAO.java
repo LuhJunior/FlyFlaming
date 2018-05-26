@@ -1,6 +1,6 @@
-package dados;
+package Banco;
 
-import flyflaming.Voo;
+import Modelo.Voo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

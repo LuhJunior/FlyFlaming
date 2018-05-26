@@ -24,13 +24,13 @@
               <!-- Navigation -->
               <div class="android-navigation-container">
                 <nav class="android-navigation mdl-navigation GoBystrok-navigation-color">
-                  <a class="mdl-navigation__link" href="index.html">HOME</a>
+                  <a class="mdl-navigation__link" href="index.jsp">HOME</a>
                   <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Passagem</a>
                   <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Voo</a>
                   <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Contato</a>
-                  <a class="mdl-navigation__link mdl-typography--text-uppercase" href="checkin.html">Check-In</a>
-                  <a class="mdl-navigation__link mdl-typography--text-uppercase" href="reclamacao.html">RECLAMAÇÃO</a>
-                  <a href="login.html">
+                  <a class="mdl-navigation__link mdl-typography--text-uppercase" href="checkin.jsp">Check-In</a>
+                  <a class="mdl-navigation__link mdl-typography--text-uppercase" href="reclamacao.jsp">RECLAMAÇÃO</a>
+                  <a href="login.jsp">
                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect mdl-button--mini-fab">
                       Entrar
                     </button>
@@ -59,12 +59,13 @@
             <nav class="mdl-navigation">
               <a class="mdl-navigation__link" href="">Passagem</a>
               <a class="mdl-navigation__link" href="">Voo</a>
-              <a class="mdl-navigation__link" href="checkin.html">Check-In</a>          
+              <a class="mdl-navigation__link" href="checkin.jsp">Check-In</a>
+              <a class="mdl-navigation__link" href="consulta-reclamacao.jsp">Acompanhar Reclamação</a> 
               <div class="android-drawer-separator"></div>
               <span class="mdl-navigation__link" href="">Dúvidas</span>
               <a class="mdl-navigation__link" href="">Contato</a>                                                             
               <div class="android-drawer-separator"></div>
               <span class="mdl-navigation__link" href="">Usuário</span>
-              <a class="mdl-navigation__link" href="signin.html">Cadastre-se</a>
+              <a class="mdl-navigation__link" href="signin.jsp">Cadastre-se</a>
             </nav>
           </div>

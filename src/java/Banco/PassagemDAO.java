@@ -1,10 +1,11 @@
-package dados;
+package Banco;
 
-import flyflaming.Passagem;
+import Modelo.Passagem;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 public class PassagemDAO {
     public boolean inserir(Passagem pa){
@@ -43,10 +44,21 @@ public class PassagemDAO {
     
     public void pesquisar(Passagem pa){
         try{
-            String sql = "";
+            String sql = "SELECT IDPROGRAMACAO, COD_POLTRONA, DATAHORA_COMPRA, CHECKIN,"
+                    + "CANCELAMENTO, VALOR, CPF FROM PASSAGEM WHERE IDPASSAGEM = ?";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement p = conn.prepareStatement(sql);
+            p.setInt(1, pa.getCodigo());
             ResultSet rs = p.executeQuery();
+            if(rs != null && rs.next()){
+                pa.getProgramacao().getFromDb(rs.getInt("IDPROGRAMACAO"));
+                pa.setAssento(rs.getString("COD_POLTRONA"));
+                pa.setHoraCompra(rs.getString("DATAHORA_COMPRA"));
+                pa.setCheckin(rs.getInt("CHECKIN") == 1);
+                pa.setCancelada(rs.getInt("CANCELAMENTO") == 1);
+                pa.setValor(rs.getFloat("VALOR"));
+                pa.getCliente().setCpf(rs.getString("CPF"));
+            }
             ConnectionFactory.closeConnection(conn, p, rs);
         }
         catch(SQLException e){
