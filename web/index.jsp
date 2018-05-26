@@ -4,6 +4,7 @@
     Author     : Diego Malta
 --%>
 
+<%@page import="Negocio.vooNeg"%>
 <jsp:include page="layout/header.jsp"/>    
     <jsp:include page="layout/navbar.jsp"/>  
 
@@ -194,6 +195,8 @@
               <div style="padding-top: 20px;" class="logo-font GoBystrok-title GoBystrok-slogan">Voos da semana</div>
 
               <div class="GoBystrok-fab padding-form">
+                  
+                  
                   <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp ">
                     <thead>
                       <tr>
@@ -207,78 +210,21 @@
                       </tr>
                     </thead>
                     <tbody>
+                    <% vooNeg r = new vooNeg();
+                        r.pesquisarVoosSemana();
+                    %>
+                    <% for (int i=0;i<r.getSemana().length;i++) 
+                        if (r.getSemana()[i]!= null){%>
                       <tr>
-                        <td class="mdl-data-table__cell--non-numeric">242</td>
-                        <td>São Paulo</td>
-                        <td>15/04/2018</td>
-                        <td>08:25</td>
+                        <td class="mdl-data-table__cell--non-numeric"> <%=r.getSemana()[i].getNumVoo()%> </td>
+                        <td><%=r.getSemana()[i].getDestino()%></td>
+                        <td><%=r.getSemana()[i].getData()%></td>
+                        <td><%=r.getSemana()[i].getHora()%></td>
                         <td>20</td>
                         <td>36</td>
-                        <td>R$ 749,65</td>
+                        <td><%=r.getSemana()[i].getValorPassagem()%></td>
                       </tr>
-                      <tr>
-                        <td class="mdl-data-table__cell--non-numeric">242</td>
-                        <td>São Paulo</td>
-                        <td>15/04/2018</td>
-                        <td>08:25</td>
-                        <td>20</td>
-                        <td>36</td>
-                        <td>R$ 749,65</td>
-                      </tr>
-                      <tr>
-                        <td class="mdl-data-table__cell--non-numeric">242</td>
-                        <td>São Paulo</td>
-                        <td>15/04/2018</td>
-                        <td>08:25</td>
-                        <td>20</td>
-                        <td>36</td>
-                        <td>R$ 749,65</td>
-                      </tr>
-                      <tr>
-                        <td class="mdl-data-table__cell--non-numeric">242</td>
-                        <td>São Paulo</td>
-                        <td>15/04/2018</td>
-                        <td>08:25</td>
-                        <td>20</td>
-                        <td>36</td>
-                        <td>R$ 749,65</td>
-                      </tr>
-                      <tr>
-                        <td class="mdl-data-table__cell--non-numeric">242</td>
-                        <td>São Paulo</td>
-                        <td>15/04/2018</td>
-                        <td>08:25</td>
-                        <td>20</td>
-                        <td>36</td>
-                        <td>R$ 749,65</td>
-                      </tr>
-                      <tr>
-                        <td class="mdl-data-table__cell--non-numeric">242</td>
-                        <td>São Paulo</td>
-                        <td>15/04/2018</td>
-                        <td>08:25</td>
-                        <td>20</td>
-                        <td>36</td>
-                        <td>R$ 749,65</td>
-                      </tr>
-                      <tr>
-                        <td class="mdl-data-table__cell--non-numeric">242</td>
-                        <td>São Paulo</td>
-                        <td>15/04/2018</td>
-                        <td>08:25</td>
-                        <td>20</td>
-                        <td>36</td>
-                        <td>R$ 749,65</td>
-                      </tr>
-                      <tr>
-                        <td class="mdl-data-table__cell--non-numeric">242</td>
-                        <td>São Paulo</td>
-                        <td>15/04/2018</td>
-                        <td>08:25</td>
-                        <td>20</td>
-                        <td>36</td>
-                        <td>R$ 749,65</td>
-                      </tr>
+                    <%}%>
                     </tbody>
                   </table>
               </div>
