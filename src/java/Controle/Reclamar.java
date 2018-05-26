@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
+package Controle;
 
-import Modelo.Cliente;
-import Modelo.Passagem;
 import Modelo.Reclamacao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Júnior
  */
-public class ConsultarReclamacao extends HttpServlet {
+@WebServlet(name="Reclamar", urlPatterns={"/Reclamar"})
+public class Reclamar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,20 +33,13 @@ public class ConsultarReclamacao extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Passagem p = new Passagem();
-        p.setCodigo(Integer.parseInt(request.getParameter("codPassagem")));
-        p.getFromDb();
-        String cpf = request.getParameter("CPF");
-        if(p.getCliente().getCpf().equals(cpf)){
-            p.consultarReclamacao();
-            request.setAttribute("reclamacao", p.getReclamacao());
-            RequestDispatcher dispacher = request.getRequestDispatcher("resultado-consulta-reclamacao.jsp");
-            dispacher.forward(request, response);
-        }
-        else{
-            RequestDispatcher dispacher = request.getRequestDispatcher("resultado-consulta-reclamacao.jsp");
-            dispacher.forward(request, response);
-        }
+        Reclamacao r = new Reclamacao();
+        r.setDescricao(request.getParameter("descricao"));
+        boolean p = r.addOnDb(request.getParameter("codPassagem"));
+        if(!p) System.out.println("Deu ruim");
+        else System.out.println("Deu bom");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("reclamacao.jsp");
+        dispatcher.forward(request,response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
