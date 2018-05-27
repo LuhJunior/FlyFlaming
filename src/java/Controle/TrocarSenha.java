@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
+package Controle;
 
-import Modelo.Reclamacao;
+import Modelo.Cliente;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,27 +18,14 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Júnior
  */
-@WebServlet(name="Reclamar", urlPatterns={"/Reclamar"})
-public class Reclamar extends HttpServlet {
+@WebServlet(name = "TrocarSenha", urlPatterns = {"/TrocarSenha"})
+public class TrocarSenha extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Reclamacao r = new Reclamacao();
-        r.setDescricao(request.getParameter("descricao"));
-        boolean p = r.addOnDb(request.getParameter("codPassagem"));
-        if(!p) System.out.println("Deu ruim");
-        else System.out.println("Deu bom");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("reclamacao.jsp");
-        dispatcher.forward(request,response);
+        Cliente c = new Cliente();
+        c.setSenha(request.getParameter("Senha"));
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

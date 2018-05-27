@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
+package Controle;
 
 import Modelo.Cliente;
-import Modelo.Passagem;
-import Modelo.Reclamacao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,32 +19,18 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Júnior
  */
-public class ConsultarReclamacao extends HttpServlet {
+@WebServlet(name = "NovaSenha", urlPatterns = {"/NovaSenha"})
+public class NovaSenha extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Passagem p = new Passagem();
-        p.setCodigo(Integer.parseInt(request.getParameter("codPassagem")));
-        p.getFromDb();
-        String cpf = request.getParameter("CPF");
-        if(p.getCliente().getCpf().equals(cpf)){
-            p.consultarReclamacao();
-            request.setAttribute("reclamacao", p.getReclamacao());
-            RequestDispatcher dispacher = request.getRequestDispatcher("resultado-consulta-reclamacao.jsp");
-            dispacher.forward(request, response);
-        }
-        else{
-            RequestDispatcher dispacher = request.getRequestDispatcher("resultado-consulta-reclamacao.jsp");
-            dispacher.forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        Cliente c = new Cliente();
+        c.setCpf("");
+        c.setSenha(request.getParameter("Senha"));
+        if(c.trocarSenha()){
+            RequestDispatcher dispatcher = request.getRequestDispatcher("trocar-senha.jsp");
+            dispatcher.forward(request, response);
         }
     }
 

@@ -45,7 +45,8 @@ public class PassagemDAO {
     public void pesquisar(Passagem pa){
         try{
             String sql = "SELECT IDPROGRAMACAO, COD_POLTRONA, DATAHORA_COMPRA, CHECKIN,"
-                    + "CANCELAMENTO, VALOR, CPF FROM PASSAGEM WHERE IDPASSAGEM = ?";
+                    + "CANCELAMENTO, VALOR_FINAL, CPF FROM PASSAGEM AS P JOIN PAGAMENTO AS PG ON P.IDPAGAMENTO=PG.PAGAMENTO"
+                    + " WHERE IDPASSAGEM = ?";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement p = conn.prepareStatement(sql);
             p.setInt(1, pa.getCodigo());
@@ -56,7 +57,7 @@ public class PassagemDAO {
                 pa.setHoraCompra(rs.getString("DATAHORA_COMPRA"));
                 pa.setCheckin(rs.getInt("CHECKIN") == 1);
                 pa.setCancelada(rs.getInt("CANCELAMENTO") == 1);
-                pa.setValor(rs.getFloat("VALOR"));
+                pa.setValor(rs.getFloat("VALOR_FINAL"));
                 pa.getCliente().setCpf(rs.getString("CPF"));
             }
             ConnectionFactory.closeConnection(conn, p, rs);

@@ -11,7 +11,7 @@
             <div class="formulario color-orange padding-form">     
                 <div class="mdl-grid center-items color-orange">
                         <div class="logo-font GoBystrok-title GoBystrok-slogan">Troca de Senha</div>
-                        <form method="POST" name="loginForm" onsubmit="return verificarCampos()">
+                        <form action="NovaSenha" method="POST" name="loginForm" onsubmit="return verificarCampos()">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
                                 <input class="mdl-textfield__input color-white" type="password" name="Senha" minlength="8" maxlength="16" id="sample3">
                                 <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Senha</label>

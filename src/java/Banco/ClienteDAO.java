@@ -22,14 +22,16 @@ public class ClienteDAO {
         }
     }
     
-    public boolean update(Cliente c){
+    public boolean updateSenha(Cliente c){
         int r = 0;
         try{
-            String sql = "";
+            String sql = "UPDATE CLIENTE SET SENHA=? WHERE CPF=?";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement p = conn.prepareStatement(sql);
-            ResultSet rs = p.executeQuery();
-            ConnectionFactory.closeConnection(conn, p, rs);
+            p.setString(1, c.getSenha());
+            p.setString(2, c.getCpf());
+            r = p.executeUpdate();
+            ConnectionFactory.closeConnection(conn, p);
         }
         catch(SQLException e){
             throw new RuntimeException(e);

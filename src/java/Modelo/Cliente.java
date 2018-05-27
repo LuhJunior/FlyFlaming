@@ -1,9 +1,10 @@
 package Modelo;
 
+import Banco.ClienteDAO;
 import java.util.Calendar;
 
 public class Cliente {
-    String nome, cpf, email, telefone;
+    String nome, cpf, email, telefone, senha;
     Calendar dataNascimento;
 
     public Cliente() {
@@ -19,6 +20,14 @@ public class Cliente {
 
     public String getNome() {
         return nome;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public void setNome(String nome) {
@@ -57,15 +66,20 @@ public class Cliente {
         this.dataNascimento = dataNascimento;
     }
     
-    boolean comprarPassagem(){
+    public boolean comprarPassagem(){
         return true;
     }
     
-    boolean addOnDb(){ 
+    public boolean addOnDb(){ 
         return true;
     }
     
-    boolean getFromDb(){
+    public boolean getFromDb(){
+        return true;
+    }
+    
+    public boolean trocarSenha(){
+        ClienteDAO c = new ClienteDAO();
         return true;
     }
 }

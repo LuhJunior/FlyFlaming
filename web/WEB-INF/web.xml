@@ -11,7 +11,7 @@
     </servlet>
     <servlet>
         <servlet-name>ConsultarReclamacao</servlet-name>
-        <servlet-class>Controller.ConsultarReclamacao</servlet-class>
+        <servlet-class>Controle.ConsultarReclamacao</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
