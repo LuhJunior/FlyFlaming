@@ -4,6 +4,7 @@
     Author     : Diego Malta
 --%>
 
+<%@page import="Negocio.ofertasNeg"%>
 <%@page import="Negocio.vooNeg"%>
 <jsp:include page="layout/header.jsp"/>    
     <jsp:include page="layout/navbar.jsp"/>  
@@ -75,118 +76,32 @@
         <div class="android-screen-section mdl-typography--text-center GoBystrok-spacer"></div>
 
         <div class="mdl-typography--display-1-color-contrast mdl-typography--text-center GoBystrok-title-section GoBystrok-title">Ofertas Imperdíveis!</div>
-                  
-          <!-- SECTION OFERTAS - ROW  -->
-          <div class="mdl-grid layout-center padding-sale">            
-
-            <div class="mdl-cell mdl-cell--4-col margin-negative">
-              <div class="demo-card-square mdl-card mdl-shadow--2dp">
-              <div class="mdl-card__title mdl-card--expand">
-                <h2 class="mdl-card__title-text">São Paulo</h2>
-              </div>
-              <div class="mdl-card__supporting-text">
-                A partir de <strong>R$ 113,53</strong> à vista
-              </div>
-              <div class="mdl-card__actions mdl-card--border">
-                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                  Comprar
-                </a>
-              </div>
-            </div>
-
-          </div>
-          <div class="mdl-cell mdl-cell--4-col margin-negative">
-
-            <div class="demo-card-square mdl-card mdl-shadow--2dp">
-              <div class="mdl-card__title mdl-card--expand">
-                <h2 class="mdl-card__title-text">São Paulo</h2>
-              </div>
-              <div class="mdl-card__supporting-text">
-                A partir de <strong>R$ 113,53</strong> à vista
-              </div>
-              <div class="mdl-card__actions mdl-card--border">
-                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                  Comprar
-                </a>
-              </div>
-            </div>
-
-            </div>
-
-            <div class="mdl-cell mdl-cell--4-col margin-negative">
-
-              <div class="demo-card-square mdl-card mdl-shadow--2dp">
-                <div class="mdl-card__title mdl-card--expand">
-                  <h2 class="mdl-card__title-text">São Paulo</h2>
+            <% ofertasNeg o = new ofertasNeg();
+                  o.pesquisarOfertaSemana();
+            %>
+            <!-- SECTION OFERTAS - ROW  -->
+            <div class="mdl-grid layout-center padding-sale">  
+            <% for (int i = 0; i<o.getSemana().length; i++) 
+                    if (o.getSemana()[i]!= null){%>  
+                    <div class="mdl-cell mdl-cell--4-col margin-negative">
+                      <div class="demo-card-square mdl-card mdl-shadow--2dp">
+                      <div class="mdl-card__title mdl-card--expand">
+                        <h2 class="mdl-card__title-text"><%=o.getSemana()[i].getLocal()%></h2>
+                      </div>
+                      <div class="mdl-card__supporting-text">
+                        <%=o.getSemana()[i].getDescricao()%>
+                      </div>
+                      <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                          Comprar
+                        </a>
+                      </div>
+                    </div>                    
                 </div>
-                <div class="mdl-card__supporting-text">
-                  A partir de <strong>R$ 113,53</strong> à vista
-                </div>
-                <div class="mdl-card__actions mdl-card--border">
-                  <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                    Comprar
-                  </a>
-                </div>
-              </div>
-            </div>
+            <%}%>
+            </div> <!-- ./END SECTION OFERTAS - ROW 1 -->
 
-          </div> <!-- ./END SECTION OFERTAS - ROW 1 -->
-
-          <!-- SECTION OFERTAS - ROW 2 -->
-          <div style="padding-bottom: 50px;" class="mdl-grid layout-center padding-sale">
-
-            <div class="mdl-cell mdl-cell--4-col margin-negative">
-              <div class="demo-card-square mdl-card mdl-shadow--2dp">
-              <div class="mdl-card__title mdl-card--expand">
-                <h2 class="mdl-card__title-text">São Paulo</h2>
-              </div>
-              <div class="mdl-card__supporting-text">
-                A partir de <strong>R$ 113,53</strong> à vista
-              </div>
-              <div class="mdl-card__actions mdl-card--border">
-                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                  Comprar
-                </a>
-              </div>
-            </div>
-
-          </div>
-          <div class="mdl-cell mdl-cell--4-col margin-negative">
-
-            <div class="demo-card-square mdl-card mdl-shadow--2dp">
-              <div class="mdl-card__title mdl-card--expand">
-                <h2 class="mdl-card__title-text">São Paulo</h2>
-              </div>
-              <div class="mdl-card__supporting-text">
-                A partir de <strong>R$ 113,53</strong> à vista
-              </div>
-              <div class="mdl-card__actions mdl-card--border">
-                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                  Comprar
-                </a>
-              </div>
-            </div>
-
-            </div>
-
-            <div class="mdl-cell mdl-cell--4-col margin-negative">
-
-              <div class="demo-card-square mdl-card mdl-shadow--2dp">
-                <div class="mdl-card__title mdl-card--expand">
-                  <h2 class="mdl-card__title-text">São Paulo</h2>
-                </div>
-                <div class="mdl-card__supporting-text">
-                  A partir de <strong>R$ 113,53</strong> à vista
-                </div>
-                <div class="mdl-card__actions mdl-card--border">
-                  <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                    Comprar
-                  </a>
-                </div>
-              </div>
-            </div>
-
-          </div> <!-- ./END SECTION OFERTAS - ROW 2 -->
+          <div style="padding-bottom: 50px;" class="mdl-grid layout-center padding-sale"></div>
 
           <div class="android-customized-section">
 
