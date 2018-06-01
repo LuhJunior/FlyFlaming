@@ -6,8 +6,8 @@
 
 <%@page import="Negocio.ofertasNeg"%>
 <%@page import="Negocio.vooNeg"%>
-<jsp:include page="layout/header.jsp"/>    
-    <jsp:include page="layout/navbar.jsp"/>  
+<jsp:include page="layout/header.jsp"/>
+<jsp:include page="navbarDinamica.jsp"/>
 
       <div class="android-content mdl-layout__content">
         <a name="top"></a>

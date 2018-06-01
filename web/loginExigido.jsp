@@ -1,21 +1,11 @@
 <%-- 
     Document   : login
-    Created on : 21/05/2018, 21:50:11
-    Author     : Diego Malta
+    Author     : hspacheco
 --%>
 
-<%--Caso tente acessar login pela URL e já esteja logado --%>
-<%if(session.getAttribute("clienteAutenticado") != null) { %>
-    <jsp:forward page="index.jsp" /> 
-<%}%>
 
-<jsp:include page="layout/header.jsp"/> 
-    <%if(session.getAttribute("clienteAutenticado") != null) { %>
-        <jsp:include page="layout/navbarLogado.jsp"/> 
-    <%} else {%>
-        <jsp:include page="layout/navbar.jsp"/> 
-    <%}%>
-    
+<jsp:include page="layout/header.jsp"/>    
+    <jsp:include page="layout/navbar.jsp"/>
     <div class="android-content mdl-layout__content">
         <div class="android-be-together-section">
             <div class="formulario color-orange padding-form">     
@@ -23,6 +13,8 @@
                     <div class="logo-font GoBystrok-title GoBystrok-slogan">Login</div>
                     
                     <form method="POST" action="Login" onsubmit="return verificarCamposLogin()">
+                        
+                        <p style="text-align: center; ">Autenticação necessária !</p>
                         
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
                             <input class="mdl-textfield__input color-white" 

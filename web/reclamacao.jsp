@@ -4,8 +4,11 @@
     Author     : Diego Malta
 --%>
 
+
+<jsp:include page="autenticacaoPagina.jsp"/>
 <jsp:include page="layout/header.jsp"/>    
-    <jsp:include page="layout/navbar.jsp"/>
+<jsp:include page="layout/navbarLogado.jsp"/>
+    
     <div class="android-content mdl-layout__content">
         <div class="android-be-together-section">
             <div class="formulario color-orange">     
@@ -22,7 +25,10 @@
                             </div>
 
                             <div class="toolbar-section">
-                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect margin-top" type="submit" name="submit">Enviar</button>
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect margin-top" 
+                                        type="submit" 
+                                        name="submit">Enviar</button>
+                                
                                 <a href="consulta-reclamacao.jsp"> Consultar</a>
                             </div>
                         </form>
