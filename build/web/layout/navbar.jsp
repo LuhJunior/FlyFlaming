@@ -6,7 +6,7 @@
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header ">
         <div class="mdl-layout__header mdl-layout__header--waterfall GoBystrok-navbar">
-            <div aria-expanded="false" role="button" tabindex="0" class="mdl-layout__drawer-button GoBystrok-navbar"><i class="material-icons">?</i></div>
+            <div aria-expanded="false" role="button" tabindex="0" class="mdl-layout__drawer-button GoBystrok-navbar"><i class="material-icons">+</i></div>
             <div class="mdl-layout__header-row">
               <span class="android-title mdl-layout-title GoBystrok-brand ">
                 FlyFlaming

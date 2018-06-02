@@ -5,7 +5,7 @@
  */
 package Controle;
 
-import Modelo.Cliente;
+import Negocio.vooNeg;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -17,39 +17,29 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Júnior
+ * @author PATRICIA
  */
-@WebServlet(name = "NovaSenha", urlPatterns = {"/NovaSenha"})
-public class NovaSenha extends HttpServlet {
+@WebServlet(name = "vooServ", urlPatterns = {"/vooServ"})
+public class vooServ extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        Cliente c = (Modelo.Cliente)request.getSession().getAttribute("clienteAutenticado");
-        if(c != null){
-            c.setSenha(request.getParameter("Senha"));
-            if(c.getFromDb()){
-                c.setSenha(request.getParameter("NovaSenha"));
-                c.trocarSenha();
-                request.setAttribute("VaiDa", "Que não vai da oq");
-                request.getSession().setAttribute("clienteAutenticado", c);
-                System.out.println("deubom");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("trocar-senha.jsp");
-                dispatcher.forward(request, response);
-            }
-            else{
-                request.setAttribute("VaiDa", "Não deu");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("trocar-senha.jsp");
-                dispatcher.forward(request, response);
-            }
-        }
-        else{
-            request.setAttribute("VaiDa", false);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("trocar-senha.jsp");
-            dispatcher.forward(request, response);
-        }
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");              
+        vooNeg resp = new vooNeg();
+
+        resp.pesquisarVoosSemana();
+        request.setAttribute("voosSemana", resp);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+        dispatcher.forward(request, response);
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -91,3 +81,6 @@ public class NovaSenha extends HttpServlet {
     }// </editor-fold>
 
 }
+
+
+

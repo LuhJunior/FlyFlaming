@@ -1,8 +1,8 @@
 <%-- 
     Document   : navbar
-    Created on : 21/05/2018, 21:36:00
-    Author     : Diego Malta
+    Author     : hspacheco
 --%>
+
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header ">
         <div class="mdl-layout__header mdl-layout__header--waterfall GoBystrok-navbar">
@@ -28,11 +28,13 @@
                   <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Passagem</a>
                   <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Voo</a>
                   <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Contato</a>
-                  <a class="mdl-navigation__link mdl-typography--text-uppercase" href="checkin.jsp">Check-In</a>
-                  <a class="mdl-navigation__link mdl-typography--text-uppercase" href="reclamacao.jsp">RECLAMAÇÃO</a>
-                  <a href="login.jsp">
+                  <a class="mdl-navigation__link mdl-typography--text-uppercase" href="checkin.jsp">CheckIn</a>
+                  <a class="mdl-navigation__link mdl-typography--text-uppercase" href="reclamacao.jsp">Reclamação</a>
+                  <% Modelo.Cliente cliente = (Modelo.Cliente) session.getAttribute("clienteAutenticado"); %>
+                  <a class="mdl-typography--text-uppercase">Olá, <%=cliente.getNome()%></a> 
+                  <a href="finalizarSessaoPagina.jsp">
                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect mdl-button--mini-fab">
-                      Entrar
+                      Sair
                     </button>
                   </a>
 
@@ -60,7 +62,8 @@
               <a class="mdl-navigation__link" href="">Passagem</a>
               <a class="mdl-navigation__link" href="">Voo</a>
               <a class="mdl-navigation__link" href="checkin.jsp">Check-In</a>
-              <a class="mdl-navigation__link" href="consulta-reclamacao.jsp">Acompanhar Reclamação</a> 
+              <a class="mdl-navigation__link" href="consulta-reclamacao.jsp">Acompanhar Reclamação</a>
+              <a class="mdl-navigation__link" href="trocar-senha.jsp">Trocar Senha</a> 
               <div class="android-drawer-separator"></div>
               <span class="mdl-navigation__link" href="">Dúvidas</span>
               <a class="mdl-navigation__link" href="">Contato</a>                                                             

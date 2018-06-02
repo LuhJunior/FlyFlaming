@@ -10,12 +10,13 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String nome, String cpf, String email, String telefone, Calendar dataNascimento) {
+    public Cliente(String nome, String cpf, String email, String telefone, Calendar dataNascimento, String senha) {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
         this.telefone = telefone;
         this.dataNascimento = dataNascimento;
+        this.senha = senha;
     }
 
     public String getNome() {
@@ -74,12 +75,25 @@ public class Cliente {
         return true;
     }
     
+    public boolean validarCliente() {
+        ClienteDAO cli = new ClienteDAO();
+        return cli.validarCliente(this);
+    }
+    
+    public Cliente autenticarCliente() {
+        ClienteDAO cli = new ClienteDAO();
+        return cli.pesquisarCpfSenha(this);
+    }
+    
     public boolean getFromDb(){
-        return true;
+        ClienteDAO c = new ClienteDAO();
+        c.pesquisar(this);
+        return (c != null);
     }
     
     public boolean trocarSenha(){
         ClienteDAO c = new ClienteDAO();
+        c.updateSenha(this);
         return true;
     }
 }

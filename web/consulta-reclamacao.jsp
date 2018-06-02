@@ -3,9 +3,9 @@
     Created on : 21/05/2018, 22:09:42
     Author     : Diego Malta
 --%>
-
+<jsp:include page="autenticacaoPagina.jsp"/>
 <jsp:include page="layout/header.jsp"/>    
-    <jsp:include page="layout/navbar.jsp"/>
+    <jsp:include page="layout/navbarLogado.jsp"/>
     <div class="android-content mdl-layout__content">
         <div class="android-be-together-section">
             <div class="formulario color-orange">     
@@ -29,6 +29,7 @@
             </div>
         </div>
         <div class="mdl-grid center-items color-orange"></div>
+    </div>
 <jsp:include page="layout/footer.jsp"/> 
 
 

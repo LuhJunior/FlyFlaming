@@ -8,48 +8,56 @@ package Controle;
 import Modelo.Cliente;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Júnior
+ * @author hspacheco
  */
-@WebServlet(name = "NovaSenha", urlPatterns = {"/NovaSenha"})
-public class NovaSenha extends HttpServlet {
-
+@WebServlet(name = "Login", urlPatterns = {"/Login"})
+public class Login extends HttpServlet {
+  
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        Cliente c = (Modelo.Cliente)request.getSession().getAttribute("clienteAutenticado");
-        if(c != null){
-            c.setSenha(request.getParameter("Senha"));
-            if(c.getFromDb()){
-                c.setSenha(request.getParameter("NovaSenha"));
-                c.trocarSenha();
-                request.setAttribute("VaiDa", "Que não vai da oq");
-                request.getSession().setAttribute("clienteAutenticado", c);
-                System.out.println("deubom");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("trocar-senha.jsp");
-                dispatcher.forward(request, response);
-            }
-            else{
-                request.setAttribute("VaiDa", "Não deu");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("trocar-senha.jsp");
-                dispatcher.forward(request, response);
-            }
+        
+        if(request.getParameter("recuperar") != null ) {
+            request.getRequestDispatcher("esqueci-senha.jsp").forward(request, response);
         }
-        else{
-            request.setAttribute("VaiDa", false);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("trocar-senha.jsp");
-            dispatcher.forward(request, response);
+        
+        
+        String cpf = (String) request.getParameter("CPF");    
+        String senha = (String) request.getParameter("senha");
+        
+           
+        Cliente c = new Cliente();
+        c.setCpf(cpf);
+        c.setSenha(senha);
+        
+        HttpSession session = request.getSession();        
+        
+ 
+        if(c.validarCliente()) {
+
+            System.out.println("Cliente valido"); 
+            session.setAttribute("clienteAutenticado", c.autenticarCliente());
+            response.sendRedirect("index.jsp");
+            //request.getRequestDispatcher("reclamacao.jsp").forward(request, response);
+            
+        } else {
+            System.out.println("nao valido");  
+            response.sendRedirect("login.jsp");
+            //request.getRequestDispatcher("login.jsp").forward(request, response);
+            
         }
+        
+        
+        
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
