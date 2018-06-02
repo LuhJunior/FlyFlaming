@@ -3,19 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Júnior/Documents/NetBeansProjects/FlyFlaming/web/navbarDinamica.jsp</file>
             <file>file:/C:/Users/Júnior/Documents/NetBeansProjects/FlyFlaming/src/java/Modelo/Cliente.java</file>
-            <file>file:/C:/Users/Júnior/Documents/NetBeansProjects/FlyFlaming/src/java/Banco/PassagemDAO.java</file>
-            <file>file:/C:/Users/Júnior/Documents/NetBeansProjects/FlyFlaming/src/java/Controle/TrocarSenha.java</file>
-            <file>file:/C:/Users/Júnior/Documents/NetBeansProjects/FlyFlaming/web/consulta-reclamacao.jsp</file>
-            <file>file:/C:/Users/Júnior/Documents/NetBeansProjects/FlyFlaming/src/java/Controle/ConsultarReclamacao.java</file>
-            <file>file:/C:/Users/Júnior/Documents/NetBeansProjects/FlyFlaming/src/java/Modelo/Reclamacao.java</file>
-            <file>file:/C:/Users/Júnior/Documents/NetBeansProjects/FlyFlaming/web/esqueci-senha-trocar.jsp</file>
-            <file>file:/C:/Users/Júnior/Documents/NetBeansProjects/FlyFlaming/src/java/Controle/NovaSenha.java</file>
-            <file>file:/C:/Users/Júnior/Documents/NetBeansProjects/FlyFlaming/web/trocar-senha.jsp</file>
-            <file>file:/C:/Users/Júnior/Documents/NetBeansProjects/FlyFlaming/src/java/Banco/ClienteDAO.java</file>
+            <file>file:/C:/Users/Júnior/Documents/NetBeansProjects/FlyFlaming/web/layout/navbarLogado.jsp</file>
+            <file>file:/C:/Users/Júnior/Documents/NetBeansProjects/FlyFlaming/src/java/Controle/Login.java</file>
             <file>file:/C:/Users/Júnior/Documents/NetBeansProjects/FlyFlaming/src/java/Banco/ReclamacaoDAO.java</file>
-            <file>file:/C:/Users/Júnior/Documents/NetBeansProjects/FlyFlaming/web/esqueci-senha.jsp</file>
-            <file>file:/C:/Users/Júnior/Documents/NetBeansProjects/FlyFlaming/src/java/Modelo/Passagem.java</file>
+            <file>file:/C:/Users/Júnior/Documents/NetBeansProjects/FlyFlaming/web/login.jsp</file>
         </group>
     </open-files>
 </project-private>
