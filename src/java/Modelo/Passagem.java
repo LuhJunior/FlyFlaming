@@ -112,7 +112,8 @@ public class Passagem {
     }
     
     public boolean checkin(){
-        return true;
+        PassagemDAO p = new PassagemDAO();
+        return p.updateCheckin(this);
     }
     
     public boolean pagar(){

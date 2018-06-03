@@ -28,7 +28,7 @@
                   <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Passagem</a>
                   <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Voo</a>
                   <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Contato</a>
-                  <a class="mdl-navigation__link mdl-typography--text-uppercase" href="checkin.jsp">Check-In</a>
+                  <a class="mdl-navigation__link mdl-typography--text-uppercase" href="checkinOuCancelamento.jsp">Check-In ou Cancelamento</a>
                   <a class="mdl-navigation__link mdl-typography--text-uppercase" href="reclamacao.jsp">RECLAMAÇÃO</a>
                   <a href="login.jsp">
                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect mdl-button--mini-fab">

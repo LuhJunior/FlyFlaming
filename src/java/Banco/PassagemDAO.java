@@ -42,11 +42,29 @@ public class PassagemDAO {
         }
     }
     
+    public boolean updateCheckin(Passagem pa){
+        int r = 0;
+        try{
+            String sql = "UPDATE PASSAGEM SET CHECKIN=1 WHERE IDPASSAGEM = ?";
+            Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement p = conn.prepareStatement(sql);
+            p.setInt(1, pa.getCodigo());
+            r = p.executeUpdate();
+            ConnectionFactory.closeConnection(conn, p);
+        }
+        catch(SQLException e){
+            throw new RuntimeException(e);
+        }  
+        finally{
+            return (r>0);
+        }
+    }
+    
     public void pesquisar(Passagem pa){
         try{
             String sql = "SELECT IDPROGRAMACAO, COD_POLTRONA, DATAHORA_COMPRA, CHECKIN,"
-                    + "CANCELAMENTO, VALOR_FINAL, CPF FROM PASSAGEM AS P JOIN PAGAMENTO AS PG ON P.IDPAGAMENTO=PG.PAGAMENTO"
-                    + " WHERE IDPASSAGEM = ?";
+                    + "CANCELAMENTO, VALOR_FINAL, CPF FROM PASSAGEM AS P JOIN PAGAMENTO AS PG ON P.IDPASSAGEM=PG.IDPASSAGEM"
+                    + " WHERE P.IDPASSAGEM = ?";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement p = conn.prepareStatement(sql);
             p.setInt(1, pa.getCodigo());

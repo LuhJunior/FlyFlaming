@@ -28,7 +28,7 @@
                   <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Passagem</a>
                   <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Voo</a>
                   <a class="mdl-navigation__link mdl-typography--text-uppercase" href="">Contato</a>
-                  <a class="mdl-navigation__link mdl-typography--text-uppercase" href="checkin.jsp">CheckIn</a>
+                  <a class="mdl-navigation__link mdl-typography--text-uppercase" href="checkinOuCancelamento.jsp">CheckIn Ou Cancelamento</a>
                   <a class="mdl-navigation__link mdl-typography--text-uppercase" href="reclamacao.jsp">Reclamação</a>
                   <% Modelo.Cliente cliente = (Modelo.Cliente) session.getAttribute("clienteAutenticado"); %>
                   <a class="mdl-typography--text-uppercase">Olá, <%=cliente.getNome()%></a> 
