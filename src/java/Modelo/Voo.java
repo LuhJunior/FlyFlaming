@@ -1,8 +1,9 @@
 package Modelo;
 
 public class Voo {
-    String origem, destino;
-    float valor;
+    int numero;
+    String origem, destino, data, hora;
+    double valor;
     Aeronave aviao;
 
     public Voo() {
@@ -27,15 +28,39 @@ public class Voo {
         return destino;
     }
 
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
+
     public void setDestino(String destino) {
         this.destino = destino;
     }
 
-    public float getValor() {
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(float valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
 

@@ -6,7 +6,8 @@ import java.util.Calendar;
 public class Cliente {
     String nome, cpf, email, telefone, senha;
     Calendar dataNascimento;
-
+    Endereco endereco;
+    
     public Cliente() {
     }
 
@@ -29,6 +30,14 @@ public class Cliente {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
     public void setNome(String nome) {
@@ -71,8 +80,9 @@ public class Cliente {
         return true;
     }
     
-    public boolean addOnDb(){ 
-        return true;
+    public boolean addOnDb(){
+        ClienteDAO c = new ClienteDAO();
+        return (c.inserir(this) && c.inserirTelefone(this) && c.inserirEndereco(this));
     }
     
     public boolean validarCliente() {
@@ -88,7 +98,11 @@ public class Cliente {
     public boolean getFromDb(){
         ClienteDAO c = new ClienteDAO();
         c.pesquisar(this);
-        return (c != null);
+        if(this != null){
+            c.pesquisarEndereco(this);
+            return true;
+        }
+        return false;
     }
     
     public boolean trocarSenha(){
