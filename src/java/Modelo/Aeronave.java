@@ -1,7 +1,5 @@
 package Modelo;
 
-import Modelo.Companhia;
-
 public class Aeronave {
     String prefixo;
     int capacPrimeira, capacEconomica, fileiras, colunas;

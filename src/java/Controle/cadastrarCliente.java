@@ -6,6 +6,7 @@
 package Controle;
 
 import Modelo.Cliente;
+import Modelo.Endereco;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -19,37 +20,46 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Júnior
  */
-@WebServlet(name = "NovaSenha", urlPatterns = {"/NovaSenha"})
-public class NovaSenha extends HttpServlet {
+@WebServlet(name = "cadastrarCliente", urlPatterns = {"/cadastrarCliente"})
+public class cadastrarCliente extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        Cliente c = (Modelo.Cliente)request.getSession().getAttribute("clienteAutenticado");
-        if(c != null){
-            c.setSenha(request.getParameter("Senha"));
-            if(c.getFromDb()){
-                c.setSenha(request.getParameter("NovaSenha"));
-                c.trocarSenha();
-                request.setAttribute("VaiDa", "Que não vai dá oq");
-                request.getSession().setAttribute("clienteAutenticado", c);
-                System.out.println("deubom");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("trocar-senha.jsp");
-                dispatcher.forward(request, response);
-            }
-            else{
-                request.setAttribute("VaiDa", "Não deu");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("trocar-senha.jsp");
-                dispatcher.forward(request, response);
-            }
+        Cliente c = new Cliente();
+        c.setNome(request.getParameter("Nome"));
+        c.setCpf(request.getParameter("CPF"));
+        c.setSenha(request.getParameter("Senha"));
+        c.setEmail(request.getParameter("Email"));
+        c.setTelefone(request.getParameter("Telefone"));
+        c.setEndereco(new Endereco());
+        c.getEndereco().setRua(request.getParameter("Rua"));
+        c.getEndereco().setBairro(request.getParameter("Bairro"));
+        c.getEndereco().setCidade(request.getParameter("Cidade"));
+        c.getEndereco().setEstado(request.getParameter("Estado"));
+        c.getEndereco().setCEP(request.getParameter("CEP"));
+        if(c.addOnDb()){
+            request.setAttribute("VaiDa", "Que não vai dá oq");
+            System.out.println("deubom");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("signin.jsp");
+            dispatcher.forward(request, response);
         }
         else{
-            request.setAttribute("VaiDa", false);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("trocar-senha.jsp");
+            request.setAttribute("VaiDa", "Não vai da não");
+            System.out.println("deuruim");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("signin.jsp");
             dispatcher.forward(request, response);
         }
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
