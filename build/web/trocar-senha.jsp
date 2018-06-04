@@ -13,9 +13,9 @@
                         <div class="logo-font GoBystrok-title GoBystrok-slogan">Troca de Senha</div>
                         <% String men = (String)request.getAttribute("VaiDa");%>
                         <% if(men != null){%>
-                            <script>alert(<%=men%>);</script>
+                            <script>alert("<%=men%>");</script>
                         <%}%>
-                        <form action="NovaSenha" method="POST" name="loginForm" onsubmit="return verificarCampos()">
+                        <form action="NovaSenha" method="POST" name="trocarSenhaForm" onsubmit="return verificarCamposTrocarSenha()">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
                                 <input class="mdl-textfield__input color-white" type="password" name="Senha" minlength="8" maxlength="16" id="sample3">
                                 <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Senha Atual</label>
@@ -25,7 +25,7 @@
                                 <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Nova Senha</label>
                             </div>
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
-                                <input class="mdl-textfield__input color-white" type="password" name="NovaSenha" minlength="8" maxlength="16" id="sample3">
+                                <input class="mdl-textfield__input color-white" type="password" name="RepetirNovaSenha" minlength="8" maxlength="16" id="sample3">
                                 <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Confirmar Senha</label>
                             </div>
                             <div class="toolbar-section">

@@ -15,7 +15,7 @@
     <%} else {%>
         <jsp:include page="layout/navbar.jsp"/> 
     <%}%>
-    
+
     <div class="android-content mdl-layout__content">
         <div class="android-be-together-section">
             <div class="formulario color-orange padding-form">     

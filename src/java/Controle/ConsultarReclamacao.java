@@ -40,13 +40,9 @@ public class ConsultarReclamacao extends HttpServlet {
         if(p.getCliente().getCpf().equals(cpf)){
             p.consultarReclamacao();
             request.setAttribute("reclamacao", p.getReclamacao());
-            RequestDispatcher dispacher = request.getRequestDispatcher("resultado-consulta-reclamacao.jsp");
-            dispacher.forward(request, response);
         }
-        else{
-            RequestDispatcher dispacher = request.getRequestDispatcher("resultado-consulta-reclamacao.jsp");
-            dispacher.forward(request, response);
-        }
+        RequestDispatcher dispacher = request.getRequestDispatcher("resultado-consulta-reclamacao.jsp");
+        dispacher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

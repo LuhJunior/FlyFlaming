@@ -98,3 +98,20 @@ function verificarCamposPagamento(){
     }
     return r;
 }
+
+function verificarCamposTrocarSenha(){
+    var r=true;
+    if(trocarSenhaForm.Senha == ""){
+        alert("O campo Senha não está preenchido");
+        r = false;
+    }
+    if(trocarSenhaForm.NovaSenha == "" || trocarSenhaForm.RepetirNovaSenha == ""){
+        alert("O campo Nova Senha não está preenchido");
+        r = false;
+    }
+    if(trocarSenhaForm.NovaSenha != trocarSenhaForm.RepetirNovaSenha){
+        alert("Os campo Nova Senha não estão iguais");
+        r = false;
+    }
+    return r;
+}

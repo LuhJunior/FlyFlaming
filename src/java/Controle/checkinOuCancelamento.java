@@ -29,30 +29,42 @@ public class checkinOuCancelamento extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String cpf = ((Modelo.Cliente) request.getSession().getAttribute("clienteAutenticado")).getCpf();
         Passagem p = new Passagem();
         p.setCodigo(Integer.parseInt(request.getParameter("codPassagem")));
-        System.out.println(request.getParameter("submit"));
         if(p.getFromDb()){
-            if(p.isCheckin() || p.isCancelada()){
-                request.setAttribute("VaiDa", "Checkin já foi feito ou a passagem foi cancelada");
-                System.out.println("Checkin já foi feito");
-            }
-            else if(request.getParameter("submit").equals("checkin")){
-                if(p.checkin()){
-                    request.setAttribute("VaiDa", "Que não vai dá oq");
-                    System.out.println("Deu bom");
+            if(cpf.equals(p.getCliente().getCpf())){
+                if(p.isCheckin() || p.isCancelada()){
+                    request.setAttribute("VaiDa", "Checkin já foi feito ou a passagem foi cancelada");
+                    System.out.println("Checkin já foi feito");
+                }
+                else if(request.getParameter("submit").equals("checkin")){
+                    if(p.checkin()){
+                        request.setAttribute("VaiDa", "Que não vai dá oq");
+                        System.out.println("Deu bom");
+                    }
+                    else{
+                        request.setAttribute("VaiDa", "Não vai dá não");
+                        System.out.println("Deu ruim");
+                    }
                 }
                 else{
-                    request.setAttribute("VaiDa", "Não vai dá não");
-                    System.out.println("Deu ruim");
+                    if(p.cancelar()){
+                        request.setAttribute("VaiDa", "Que não vai dá oq");
+                        System.out.println("Deu bom");
+                    }
+                    else{
+                        request.setAttribute("VaiDa", "Não vai dá não");
+                        System.out.println("Deu ruim");
+                    }
                 }
             }
             else{
-                //cancelamento
+                request.setAttribute("VaiDa", "Essa Passagem pertence a outro cliente");
+                System.out.println("Essa Passagem pertence a outro cliente");
             }
         }
         else{
-            System.out.println("adasd");
             request.setAttribute("VaiDa", "Não vai dá não");
             System.out.println("Deu ruim");
         }

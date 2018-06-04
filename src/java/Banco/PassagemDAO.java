@@ -60,6 +60,24 @@ public class PassagemDAO {
         }
     }
     
+    public boolean updateCancelamento(Passagem pa){
+        int r = 0;
+        try{
+            String sql = "UPDATE PASSAGEM SET CANCELAMENTO=1 WHERE IDPASSAGEM = ?";
+            Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement p = conn.prepareStatement(sql);
+            p.setInt(1, pa.getCodigo());
+            r = p.executeUpdate();
+            ConnectionFactory.closeConnection(conn, p);
+        }
+        catch(SQLException e){
+            throw new RuntimeException(e);
+        }  
+        finally{
+            return (r>0);
+        }
+    }
+    
     public void pesquisar(Passagem pa){
         try{
             String sql = "SELECT IDPROGRAMACAO, COD_POLTRONA, DATAHORA_COMPRA, CHECKIN,"

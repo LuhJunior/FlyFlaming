@@ -109,7 +109,7 @@ public class ClienteDAO {
     public void pesquisarEndereco(Cliente c){
         try{
             String sql = "SELECT RUA, BAIRRO, NOME AS CIDADE, ESTADO, CEP FROM ENDERECO AS E "
-                    + "INNER JOIN CIDADE AS C ON C.IDCIDADE=T.IDCIDADE WHERE E.CPF = ?";
+                    + "INNER JOIN CIDADE AS C ON C.IDCIDADE=E.IDCIDADE WHERE E.CPF = ?";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement p = conn.prepareStatement(sql);
             p.setString(1, c.getCpf());

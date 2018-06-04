@@ -108,6 +108,8 @@ public class Passagem {
     }
     
     public boolean cancelar(){
+        PassagemDAO p = new PassagemDAO();
+        p.updateCancelamento(this);
         return true;
     }
     

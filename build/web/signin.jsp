@@ -13,7 +13,7 @@
             <div class="logo-font GoBystrok-title GoBystrok-slogan">Troca de Senha</div>
             <% String men = (String)request.getAttribute("VaiDa");%>
             <% if(men != null){%>
-                <script>alert(<%=men%>);</script>
+                <script>alert("<%=men%>");</script>
             <%}%>
             <div class="logo-font GoBystrok-title GoBystrok-slogan">Cadastrar-se</div>
             <form action="cadastrarCliente" method="POST" name="cadastroForm" class="" onsubmit="return verificarCamposCadastro()">
