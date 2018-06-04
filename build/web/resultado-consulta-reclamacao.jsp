@@ -11,34 +11,42 @@
             <div class="formulario color-orange">     
                 <div class="mdl-grid center-items color-orange">
                     <div class="logo-font GoBystrok-title GoBystrok-slogan">Reclamações</div>
-                    <% Modelo.Reclamacao r = (Modelo.Reclamacao) request.getAttribute("reclamacao"); %>
+                    <% Modelo.Passagem[] p = (Modelo.Passagem[]) request.getAttribute("passagens"); %>
                         <table style="margin-top: 20px;" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp ">
                             <thead>
                                 <tr>
+                                    <th class="mdl-data-table__cell--non-numeric">Código da Passagem</th>
                                     <th class="mdl-data-table__cell--non-numeric">Código da Reclamação</th>
                                     <th>Descrição</th>
                                     <th>Situação</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <%if(r != null){ %>
+                                <%if(p != null){ 
+                                    for(int i=0; i<p.length; i++){
+                                %>
+                                <script>alert("<%=i%>")</script>
                                     <tr>
-                                        <td class="mdl-data-table__cell--non-numeric"><%=r.getCodReclamacao() %></td>
-                                        <td><%=r.getDescricao()%></td>
+                                        <td class="mdl-data-table__cell--non-numeric"><%=p[i].getCodigo()%></td>
+                                        <td class="mdl-data-table__cell--non-numeric"><%=p[i].getReclamacao().getCodReclamacao()%></td>
+                                        <td><%=p[i].getReclamacao().getDescricao()%></td>
                                         <%
                                             String situacao;
-                                            if(r.getEstado() == 'A') situacao = "Aberto";
+                                            if(p[i].getReclamacao().getEstado() == 'A') situacao = "Aberto";
                                             else situacao = "Resolvido";
                                         %>
                                         <td><%=situacao%></td>
                                     </tr>
-                                <%}else{%>
-                                    <script>alert("Deu ruim");</script>
+                                    <%}
+                                }else{%>
+                                    <script>alert("Não existe passagens com reclamação");</script>
                                 <%}%>
                             </tbody>
                         </table>
                     <div class="toolbar-section">
+                        <a href="reclamacao.jsp">
                         <button class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect margin-top" type="submit" name="submit">Voltar</button>
+                        </a>
                     </div>
                 </div>
             </div>

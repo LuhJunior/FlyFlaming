@@ -32,8 +32,7 @@ public class checkinOuCancelamento extends HttpServlet {
         String cpf = ((Modelo.Cliente) request.getSession().getAttribute("clienteAutenticado")).getCpf();
         Passagem p = new Passagem();
         p.setCodigo(Integer.parseInt(request.getParameter("codPassagem")));
-        if(p.getFromDb()){
-            if(cpf.equals(p.getCliente().getCpf())){
+        if(p.buscarDados()){
                 if(p.isCheckin() || p.isCancelada()){
                     request.setAttribute("VaiDa", "Checkin já foi feito ou a passagem foi cancelada");
                     System.out.println("Checkin já foi feito");
@@ -58,12 +57,7 @@ public class checkinOuCancelamento extends HttpServlet {
                         System.out.println("Deu ruim");
                     }
                 }
-            }
-            else{
-                request.setAttribute("VaiDa", "Essa Passagem pertence a outro cliente");
-                System.out.println("Essa Passagem pertence a outro cliente");
-            }
-        }
+        }   
         else{
             request.setAttribute("VaiDa", "Não vai dá não");
             System.out.println("Deu ruim");

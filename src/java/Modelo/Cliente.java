@@ -7,7 +7,7 @@ public class Cliente {
     String nome, cpf, email, telefone, senha;
     Calendar dataNascimento;
     Endereco endereco;
-    
+    Passagem passagens[];
     public Cliente() {
     }
 
@@ -34,6 +34,14 @@ public class Cliente {
 
     public Endereco getEndereco() {
         return endereco;
+    }
+
+    public Passagem[] getPassagens() {
+        return passagens;
+    }
+
+    public void setPassagens(Passagem[] passagens) {
+        this.passagens = passagens;
     }
 
     public void setEndereco(Endereco endereco) {

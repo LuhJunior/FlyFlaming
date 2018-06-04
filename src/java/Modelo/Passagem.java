@@ -11,7 +11,6 @@ public class Passagem {
     float valor;
     String horaCompra;
     Programacao programacao;
-    Cliente cliente;
     Reclamacao reclamacao;
 
     public Passagem() {
@@ -23,7 +22,6 @@ public class Passagem {
         this.checkin = checkin;
         this.valor = valor;
         this.programacao = programacao;
-        this.cliente = cliente;
         this.reclamacao = reclamacao;
     }
 
@@ -91,14 +89,6 @@ public class Passagem {
         this.programacao = programacao;
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
     public Reclamacao getReclamacao() {
         return reclamacao;
     }
@@ -132,15 +122,24 @@ public class Passagem {
         return true;
     }
     
-    public boolean addOnDb(){ 
+    public boolean inserirDados(){ 
         return true;
     }
     
-    public boolean getFromDb(){
-        this.setCliente(new Cliente());
+    public static Passagem[] buscarDados(String cpf){
+        PassagemDAO p = new PassagemDAO();
+        return p.getFromDb(cpf);
+    }
+    
+    public static Passagem[] buscarPassagensComReclamacao(String cpf){
+        PassagemDAO p = new PassagemDAO();
+        return p.pegarPassagensComReclamcao(cpf);
+    }
+    
+    public boolean buscarDados(){
         this.setProgramacao(new Programacao());
         PassagemDAO p = new PassagemDAO();
-        p.pesquisar(this);
+        p.getFromDb(this);
         return true;
     }
 }

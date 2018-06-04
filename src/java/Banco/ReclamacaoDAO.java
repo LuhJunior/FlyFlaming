@@ -47,17 +47,18 @@ public class ReclamacaoDAO {
     
     public void pesquisar(Reclamacao r, int id){
         try{
-            String sql = "SELECT NUM_RECLAM, DESCRICAO, SITU_RECLAMACAO, DATAHORA_RECLAM FROM RECLAMACAO WHERE IDPASSAGEM = ?";
+            String sql = "SELECT NUM_RECLAM, DESCRICAO, SITU_RECLAMACAO, DATAHORA_RECLAM FROM RECLAMACAO "
+                    + "WHERE IDPASSAGEM = ?";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement p = conn.prepareStatement(sql);
             p.setInt(1, id);
             ResultSet rs = p.executeQuery();
-            if(rs != null && rs.next()){
+            if(rs.next()){
                 r.setCodReclamacao(rs.getString("NUM_RECLAM"));
                 r.setDescricao(rs.getString("DESCRICAO"));
                 r.setEstado(rs.getString("SITU_RECLAMACAO").charAt(0));
                 r.setDataHora(rs.getString("DATAHORA_RECLAM"));
-            }
+            }else r = null;
             ConnectionFactory.closeConnection(conn, p, rs);
         }
         catch(SQLException e){

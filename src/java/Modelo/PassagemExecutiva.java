@@ -60,16 +60,6 @@ public class PassagemExecutiva extends Passagem{
     }
 
     @Override
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    @Override
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    @Override
     public Reclamacao getReclamacao() {
         return reclamacao;
     }

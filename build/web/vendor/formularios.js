@@ -41,6 +41,14 @@ function verificarCamposCadastro(){
         alert("O campo Telefone não está preenchido");
         r = false;
     }
+    if(cadastroForm.Rua.value == ""){
+        alert("O campo Rua não está preenchido");
+        r = false;
+    }
+    if(cadastroForm.Bairro.value == ""){
+        alert("O campo Bairro não está preenchido");
+        r = false;
+    }
     if(cadastroForm.Cidade.value == ""){
         alert("O campo Cidade não está preenchido");
         r = false;
@@ -75,10 +83,6 @@ function verificarCamposCheckin(){
         alert("O campo Código da Passagem não está preenchido");
         r = false;
     }
-    if(checkinForm.CPF.value == ""){
-        alert("O campo CPF não está preenchido");
-        r = false;
-    }
     return r;
 }
 
@@ -101,15 +105,15 @@ function verificarCamposPagamento(){
 
 function verificarCamposTrocarSenha(){
     var r=true;
-    if(trocarSenhaForm.Senha == ""){
+    if(trocarSenhaForm.Senha.value == ""){
         alert("O campo Senha não está preenchido");
         r = false;
     }
-    if(trocarSenhaForm.NovaSenha == "" || trocarSenhaForm.RepetirNovaSenha == ""){
+    if(trocarSenhaForm.NovaSenha.value == "" || trocarSenhaForm.RepetirNovaSenha.value == ""){
         alert("O campo Nova Senha não está preenchido");
         r = false;
     }
-    if(trocarSenhaForm.NovaSenha != trocarSenhaForm.RepetirNovaSenha){
+    if(trocarSenhaForm.NovaSenha.value != trocarSenhaForm.RepetirNovaSenha.value){
         alert("Os campo Nova Senha não estão iguais");
         r = false;
     }

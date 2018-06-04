@@ -27,9 +27,12 @@
                             <div class="toolbar-section">
                                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect margin-top" 
                                         type="submit" 
-                                        name="submit">Enviar</button>
-                                
-                                <a href="consulta-reclamacao.jsp"> Consultar</a>
+                                        name="submit">Enviar
+                                </button>
+                                <a  href="ConsultarReclamacao"
+                                    class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect margin-top" 
+                                    name="Reclamacao">Consultar
+                                </a>
                             </div>
                         </form>
                 </div>
