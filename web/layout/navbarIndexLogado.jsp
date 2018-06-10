@@ -59,15 +59,14 @@
                 FlyFlaming
             </span>
             <nav class="mdl-navigation">
-              <a class="mdl-navigation__link" href="">Passagem</a>
               <a class="mdl-navigation__link" href="">Voo</a>
-              <a class="mdl-navigation__link" href="passagem.jsp">Check-In</a>
+              <a class="mdl-navigation__link" href="passagem.jsp">Opções de Passagem</a>
               <a class="mdl-navigation__link" href="consulta-reclamacao.jsp">Acompanhar Reclamação</a> 
               <div class="android-drawer-separator"></div>
               <span class="mdl-navigation__link" href="">Dúvidas</span>
               <a class="mdl-navigation__link" href="">Contato</a>                                                             
               <div class="android-drawer-separator"></div>
               <span class="mdl-navigation__link" href="">Usuário</span>
-              <a class="mdl-navigation__link" href="signin.jsp">Cadastre-se</a>
+              <a class="mdl-navigation__link" href="perfil.jsp">Perfil</a>
             </nav>
 </div>
