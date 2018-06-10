@@ -28,7 +28,6 @@
                                 <script>alert("<%=i%>")</script>
                                     <tr>
                                         <td class="mdl-data-table__cell--non-numeric"><%=p[i].getCodigo()%></td>
-                                        <td class="mdl-data-table__cell--non-numeric"><%=p[i].getReclamacao().getCodReclamacao()%></td>
                                         <td><%=p[i].getReclamacao().getDescricao()%></td>
                                         <%
                                             String situacao;

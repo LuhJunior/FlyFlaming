@@ -62,7 +62,7 @@ public class checkinOuCancelamento extends HttpServlet {
             request.setAttribute("VaiDa", "Não vai dá não");
             System.out.println("Deu ruim");
         }
-        RequestDispatcher dispatcher = request.getRequestDispatcher("checkinOuCancelamento.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("passagem.jsp");
         dispatcher.forward(request, response);
     }
 

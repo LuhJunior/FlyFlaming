@@ -5,7 +5,7 @@
 --%>
 
 <%if(session.getAttribute("clienteAutenticado") != null) { %>
-    <jsp:include page="layout/navbarLogado.jsp"/> 
-<%} else {%>
-    <jsp:include page="layout/navbar.jsp"/> 
+    <jsp:include page="navbarLogado.jsp"/> 
+<%} else{%>
+    <jsp:include page="navbar.jsp"/> 
 <%}%>
