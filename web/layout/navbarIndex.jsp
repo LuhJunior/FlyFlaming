@@ -28,7 +28,7 @@
                         <a class="mdl-navigation__link mdl-typography--text-uppercase" href="index.jsp#pesquisarPassagem">Passagem</a>
                         <a class="mdl-navigation__link mdl-typography--text-uppercase" href="index.jsp#ofertasPassagens">Voo</a>
                         <a class="mdl-navigation__link mdl-typography--text-uppercase" href="index.jsp#contato">Contato</a>
-                        <a class="mdl-navigation__link mdl-typography--text-uppercase" href="passagem.jsp">Passagem</a>
+                        <a class="mdl-navigation__link mdl-typography--text-uppercase" href="opcoesPassagem">Passagem</a>
                         <a class="mdl-navigation__link mdl-typography--text-uppercase" href="reclamacao.jsp">RECLAMAÇÃO</a>
                         <a href="login.jsp">
                           <button class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect mdl-button--mini-fab">
@@ -58,7 +58,7 @@
             <nav class="mdl-navigation">
               <a class="mdl-navigation__link" href="">Passagem</a>
               <a class="mdl-navigation__link" href="">Voo</a>
-              <a class="mdl-navigation__link" href="checkin.jsp">Check-In</a>
+              <a class="mdl-navigation__link" href="opcoesPassagem">Opções de Passagem</a>
               <a class="mdl-navigation__link" href="consulta-reclamacao.jsp">Acompanhar Reclamação</a> 
               <div class="android-drawer-separator"></div>
               <span class="mdl-navigation__link" href="">Dúvidas</span>

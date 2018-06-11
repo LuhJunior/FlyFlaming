@@ -5,7 +5,7 @@
 --%>
 
 
-<jsp:include page="autenticacarPagina.jsp"/>
+<jsp:include page="autenticarPagina.jsp"/>
 <jsp:include page="layout/header.jsp"/>    
     <jsp:include page="layout/navbarLogado.jsp"/>
     
@@ -13,6 +13,7 @@
         <div class="android-be-together-section">
             <div class="formulario color-orange">     
                 <div class="mdl-grid center-items color-orange">
+                    <% Modelo.Passagem[] p = (Modelo.Passagem[]) request.getAttribute("passagens"); %>
                     <div class="logo-font GoBystrok-title GoBystrok-slogan">Reclamação</div>
                     <form action="Reclamar" method="POST" name="reclamacaoForm" class="" onsubmit="return verificarCamposReclamacao()">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">

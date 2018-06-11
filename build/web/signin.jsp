@@ -10,7 +10,6 @@
     <div class="android-be-together-section">
       <div class="formulario-cadastro color-orange"> 
         <div class="mdl-grid center-items color-orange">
-            <div class="logo-font GoBystrok-title GoBystrok-slogan">Troca de Senha</div>
             <% String men = (String)request.getAttribute("VaiDa");%>
             <% if(men != null){%>
                 <script>alert("<%=men%>");</script>
@@ -98,7 +97,7 @@
             </form>
         </div>
       </div>
-    </div>
+    </div>   
     <div class="android-screen-section mdl-typography--text-center GoBystrok-spacer"></div>
     <div class="android-screen-section mdl-typography--text-center GoBystrok-spacer"></div>
     <div class="mdl-grid center-items color-orange"></div>

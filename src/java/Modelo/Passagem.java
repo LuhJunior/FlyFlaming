@@ -131,6 +131,11 @@ public class Passagem {
         return p.getFromDb(cpf);
     }
     
+    public static Passagem[] buscarPassagens(String cpf){
+        PassagemDAO p = new PassagemDAO();
+        return p.pegarPassagens(cpf);
+    }
+    
     public static Passagem[] buscarPassagensComReclamacao(String cpf){
         PassagemDAO p = new PassagemDAO();
         return p.pegarPassagensComReclamcao(cpf);

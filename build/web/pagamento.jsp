@@ -3,7 +3,7 @@
     Created on : 21/05/2018, 21:53:44
     Author     : Diego Malta
 --%>
-<jsp:include page="autenticacarPagina.jsp"/>
+<jsp:include page="autenticarPagina.jsp"/>
     <jsp:include page="layout/header.jsp"/>    
         <jsp:include page="layout/navbarLogado.jsp"/>
             <div class="android-content mdl-layout__content">

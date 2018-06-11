@@ -1,7 +1,5 @@
 package Controle;
 
-import Modelo.Cliente;
-import Modelo.Endereco;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -15,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Júnior
  */
-@WebServlet(name = "cadastrarCliente", urlPatterns = {"/cadastrarCliente"})
-public class cadastrarCliente extends HttpServlet {
+@WebServlet(name = "updateCliente", urlPatterns = {"/updateCliente"})
+public class updateCliente extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,30 +27,16 @@ public class cadastrarCliente extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        Cliente c = new Cliente();
-        c.setNome(request.getParameter("Nome"));
-        c.setCpf(request.getParameter("CPF"));
-        c.setSenha(request.getParameter("Senha"));
-        c.setEmail(request.getParameter("Email"));
-        c.setTelefone(request.getParameter("Telefone"));
-        c.setEndereco(new Endereco());
-        c.getEndereco().setRua(request.getParameter("Rua"));
-        c.getEndereco().setBairro(request.getParameter("Bairro"));
-        c.getEndereco().setCidade(request.getParameter("Cidade"));
-        c.getEndereco().setEstado(request.getParameter("Estado"));
-        c.getEndereco().setCEP(request.getParameter("CEP"));
-        if(c.addOnDb()){
-            request.setAttribute("VaiDa", "Que não vai dá oq");
-            System.out.println("deubom");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("signin.jsp");
-            dispatcher.forward(request, response);
+        Modelo.Cliente c = (Modelo.Cliente)request.getSession().getAttribute("clienteAutenticado");
+        if(c.getFromDb()){
+            request.setAttribute("cliente", c);
+            RequestDispatcher dispacher = request.getRequestDispatcher("updateCliente.jsp");
+            dispacher.forward(request, response);
         }
         else{
-            request.setAttribute("VaiDa", "Não vai da não");
-            System.out.println("deuruim");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("signin.jsp");
-            dispatcher.forward(request, response);
+            request.setAttribute("Mensagem", "ocorreu um erro");
+            RequestDispatcher dispacher = request.getRequestDispatcher("updateCliente.jsp");
+            dispacher.forward(request, response);
         }
     }
 

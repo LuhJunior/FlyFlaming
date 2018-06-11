@@ -29,7 +29,7 @@
                         <a class="mdl-navigation__link mdl-typography--text-uppercase" href="index.jsp#pesquisarPassagem">Passagem</a>
                         <a class="mdl-navigation__link mdl-typography--text-uppercase" href="index.jsp#ofertasPassagens">Voo</a>
                         <a class="mdl-navigation__link mdl-typography--text-uppercase" href="index.jsp#contato">Contato</a>
-                        <a class="mdl-navigation__link mdl-typography--text-uppercase" href="passagem.jsp">Passagem</a>
+                        <a class="mdl-navigation__link mdl-typography--text-uppercase" href="opcoesPassagem">Passagem</a>
                         <a class="mdl-navigation__link mdl-typography--text-uppercase" href="reclamacao.jsp">RECLAMAÇÃO</a>
                         <% Modelo.Cliente cliente = (Modelo.Cliente) session.getAttribute("clienteAutenticado"); %>
                         <a class="mdl-typography--text-uppercase">Olá, <%=cliente.getNome()%></a> 
@@ -60,13 +60,14 @@
             </span>
             <nav class="mdl-navigation">
               <a class="mdl-navigation__link" href="">Voo</a>
-              <a class="mdl-navigation__link" href="passagem.jsp">Opções de Passagem</a>
+              <a class="mdl-navigation__link" href="opcoesPassagem">Opções de Passagem</a>
               <a class="mdl-navigation__link" href="consulta-reclamacao.jsp">Acompanhar Reclamação</a> 
+              <a class="mdl-navigation__link" href="trocar-senha.jsp">Trocar Senha</a> 
               <div class="android-drawer-separator"></div>
               <span class="mdl-navigation__link" href="">Dúvidas</span>
               <a class="mdl-navigation__link" href="">Contato</a>                                                             
               <div class="android-drawer-separator"></div>
               <span class="mdl-navigation__link" href="">Usuário</span>
-              <a class="mdl-navigation__link" href="perfil.jsp">Perfil</a>
+              <a class="mdl-navigation__link" href="perfil">Perfil</a>
             </nav>
 </div>

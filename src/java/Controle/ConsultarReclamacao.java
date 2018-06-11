@@ -34,10 +34,15 @@ public class ConsultarReclamacao extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Cliente c = (Cliente) request.getSession().getAttribute("clienteAutenticado");
-        c.setPassagens(Passagem.buscarPassagensComReclamacao(c.getCpf()));
-        if(c.getPassagens().length != 0) request.setAttribute("passagens", c.getPassagens());
-        RequestDispatcher dispacher = request.getRequestDispatcher("resultado-consulta-reclamacao.jsp");
-        dispacher.forward(request, response);
+        if(c != null){
+            c.setPassagens(Passagem.buscarPassagensComReclamacao(c.getCpf()));
+            if(c.getPassagens().length != 0) request.setAttribute("passagens", c.getPassagens());
+            RequestDispatcher dispacher = request.getRequestDispatcher("resultado-consulta-reclamacao.jsp");
+            dispacher.forward(request, response);
+        }
+        else{
+            response.sendRedirect("autenticarPagina");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -29,6 +29,25 @@ public class ClienteDAO {
         }
     }
     
+    public boolean updateCliente(Cliente c){
+        int r = 0;
+        try{
+            String sql = "UPDATE CLIENTE SET SENHA=? WHERE CPF=?";
+            Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement p = conn.prepareStatement(sql);
+            p.setString(1, c.getSenha());
+            p.setString(2, c.getCpf());
+            r = p.executeUpdate();
+            ConnectionFactory.closeConnection(conn, p);
+        }
+        catch(SQLException e){
+            throw new RuntimeException(e);
+        }  
+        finally{
+            return (r>0);
+        }
+    }
+    
     public boolean updateSenha(Cliente c){
         int r = 0;
         try{

@@ -7,7 +7,11 @@ package Modelo;
 public class Endereco {
     private String rua, bairro, cidade, estado, CEP;
 
-    public Endereco() {
+    public Endereco(){
+        this.rua = "";
+        this.estado = "";
+        this.cidade = "";
+        this.CEP = "";
     }
 
     public Endereco(String rua, String bairro, String cidade, String estado, String CEP) {
