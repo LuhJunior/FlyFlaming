@@ -29,23 +29,25 @@ public class ReclamacaoDAO {
     }
     
     public boolean update(Reclamacao r){
-        int resp = 0;
+        int rr = 0;
         try{
-            String sql = "";
+            String sql = "UPDATE RECLAMACAO SET DESCRICAO = ? WHERE NUM_RECLAM = ?";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement p = conn.prepareStatement(sql);
-            ResultSet rs = p.executeQuery();
-            ConnectionFactory.closeConnection(conn, p, rs);
+            p.setString(1, r.getDescricao());
+            p.setString(2, r.getCodReclamacao());
+            rr = p.executeUpdate();
+            ConnectionFactory.closeConnection(conn, p);
         }
         catch(SQLException e){
             throw new RuntimeException(e);
         }  
         finally{
-            return (resp>0);
+            return (rr>0);
         }
     }
     
-    public void pesquisar(Reclamacao r, int id){
+    public boolean pesquisar(Reclamacao r, int id){
         try{
             String sql = "SELECT NUM_RECLAM, DESCRICAO, SITU_RECLAMACAO, DATAHORA_RECLAM FROM RECLAMACAO "
                     + "WHERE IDPASSAGEM = ?";
@@ -58,29 +60,30 @@ public class ReclamacaoDAO {
                 r.setDescricao(rs.getString("DESCRICAO"));
                 r.setEstado(rs.getString("SITU_RECLAMACAO").charAt(0));
                 r.setDataHora(rs.getString("DATAHORA_RECLAM"));
-            }else r = null;
+            }else return false;
             ConnectionFactory.closeConnection(conn, p, rs);
         }
         catch(SQLException e){
             throw new RuntimeException(e);
-        }  
-        
+        }
+        return true;
     }
     
     public boolean deletar(Reclamacao r){
-        int resp = 0;
+        int rr = 0;
         try{
-            String sql = "";
+            String sql = "DELETE FROM RECLAMACAO WHERE NUM_RECLAM = ?";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement p = conn.prepareStatement(sql);
-            ResultSet rs = p.executeQuery();
-            ConnectionFactory.closeConnection(conn, p, rs);
+            p.setString(1, r.getCodReclamacao());
+            rr = p.executeUpdate();
+            ConnectionFactory.closeConnection(conn, p);
         }
         catch(SQLException e){
             throw new RuntimeException(e);
         }  
         finally{
-            return (resp>0);
+            return (rr>0);
         }
     }
 }

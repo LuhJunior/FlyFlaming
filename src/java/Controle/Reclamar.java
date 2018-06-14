@@ -35,9 +35,8 @@ public class Reclamar extends HttpServlet {
             throws ServletException, IOException {
         Reclamacao r = new Reclamacao();
         r.setDescricao(request.getParameter("descricao"));
-        boolean p = r.addOnDb(request.getParameter("codPassagem"));
-        if(!p) System.out.println("Deu ruim");
-        else System.out.println("Deu bom");
+        if(r.addOnDb(request.getParameter("codPassagem"))) request.setAttribute("Mensagem", "Que não vai dá pai");
+        else request.setAttribute("Mensagem", "Não vai dá não");
         RequestDispatcher dispatcher = request.getRequestDispatcher("reclamacao.jsp");
         dispatcher.forward(request,response);
     }

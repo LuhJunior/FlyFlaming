@@ -168,7 +168,7 @@ public class PassagemDAO {
         ArrayList<Passagem> passagens = new ArrayList<>();
         try{
             String sql = "SELECT P.IDPASSAGEM, IDPROGRAMACAO, COD_POLTRONA, DATAHORA_COMPRA, CHECKIN,"
-                    + "CANCELAMENTO, VALOR_FINAL FROM PASSAGEM AS P JOIN PAGAMENTO AS PG ON P.IDPASSAGEM=PG.IDPASSAGEM"
+                    + "CANCELAMENTO, VALOR_FINAL FROM PASSAGEM AS P INNER JOIN PAGAMENTO AS PG ON P.IDPASSAGEM=PG.IDPASSAGEM"
                     + " WHERE P.CPF = ?";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement p = conn.prepareStatement(sql);

@@ -63,8 +63,16 @@ public class Reclamacao {
     
     public boolean getFromDb(int id){
         ReclamacaoDAO r = new ReclamacaoDAO();
-        r.pesquisar(this, id);
-        return true;
+        return r.pesquisar(this, id);
     }
-
+    
+    public boolean deletarReclamacao(){
+        ReclamacaoDAO r = new ReclamacaoDAO();
+        return r.deletar(this);
+    }
+    
+    public boolean atualizarReclamacao(){
+        ReclamacaoDAO r = new ReclamacaoDAO();
+        return r.update(this);
+    }
 }

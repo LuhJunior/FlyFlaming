@@ -11,7 +11,10 @@
             <div class="formulario color-orange">     
                 <div class="mdl-grid center-items color-orange" style="left: 10%;right: 10%;">
                     <div class="logo-font GoBystrok-title GoBystrok-slogan">Reclamações</div>
-                    <% Modelo.Passagem[] p = (Modelo.Passagem[]) request.getAttribute("passagens"); %>
+                    <% Modelo.Passagem[] p = (Modelo.Passagem[]) request.getAttribute("passagens");
+                        String Mensagem = (String) request.getAttribute("Mensagem");
+                        if(Mensagem != null){%> <script>alert("<%=Mensagem%>")</script><%}%>
+                    
                     <div class="center-items">
                     <form action="UDReclamacao" method="post" name="UDReclamacaoForm" onsubmit="">
                         <table style="margin-top: 20px;" class="mdl-data-table mdl-shadow--2dp">
@@ -33,12 +36,12 @@
                                             if(p[i].getReclamacao().getEstado() == 'A') situacao = "Aberto";
                                             else situacao = "Resolvido";
                                         %>
-                                        <td class="mdl-data-table__cell--non-numeric"><input type="text" name="codPassagem[]" value="<%=p[i].getCodigo()%>"></td>
-                                        <td class="mdl-data-table__cell--non-numeric"><input type="text" name="codReclamacao[]" value="<%=p[i].getReclamacao().getDescricao()%>"></td>
-                                        <td class="mdl-data-table__cell--non-numeric"><input type="text" name="codReclamacao[]" value="<%=situacao%>"></td>
+                                        <td class="mdl-data-table__cell--non-numeric"><input type="hidden" name="codPassagem[<%=i%>]" value="<%=p[i].getCodigo()%>"><%=p[i].getCodigo()%></td>
+                                        <td class="mdl-data-table__cell--non-numeric"><input type="hidden" name="descricao[<%=i%>]" value="<%=p[i].getReclamacao().getDescricao()%>"><%=p[i].getReclamacao().getDescricao()%></td>
+                                        <td class="mdl-data-table__cell--non-numeric"><input type="hidden" name="codReclamacao[<%=i%>]" value="<%=situacao%>"><%=situacao%></td>
                                         <td>
-                                            <button type="submit" name="Editar[]" class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect margin-top">Editar</button>
-                                            <button type="submit" name="Excluir[]" class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect margin-top">Excluir</button>
+                                            <button name="submit" type="submit" value="Editar-<%=i%>" class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect">Editar</button>
+                                            <button name="submit" type="submit" value="Excluir-<%=i%>" class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect">Excluir</button>
                                         </td>   
                                     </tr>
                                     <%}

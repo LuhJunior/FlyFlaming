@@ -118,7 +118,7 @@ public class Passagem {
     
     public boolean consultarReclamacao(){
         this.setReclamacao(new Reclamacao());
-        this.getReclamacao().getFromDb(this.codigo);
+        if(!this.getReclamacao().getFromDb(this.codigo)) this.setReclamacao(null);
         return true;
     }
     
