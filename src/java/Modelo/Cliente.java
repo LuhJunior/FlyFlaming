@@ -118,4 +118,9 @@ public class Cliente {
         c.updateSenha(this);
         return true;
     }
+    
+    public boolean atualizarDados(){
+        ClienteDAO c = new ClienteDAO(); 
+        return c.updateCliente(this) && c.updateTelefone(this);
+    }
 }

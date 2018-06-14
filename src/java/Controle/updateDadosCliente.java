@@ -4,6 +4,7 @@ import Modelo.Cliente;
 import Modelo.Endereco;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,7 +31,7 @@ public class updateDadosCliente extends HttpServlet {
             throws ServletException, IOException {
         Cliente c = new Cliente();
         c.setNome(request.getParameter("Nome"));
-        c.setCpf(request.getParameter("CPF"));
+        c.setCpf(((Cliente)request.getSession().getAttribute("clienteAutenticado")).getCpf());
         c.setSenha(request.getParameter("Senha"));
         c.setEmail(request.getParameter("Email"));
         c.setTelefone(request.getParameter("Telefone"));
@@ -40,6 +41,18 @@ public class updateDadosCliente extends HttpServlet {
         c.getEndereco().setCidade(request.getParameter("Cidade"));
         c.getEndereco().setEstado(request.getParameter("Estado"));
         c.getEndereco().setCEP(request.getParameter("CEP"));
+        if(c.atualizarDados()){
+            System.out.println("deubom");
+            request.setAttribute("Mensagem", "Que Não vai dá pai");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("perfil");
+            dispatcher.forward(request, response);
+        }
+        else{
+            request.setAttribute("Mensagem", "Não vai da não");
+            System.out.println("deuruim");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("perfil");
+            dispatcher.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

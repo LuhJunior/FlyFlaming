@@ -32,11 +32,20 @@ public class ClienteDAO {
     public boolean updateCliente(Cliente c){
         int r = 0;
         try{
-            String sql = "UPDATE CLIENTE SET SENHA=? WHERE CPF=?";
+            String sql = "UPDATE CLIENTE SET NOME = ?, EMAIL = ?"
+                    /*+ "RUA = ?, BAIRRO = ?,ESTADO = ?, CEP = ? "*/
+                    + "WHERE CPF=?";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement p = conn.prepareStatement(sql);
-            p.setString(1, c.getSenha());
-            p.setString(2, c.getCpf());
+            p.setString(1, c.getNome());
+            p.setString(2, c.getEmail());/*
+            p.setString(3, c.getEndereco().getRua());
+            p.setString(4, c.getEndereco().getBairro());
+            p.setString(5, c.getEndereco().getEstado());
+            p.setString(6, c.getEndereco().getCEP());
+            p.setString(7, c.getCpf());
+*/
+            p.setString(3, c.getCpf());
             r = p.executeUpdate();
             ConnectionFactory.closeConnection(conn, p);
         }
@@ -55,6 +64,25 @@ public class ClienteDAO {
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement p = conn.prepareStatement(sql);
             p.setString(1, c.getSenha());
+            p.setString(2, c.getCpf());
+            r = p.executeUpdate();
+            ConnectionFactory.closeConnection(conn, p);
+        }
+        catch(SQLException e){
+            throw new RuntimeException(e);
+        }  
+        finally{
+            return (r>0);
+        }
+    }
+    
+    public boolean updateTelefone(Cliente c){
+        int r = 0;
+        try{
+            String sql = "UPDATE TELEFONE SET NUMERO = ? WHERE CPF = ?";
+            Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement p = conn.prepareStatement(sql);
+            p.setString(1, c.getTelefone());
             p.setString(2, c.getCpf());
             r = p.executeUpdate();
             ConnectionFactory.closeConnection(conn, p);

@@ -31,20 +31,20 @@ public class NovaSenha extends HttpServlet {
             if(c.getFromDb()){
                 c.setSenha(request.getParameter("NovaSenha"));
                 c.trocarSenha();
-                request.setAttribute("VaiDa", "Que não vai dá oq");
+                request.setAttribute("Mensagem", "Que não vai dá oq");
                 request.getSession().setAttribute("clienteAutenticado", c);
                 System.out.println("deubom");
                 RequestDispatcher dispatcher = request.getRequestDispatcher("trocar-senha.jsp");
                 dispatcher.forward(request, response);
             }
             else{
-                request.setAttribute("VaiDa", "Não deu");
+                request.setAttribute("Mensagem", "Não deu");
                 RequestDispatcher dispatcher = request.getRequestDispatcher("trocar-senha.jsp");
                 dispatcher.forward(request, response);
             }
         }
         else{
-            request.setAttribute("VaiDa", false);
+            request.setAttribute("Mensagem", "Login Necessário");
             RequestDispatcher dispatcher = request.getRequestDispatcher("trocar-senha.jsp");
             dispatcher.forward(request, response);
         }

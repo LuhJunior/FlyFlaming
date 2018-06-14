@@ -12,76 +12,69 @@
             <div class="formulario-cadastro color-orange"> 
                 <div class="mdl-grid center-items color-orange">
                     <% Modelo.Cliente c = (Modelo.Cliente)request.getAttribute("cliente");
-                        String men = null;
+                        String men = (String)request.getAttribute("Mensagem");
+                        String men2 = (String)request.getAttribute("Mensagem2");
                         if(c == null) {
                             c = new Modelo.Cliente();
-                            men = (String)request.getAttribute("Mensagem");
-                    %><script>alert(men)</script> <%
+                        }
+                        if(men != null){
+                    %><script>alert("<%=men%>")</script> <%
+                        }
+                        if(men2 != null){
+                    %><script>alert("<%=men2%>")</script> <%
                         }
                         if(c.getTelefone() == null) c.setTelefone("");
                         if(c.getEndereco() == null) c.setEndereco(new Modelo.Endereco());
                     %>
                     <div class="logo-font GoBystrok-title GoBystrok-slogan">Perfil</div>
-                    <div center-items>
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam">
-                            <h2 class="mdl-card__title-text color-white">Dados Pessoais</h2>
-                        </div>
-
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
-                            <input class="mdl-textfield__input color-white" type="text" name="Nome" maxlength="50" id="sample3" value="<%=c.getNome()%>" readonly="">
-                            <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Nome</label>
-                        </div>
-
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
-                            <input class="mdl-textfield__input color-white" type="text" name="CPF" maxlength="11" pattern = "-?[0-9]*(\.[0-9]+)?" id="sample3" value="<%=c.getCpf()%>" readonly="">
-                            <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">CPF</label>
-                        </div>
-
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
-                            <input class="mdl-textfield__input color-white" type="email" name="Email" id="sample3" value="<%=c.getEmail()%>" readonly="">
-                            <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Email</label>
-                        </div>
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
-                            <input class="mdl-textfield__input color-white" type="text" name="Telefone" 
-                                 minlength="9" maxlength="15" id="sample3" value="<%=c.getTelefone()%>" readonly="">
-                            <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Telefone</label>
-                            <span class="mdl-textfield__error color-white">Use somente números</span>
-                        </div>
-
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam" readonly="">
-                            <h2 class="mdl-card__title-text color-white">Endereço</h2>
-                        </div>
-
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
-                            <input class="mdl-textfield__input color-white" type="text" name="Rua" id="sample5" value="<%=c.getEndereco().getRua()%>" readonly="">     
-                            <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample5">Rua</label>
-                        </div>  
-
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam " value="<%=c.getEndereco().getBairro()%>" readonly="">
-                            <input class="mdl-textfield__input color-white" type="text" name="Bairro" id="sample3">
-                            <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Bairro</label>
-                        </div>  
-
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
-                            <input class="mdl-textfield__input color-white" type="text" name="Cidade" id="sample5" value="<%=c.getEndereco().getCidade()%>" readonly="">     
-                            <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample5">Cidade</label>
-                        </div>
-
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
-                            <input class="mdl-textfield__input color-white" name="Estado" type="text" minlength=8 
-                                   maxlength="8" id="sample6" value="<%=c.getEndereco().getEstado()%>" readonly="">      
-                            <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample6">Estado</label>
-                        </div>
-
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
-                            <input class="mdl-textfield__input color-white" type="text" name="CEP" id="sample3" value="<%=c.getEndereco().getCEP()%>" readonly="">
-                            <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">CEP</label>
-                        </div>
-
+                    
+                        <table style="margin-top: 100px;" class="mdl-data-table mdl-shadow--2dp">
+                            <tr>
+                                <td>Dados Pessoais</td>
+                            </tr>
+                            <tr>
+                                <td>Nome:</td>
+                                <td><%=c.getNome()%></td>
+                            </tr>
+                            <tr>
+                                <td>CPF:</td>
+                                <td><%=c.getCpf()%></td>
+                            </tr>
+                            <tr>
+                                <td>E-Mail:</td>
+                                <td><%=c.getEmail()%></td>
+                            </tr>
+                            <tr>
+                                <td>Telefone:</td>
+                                <td><%=c.getTelefone()%></td>
+                            </tr>
+                            <tr>
+                                <td>Endereço</td>
+                            </tr>
+                            <tr>
+                                <td>Rua:</td>
+                                <td><%=c.getEndereco().getRua()%></td>
+                            </tr>  
+                            <tr>
+                                <td>Bairro:</td>
+                                <td><%=c.getEndereco().getBairro()%></td>
+                            </tr>  
+                            <tr>
+                                <td>Cidade:</td>
+                                <td><%=c.getEndereco().getCidade()%></td>     
+                            </tr>
+                            <tr>
+                                <td>Estado:</td>
+                                <td><%=c.getEndereco().getEstado()%></td>
+                            </tr>
+                            <tr>
+                                <td>CEP:</td>
+                                <td><%=c.getEndereco().getCEP()%></td>
+                            <tr>
+                        </table>
                         <div class="toolbar-section">
                             <a href="updateCliente"> <button class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect margin-top">Alterar Dados</button></a>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>

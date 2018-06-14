@@ -10,7 +10,7 @@
     <div class="android-be-together-section">
       <div class="formulario-cadastro color-orange"> 
         <div class="mdl-grid center-items color-orange">
-            <% String men = (String)request.getAttribute("VaiDa");%>
+            <% String men = (String)request.getAttribute("Mensagem");%>
             <% if(men != null){%>
                 <script>alert("<%=men%>");</script>
             <%}%>
@@ -20,7 +20,7 @@
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam">
                     <h2 class="mdl-card__title-text color-white">Dados Pessoais</h2>
                 </div>
-
+                <tavl
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
                     <input class="mdl-textfield__input color-white" type="text" name="Nome" maxlength="50" id="sample3">
                     <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Nome</label>

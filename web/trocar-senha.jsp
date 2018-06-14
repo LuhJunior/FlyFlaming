@@ -11,7 +11,7 @@
             <div class="formulario color-orange padding-form">     
                 <div class="mdl-grid center-items color-orange">
                         <div class="logo-font GoBystrok-title GoBystrok-slogan">Troca de Senha</div>
-                        <% String men = (String)request.getAttribute("VaiDa");%>
+                        <% String men = (String)request.getAttribute("Mensagem");%>
                         <% if(men != null){%>
                             <script>alert("<%=men%>");</script>
                         <%}%>

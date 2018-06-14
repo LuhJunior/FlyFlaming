@@ -13,11 +13,8 @@
       <div class="formulario-cadastro color-orange"> 
         <div class="mdl-grid center-items color-orange">
             <% Modelo.Cliente c = (Modelo.Cliente)request.getAttribute("cliente");
-                        String men = null;
                         if(c == null) {
                             c = new Modelo.Cliente();
-                            men = (String)request.getAttribute("Mensagem");
-                    %><script>alert(men)</script> <%
                         }
                         if(c.getTelefone() == null) c.setTelefone("");
                         if(c.getEndereco() == null) c.setEndereco(new Modelo.Endereco());

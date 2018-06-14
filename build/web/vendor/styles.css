@@ -59,8 +59,7 @@ a img{
   position: absolute;
   right: 25%;
   left: 25%;
-  top: 50px;
-
+  top: 150px;
   z-index: 3;
   background: white !important;
   color: black !important;

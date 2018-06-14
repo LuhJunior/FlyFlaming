@@ -34,7 +34,7 @@ public class perfil extends HttpServlet {
             dispacher.forward(request, response);
         }
         else{
-            request.setAttribute("Mensagem", "ocorreu um erro");
+            request.setAttribute("Mensagem2", "ocorreu um erro ao procurar os dados cliente");
             RequestDispatcher dispacher = request.getRequestDispatcher("perfil.jsp");
             dispacher.forward(request, response);
         }

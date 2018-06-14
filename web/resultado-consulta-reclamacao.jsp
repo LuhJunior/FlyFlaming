@@ -9,7 +9,7 @@
     <div class="android-content mdl-layout__content">
         <div class="android-be-together-section">
             <div class="formulario color-orange">     
-                <div class="mdl-grid center-items color-orange">
+                <div class="mdl-grid center-items color-orange" style="left: 10%;right: 10%;">
                     <div class="logo-font GoBystrok-title GoBystrok-slogan">Reclamações</div>
                     <% Modelo.Passagem[] p = (Modelo.Passagem[]) request.getAttribute("passagens"); %>
                     <div class="center-items">
@@ -17,10 +17,10 @@
                         <table style="margin-top: 20px;" class="mdl-data-table mdl-shadow--2dp">
                             <thead>
                                 <tr>
-                                    <th></th>
                                     <th class="mdl-data-table__cell--non-numeric">Código da Passagem</th>
                                     <th>Descrição</th>
                                     <th>Situação</th>
+                                    <th>Opções</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -28,20 +28,18 @@
                                     for(int i=0; i<p.length; i++){
                                 %>
                                     <tr>
-                                        <td>
-                                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select">
-                                                <input type="checkbox" name="selected" class="mdl-checkbox__input"/>
-                                            </label>
-                                        </td>
-                                        <td class="mdl-data-table__cell--non-numeric"><input type="hidden" name="codPassagem" value="<%=p[i].getCodigo()%>"><%=p[i].getCodigo()%></td>
-                                        <input type="hidden" name="codReclamacao" value="<%=p[i].getReclamacao().getCodReclamacao()%>">
-                                        <td class="mdl-data-table__cell--non-numeric"><%=p[i].getReclamacao().getDescricao()%></td>
                                         <%
                                             String situacao;
                                             if(p[i].getReclamacao().getEstado() == 'A') situacao = "Aberto";
                                             else situacao = "Resolvido";
                                         %>
-                                        <td class="mdl-data-table__cell--non-numeric"><%=situacao%></td>
+                                        <td class="mdl-data-table__cell--non-numeric"><input type="text" name="codPassagem[]" value="<%=p[i].getCodigo()%>"></td>
+                                        <td class="mdl-data-table__cell--non-numeric"><input type="text" name="codReclamacao[]" value="<%=p[i].getReclamacao().getDescricao()%>"></td>
+                                        <td class="mdl-data-table__cell--non-numeric"><input type="text" name="codReclamacao[]" value="<%=situacao%>"></td>
+                                        <td>
+                                            <button type="submit" name="Editar[]" class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect margin-top">Editar</button>
+                                            <button type="submit" name="Excluir[]" class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect margin-top">Excluir</button>
+                                        </td>   
                                     </tr>
                                     <%}
                                 }else{%>
@@ -49,8 +47,6 @@
                                 <%}%>
                             </tbody>
                         </table>
-                        <button type="submit" name="Editar" class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect margin-top">Editar Reclamação</button>
-                        <button type="submit" name="excluir" class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect margin-top">Excluir Reclamação</button>
                     </form>
                     </div>
                     <div>
