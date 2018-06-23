@@ -1,9 +1,17 @@
 package Modelo;
 
+import Banco.VooDAO;
+import Banco.VooDAO;
+import Modelo.Aeronave;
+import Modelo.Programacao;
+import java.util.ArrayList;
+
 public class Voo {
     int numero;
-    String origem, destino, data, hora;
+    String origem, destino;
     double valor;
+    //ArrayList<Programacao> programacao;
+    Programacao programacao;
     Aeronave aviao;
 
     public Voo() {
@@ -14,6 +22,14 @@ public class Voo {
         this.destino = destino;
         this.valor = valor;
         this.aviao = aviao;
+    }
+
+    public Programacao getProgramacao() {
+        return programacao;
+    }
+
+    public void setProgramacao(Programacao programacao) {
+        this.programacao = programacao;
     }
 
     public String getOrigem() {
@@ -36,22 +52,6 @@ public class Voo {
         this.numero = numero;
     }
 
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-
-    public String getHora() {
-        return hora;
-    }
-
-    public void setHora(String hora) {
-        this.hora = hora;
-    }
-
     public void setDestino(String destino) {
         this.destino = destino;
     }
@@ -72,11 +72,21 @@ public class Voo {
         this.aviao = aviao;
     }
     
-    boolean addOnDb(){ 
+    public boolean inserirVoo(){
         return true;
     }
     
-    boolean getFromDb(){
+    public boolean pegarVoo(){
+        VooDAO v = VooDAO();
+        v.pesquisar(this);
         return true;
     }
+    public static ArrayList<Voo> pegarVooPelaData(String data){
+        return VooDAO.pesquisarVoosPelaData(data);
+    }
+    
+    public static ArrayList<Voo> pegarVoos(){
+        return VooDAO.pesquisarVoos();
+    }
+    
 }
