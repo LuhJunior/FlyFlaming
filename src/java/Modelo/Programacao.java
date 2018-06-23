@@ -1,55 +1,78 @@
 package Modelo;
 
-import Modelo.Voo;
-import java.util.Calendar;
+import Banco.ProgramacaoDAO;
 
 public class Programacao {
-    Calendar horaChegada, horaSaida;
-    Voo voo;
-
+    int quantidadeEcon, quantidadeExec;
+    String dataChegada, dataSaida, horaChegada, horaSaida;
+    
     public Programacao() {
     }
 
-    public Programacao(Calendar horaChegada, Calendar horaSaida, Voo voo) {
+    public Programacao(String horaChegada, String horaSaida, Voo voo) {
         this.horaChegada = horaChegada;
         this.horaSaida = horaSaida;
-        this.voo = voo;
     }
 
-    public Calendar getHoraChegada() {
+    public int getQuantidadeEcon() {
+        return quantidadeEcon;
+    }
+
+    public void setQuantidadeEcon(int quantidadeEcon) {
+        this.quantidadeEcon = quantidadeEcon;
+    }
+
+    public String getDataChegada() {
+        return dataChegada;
+    }
+
+    public void setDataChegada(String dataChegada) {
+        this.dataChegada = dataChegada;
+    }
+
+    public String getDataSaida() {
+        return dataSaida;
+    }
+
+    public void setDataSaida(String dataSaida) {
+        this.dataSaida = dataSaida;
+    }
+
+    public int getQuantidadeExec() {
+        return quantidadeExec;
+    }
+
+    public void setQuantidadeExec(int quantidadeExec) {
+        this.quantidadeExec = quantidadeExec;
+    }
+
+    public String getHoraChegada() {
         return horaChegada;
     }
 
-    public void setHoraChegada(Calendar horaChegada) {
+    public void setHoraChegada(String horaChegada) {
         this.horaChegada = horaChegada;
     }
 
-    public Calendar getHoraSaida() {
+    public String getHoraSaida() {
         return horaSaida;
     }
 
-    public void setHoraSaida(Calendar horaSaida) {
+    public void setHoraSaida(String horaSaida) {
         this.horaSaida = horaSaida;
     }
 
-    public Voo getVoo() {
-        return voo;
-    }
-
-    public void setVoo(Voo voo) {
-        this.voo = voo;
-    }
-    
     public boolean reservarAssento(String assento){
         return true;
     }
     
-    public boolean addOnDb(){ 
+    public boolean inserirProgramacao(){ 
+        ProgramacaoDAO p = new ProgramacaoDAO();
         return true;
     }
     
-    public boolean getFromDb(int id){
-        
+    public boolean pegarProgramacao(int ID){
+        ProgramacaoDAO p = new ProgramacaoDAO();
         return true;
     }
 }

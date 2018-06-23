@@ -90,7 +90,7 @@ public class PassagemDAO {
             p.setInt(1, pa.getCodigo());
             ResultSet rs = p.executeQuery();
             if(rs != null && rs.next()){
-                pa.getProgramacao().getFromDb(rs.getInt("IDPROGRAMACAO"));
+                pa.getProgramacao().pegarProgramacao(rs.getInt("IDPROGRAMACAO"));
                 pa.setAssento(rs.getString("COD_POLTRONA"));
                 pa.setHoraCompra(rs.getString("DATAHORA_COMPRA"));
                 pa.setCheckin(rs.getInt("CHECKIN") == 1);
@@ -117,7 +117,7 @@ public class PassagemDAO {
                 Passagem pa = new Passagem();
                 pa.setProgramacao(new Programacao());
                 pa.setCodigo(rs.getInt("IDPASSAGEM"));
-                pa.getProgramacao().getFromDb(rs.getInt("IDPROGRAMACAO"));
+                pa.getProgramacao().pegarProgramacao(rs.getInt("IDPROGRAMACAO"));
                 pa.setAssento(rs.getString("COD_POLTRONA"));
                 pa.setHoraCompra(rs.getString("DATAHORA_COMPRA"));
                 pa.setCheckin(rs.getInt("CHECKIN") == 1);
@@ -147,7 +147,7 @@ public class PassagemDAO {
                 Passagem pa = new Passagem();
                 pa.setProgramacao(new Programacao());
                 pa.setCodigo(rs.getInt("IDPASSAGEM"));
-                pa.getProgramacao().getFromDb(rs.getInt("IDPROGRAMACAO"));
+                pa.getProgramacao().pegarProgramacao(rs.getInt("IDPROGRAMACAO"));
                 pa.setAssento(rs.getString("COD_POLTRONA"));
                 pa.setHoraCompra(rs.getString("DATAHORA_COMPRA"));
                 pa.setCheckin(rs.getInt("CHECKIN") == 1);
@@ -155,6 +155,37 @@ public class PassagemDAO {
                 pa.setValor(rs.getFloat("VALOR_FINAL"));
                 pa.consultarReclamacao();
                 if(!(pa.isCancelada() || pa.isCheckin())) passagens.add(pa);
+            }
+            ConnectionFactory.closeConnection(conn, p, rs);
+        }
+        catch(SQLException e){
+            throw new RuntimeException(e);
+        }
+        return (Passagem[]) passagens.toArray(new Passagem[passagens.size()]);
+    }
+    
+    public Passagem[] pegarPassagensPelaData(String data){
+        ArrayList<Passagem> passagens = new ArrayList<>();
+        try{
+            String sql = "SELECT P.IDPASSAGEM, IDPROGRAMACAO, COD_POLTRONA, DATAHORA_COMPRA, CHECKIN,"
+                    + "CANCELAMENTO, VALOR_FINAL FROM PASSAGEM AS P JOIN PAGAMENTO AS PG ON P.IDPASSAGEM=PG.IDPASSAGEM"
+                    + " INNER JOIN PROGRAMACAO AS PR ON PR.IDAPROGRAMACAO = P.IDPROGRAMACAO WHERE PR.DATA_SAIDA = ?";
+            Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement p = conn.prepareStatement(sql);
+            p.setString(1, data);
+            ResultSet rs = p.executeQuery();
+            while(rs.next()){
+                Passagem pa = new Passagem();
+                pa.setProgramacao(new Programacao());
+                pa.setCodigo(rs.getInt("IDPASSAGEM"));
+                pa.getProgramacao().pegarProgramacao(rs.getInt("IDPROGRAMACAO"));
+                pa.setAssento(rs.getString("COD_POLTRONA"));
+                pa.setHoraCompra(rs.getString("DATAHORA_COMPRA"));
+                pa.setCheckin(rs.getInt("CHECKIN") == 1);
+                pa.setCancelada(rs.getInt("CANCELAMENTO") == 1);
+                pa.setValor(rs.getFloat("VALOR_FINAL"));
+                pa.consultarReclamacao();
+                passagens.add(pa);
             }
             ConnectionFactory.closeConnection(conn, p, rs);
         }
@@ -178,7 +209,7 @@ public class PassagemDAO {
                 Passagem pa = new Passagem();
                 pa.setProgramacao(new Programacao());
                 pa.setCodigo(rs.getInt("IDPASSAGEM"));
-                pa.getProgramacao().getFromDb(rs.getInt("IDPROGRAMACAO"));
+                pa.getProgramacao().pegarProgramacao(rs.getInt("IDPROGRAMACAO"));
                 pa.setAssento(rs.getString("COD_POLTRONA"));
                 pa.setHoraCompra(rs.getString("DATAHORA_COMPRA"));
                 pa.setCheckin(rs.getInt("CHECKIN") == 1);

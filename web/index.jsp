@@ -4,6 +4,7 @@
     Author     : Diego Malta
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="Negocio.ofertasNeg"%>
 <%@page import="Negocio.vooNeg"%>
 <jsp:include page="layout/header.jsp"/>
@@ -108,6 +109,7 @@
                                 <thead>
                                     <tr>
                                         <th class="mdl-data-table__cell--non-numeric">Voo</th>
+                                        <th>Origem</th>
                                         <th>Destino</th>
                                         <th>Data</th>
                                         <th>Hora</th>
@@ -117,20 +119,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <% vooNeg r = new vooNeg();
-                                        r.pesquisarVoosSemana();
-                                    %>
-                                    <% for (int i=0;i<r.getSemana().length;i++) 
-                                        if (r.getSemana()[i]!= null){%>
-                                        <tr>
-                                            <td class="mdl-data-table__cell--non-numeric"> <%=r.getSemana()[i].getNumVoo()%> </td>
-                                            <td><%=r.getSemana()[i].getDestino()%></td>
-                                            <td><%=r.getSemana()[i].getData()%></td>
-                                            <td><%=r.getSemana()[i].getHora()%></td>
-                                            <td>20</td>
-                                            <td>36</td>
-                                            <td><%=r.getSemana()[i].getValorPassagem()%></td>
-                                        </tr>
+                                    <% ArrayList<Modelo.Voo> v = (ArrayList<Modelo.Voo> ) request.getAttribute("voos");
+                                        for (Modelo.Voo aux: v) 
+                                            {%>
+                                            <tr>
+                                                <td class="mdl-data-table__cell--non-numeric"> <%=aux.getNumero()%> </td>
+                                                <td><%=aux.getOrigem()%></td>
+                                                <td><%=aux.getDestino()%></td>
+                                                <td><%=aux.getProgramacao().getDataSaida()%></td>
+                                                <td><%=aux.getProgramacao().getHoraSaida()%></td>
+                                                <td><%=aux.getProgramacao().getQuantidadeExec()%></td>
+                                                <td><%=aux.getProgramacao().getQuantidadeEcon()%></td>
+                                                <td><%=aux.getValor()%></td>
+                                            </tr>
                                     <%}%>
                                 </tbody>
                             </table>
