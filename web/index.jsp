@@ -6,7 +6,6 @@
 
 <%@page import="java.util.ArrayList"%>
 <%@page import="Negocio.ofertasNeg"%>
-<%@page import="Negocio.vooNeg"%>
 <jsp:include page="layout/header.jsp"/>
     <jsp:include page="layout/navbarDinamicaIndex.jsp"/>
         <div class="android-content mdl-layout__content">
@@ -76,20 +75,18 @@
             <section id="ofertasPassagens">
                 <div class="android-screen-section mdl-typography--text-center GoBystrok-spacer"></div>
                 <div class="mdl-typography--display-1-color-contrast mdl-typography--text-center GoBystrok-title-section GoBystrok-title">Ofertas Imperdíveis!</div>
-                    <% ofertasNeg o = new ofertasNeg();
-                          o.pesquisarOfertaSemana();
+                    <% ArrayList<Modelo.Voo> vs = (ArrayList<Modelo.Voo> ) request.getAttribute("voosDaSemana");
                     %>
                     <!-- SECTION OFERTAS - ROW  -->
                     <div class="mdl-grid layout-center padding-sale">  
-                    <% for (int i = 0; i<o.getSemana().length; i++) 
-                            if (o.getSemana()[i]!= null){%>  
+                    <% for (Modelo.Voo v: vs){%>  
                             <div class="mdl-cell mdl-cell--4-col margin-negative">
                                 <div class="demo-card-square mdl-card mdl-shadow--2dp">
                                 <div class="mdl-card__title mdl-card--expand">
-                                    <h2 class="mdl-card__title-text"><%=o.getSemana()[i].getLocal()%></h2>
+                                    <h2 class="mdl-card__title-text"><%=v.getDestino()%></h2>
                                 </div>
                                 <div class="mdl-card__supporting-text">
-                                    <%=o.getSemana()[i].getDescricao()%>
+                                    <%="A partir de R$ "+v.getValor()+" à vista"%>
                                 </div>
                                 <div class="mdl-card__actions mdl-card--border">
                                     <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
@@ -105,7 +102,8 @@
                     <div class="android-customized-section-image">
                         <div style="padding-top: 20px;" class="logo-font GoBystrok-title GoBystrok-slogan">Voos da semana</div>
                         <div class="GoBystrok-fab padding-form">
-                            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp ">
+                            <div class="center-items">
+                            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp ">
                                 <thead>
                                     <tr>
                                         <th class="mdl-data-table__cell--non-numeric">Voo</th>
@@ -135,6 +133,7 @@
                                     <%}%>
                                 </tbody>
                             </table>
+                            </div>
                         </div>
                     </div>
                 </div>

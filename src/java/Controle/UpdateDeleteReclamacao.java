@@ -1,6 +1,11 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Controle;
 
-import Modelo.Passagem;
+import Modelo.Reclamacao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -9,13 +14,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sun.rmi.server.Dispatcher;
 
 /**
  *
  * @author Júnior
  */
-@WebServlet(name = "checkinOuCancelamento", urlPatterns = {"/checkinOuCancelamento"})
-public class checkinOuCancelamento extends HttpServlet {
+@WebServlet(name = "UpdateDeleteReclamacao", urlPatterns = {"/UpdateDeleteReclamacao"})
+public class UpdateDeleteReclamacao extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -28,42 +34,26 @@ public class checkinOuCancelamento extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String cpf = ((Modelo.Cliente) request.getSession().getAttribute("clienteAutenticado")).getCpf();
-        Passagem p = new Passagem();
-        p.setCodigo(Integer.parseInt(request.getParameter("codPassagem")));
-        if(p.buscarDados()){
-                if(p.isCheckin() || p.isCancelada()){
-                    request.setAttribute("VaiDa", "Checkin já foi feito ou a passagem foi cancelada");
-                    System.out.println("Checkin já foi feito");
-                }
-                else if(request.getParameter("submit").equals("checkin")){
-                    if(p.checkin()){
-                        request.setAttribute("VaiDa", "Que não vai dá oq");
-                        System.out.println("Deu bom");
-                    }
-                    else{
-                        request.setAttribute("VaiDa", "Não vai dá não");
-                        System.out.println("Deu ruim");
-                    }
-                }
-                else{
-                    if(p.cancelar()){
-                        request.setAttribute("VaiDa", "Que não vai dá oq");
-                        System.out.println("Deu bom");
-                    }
-                    else{
-                        request.setAttribute("VaiDa", "Não vai dá não");
-                        System.out.println("Deu ruim");
-                    }
-                }
-        }   
-        else{
-            request.setAttribute("VaiDa", "Não vai dá não");
-            System.out.println("Deu ruim");
+        String selected = request.getParameter("submit");
+        String tipo = selected.substring(0, 6);
+        System.out.println(tipo);
+        if(tipo.equals("Editar")){
+            int row = Integer.parseInt(selected.substring(7));
+            Reclamacao r = new Reclamacao();
+            r.getFromDb(Integer.parseInt(request.getParameter("codPassagem["+row+"]")));
+            request.setAttribute("reclamacao", r);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("updateReclamacao.jsp");
+            dispatcher.forward(request, response);
         }
-        RequestDispatcher dispatcher = request.getRequestDispatcher("passagem.jsp");
-        dispatcher.forward(request, response);
+        else{
+            int row = Integer.parseInt(selected.substring(8));
+            Reclamacao r = new Reclamacao();
+            r.getFromDb(Integer.parseInt(request.getParameter("codPassagem["+row+"]")));
+            if(r.deletarReclamacao()) request.setAttribute("Mensagem", "Que não vai dá pai");
+            else request.setAttribute("Mensagem", "Não vai dá não");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("ConsultarReclamacao");
+            dispatcher.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

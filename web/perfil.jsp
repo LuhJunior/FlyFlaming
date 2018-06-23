@@ -73,7 +73,7 @@
                             <tr>
                         </table>
                         <div class="toolbar-section">
-                            <a href="updateCliente"> <button class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect margin-top">Alterar Dados</button></a>
+                            <a href="UpdateCliente"> <button class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect margin-top">Alterar Dados</button></a>
                         </div>
                 </div>
             </div>

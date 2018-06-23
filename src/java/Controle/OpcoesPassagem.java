@@ -1,5 +1,7 @@
 package Controle;
 
+import Modelo.Cliente;
+import Modelo.Passagem;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -13,8 +15,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Júnior
  */
-@WebServlet(name = "updateCliente", urlPatterns = {"/updateCliente"})
-public class updateCliente extends HttpServlet {
+@WebServlet(name = "OpcoesPassagem", urlPatterns = {"/OpcoesPassagem"})
+public class OpcoesPassagem extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -27,16 +29,15 @@ public class updateCliente extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Modelo.Cliente c = (Modelo.Cliente)request.getSession().getAttribute("clienteAutenticado");
-        if(c.getFromDb()){
-            request.setAttribute("cliente", c);
-            RequestDispatcher dispacher = request.getRequestDispatcher("updateCliente.jsp");
+        Cliente c = (Cliente) request.getSession().getAttribute("clienteAutenticado");
+        if(c != null){
+            c.setPassagens(Modelo.Passagem.buscarPassagens(c.getCpf()));
+            if(c.getPassagens().length != 0) request.setAttribute("passagens", c.getPassagens());
+            RequestDispatcher dispacher = request.getRequestDispatcher("passagem.jsp");
             dispacher.forward(request, response);
         }
         else{
-            request.setAttribute("Mensagem", "ocorreu um erro");
-            RequestDispatcher dispacher = request.getRequestDispatcher("updateCliente.jsp");
-            dispacher.forward(request, response);
+            response.sendRedirect("autenticarPagina");
         }
     }
 

@@ -5,20 +5,6 @@ public class PassagemExecutiva extends Passagem{
     public PassagemExecutiva() {
     }
 
-    public PassagemExecutiva(String assento, boolean paga, boolean checkin, float valor, Programacao programacao, Cliente cliente, Reclamacao reclamacao) {
-        super(assento, paga, checkin, valor, programacao, cliente, reclamacao);
-    }
-
-    @Override
-    public String getAssento() {
-        return assento;
-    }
-
-    @Override
-    public void setAssento(String assento) {
-        this.assento = assento;
-    }
-
     @Override
     public boolean isPaga() {
         return paga;
@@ -27,16 +13,6 @@ public class PassagemExecutiva extends Passagem{
     @Override
     public void setPaga(boolean paga) {
         this.paga = paga;
-    }
-
-    @Override
-    public boolean isCheckin() {
-        return checkin;
-    }
-
-    @Override
-    public void setCheckin(boolean checkin) {
-        this.checkin = checkin;
     }
 
     @Override

@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controle;
 
-import Modelo.Reclamacao;
+import Modelo.Passagem;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -14,14 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import sun.rmi.server.Dispatcher;
 
 /**
  *
  * @author Júnior
  */
-@WebServlet(name = "UDReclamacao", urlPatterns = {"/UDReclamacao"})
-public class UDReclamacao extends HttpServlet {
+@WebServlet(name = "CheckarCancelar", urlPatterns = {"/CheckarCancelar"})
+public class CheckarCancelar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,26 +28,39 @@ public class UDReclamacao extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         String selected = request.getParameter("submit");
-        String tipo = selected.substring(0, 6);
+        String tipo = selected.substring(0, 7);
         System.out.println(tipo);
-        if(tipo.equals("Editar")){
-            int row = Integer.parseInt(selected.substring(7));
-            Reclamacao r = new Reclamacao();
-            r.getFromDb(Integer.parseInt(request.getParameter("codPassagem["+row+"]")));
-            request.setAttribute("reclamacao", r);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("updateReclamacao.jsp");
-            dispatcher.forward(request, response);
+        Passagem p = new Passagem();
+        if(tipo.equals("checkin")){
+            int row = Integer.parseInt(selected.substring(8));
+            System.out.println(row);
+            p.setCodigo(Integer.parseInt(request.getParameter("codPassagem["+row+"]")));
+            System.out.println(p.getCodigo());
+            if(p.buscarDados() && p.checkin()){
+                request.setAttribute("VaiDa", "Que não vai dá oq");
+                System.out.println("Deu bom");
+            }   
+            else{
+                request.setAttribute("VaiDa", "Não vai dá não");
+                System.out.println("Deu ruim");
+            }
         }
         else{
-            int row = Integer.parseInt(selected.substring(8));
-            Reclamacao r = new Reclamacao();
-            r.getFromDb(Integer.parseInt(request.getParameter("codPassagem["+row+"]")));
-            if(r.deletarReclamacao()) request.setAttribute("Mensagem", "Que não vai dá pai");
-            else request.setAttribute("Mensagem", "Não vai dá não");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("ConsultarReclamacao");
-            dispatcher.forward(request, response);
+            int row = Integer.parseInt(selected.substring(9));
+            p.setCodigo(Integer.parseInt(request.getParameter("codPassagem["+row+"]")));
+            if(p.buscarDados() && p.cancelar()){
+                request.setAttribute("VaiDa", "Que não vai dá oq");
+                System.out.println("Deu bom");
+            }
+            else{
+                request.setAttribute("VaiDa", "Não vai dá não");
+                System.out.println("Deu ruim");
+            }
         }
+        RequestDispatcher dispatcher = request.getRequestDispatcher("passagem.jsp");
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

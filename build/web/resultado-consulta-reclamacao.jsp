@@ -14,9 +14,8 @@
                     <% Modelo.Passagem[] p = (Modelo.Passagem[]) request.getAttribute("passagens");
                         String Mensagem = (String) request.getAttribute("Mensagem");
                         if(Mensagem != null){%> <script>alert("<%=Mensagem%>")</script><%}%>
-                    
                     <div class="center-items">
-                    <form action="UDReclamacao" method="post" name="UDReclamacaoForm" onsubmit="">
+                    <form action="UpdateDeleteReclamacao" method="post" name="UpdateDeleteReclamacaoForm" onsubmit="">
                         <table style="margin-top: 20px;" class="mdl-data-table mdl-shadow--2dp">
                             <thead>
                                 <tr>

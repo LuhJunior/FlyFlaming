@@ -14,7 +14,7 @@
                         String Mensagem = (String) request.getAttribute("Mensagem");
                         if(Mensagem != null){%> <script>alert("<%=Mensagem%>")</script><%}%>
                     <div class="logo-font GoBystrok-title GoBystrok-slogan">Reclamação</div>
-                    <form action="atualizarReclamacao" method="POST" name="atualizarReclamacaoForm" class="" onsubmit="">
+                    <form action="AtualizarReclamacao" method="POST" name="atualizarReclamacaoForm" class="" onsubmit="">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
                             <input type="hidden" name="codReclamacacao" value="<%=r.getCodReclamacao()%>">
                             <textarea class="mdl-textfield__input color-white" type="text" name="descricao" rows="5" id="sample3"><%=r.getDescricao()%></textarea>

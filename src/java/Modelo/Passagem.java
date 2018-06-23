@@ -6,31 +6,38 @@ import java.util.Calendar;
 
 public class Passagem {
     int codigo;
-    String assento;
-    boolean paga, checkin, cancelada;
+    boolean paga;
     float valor;
-    String horaCompra;
+    String horaCompra, checkin, cancelamento;
     Programacao programacao;
+    Assento assento;
     Reclamacao reclamacao;
 
     public Passagem() {
     }
 
-    public Passagem(String assento, boolean paga, boolean checkin, float valor, Programacao programacao, Cliente cliente, Reclamacao reclamacao) {
-        this.assento = assento;
-        this.paga = paga;
+    public String getCheckin() {
+        return checkin;
+    }
+
+    public void setCheckin(String checkin) {
         this.checkin = checkin;
-        this.valor = valor;
-        this.programacao = programacao;
-        this.reclamacao = reclamacao;
     }
 
-    public boolean isCancelada() {
-        return cancelada;
+    public String getCancelamento() {
+        return cancelamento;
     }
 
-    public void setCancelada(boolean cancelada) {
-        this.cancelada = cancelada;
+    public void setCancelamento(String cancelada) {
+        this.cancelamento = cancelada;
+    }
+
+    public Assento getAssento() {
+        return assento;
+    }
+
+    public void setAssento(Assento assento) {
+        this.assento = assento;
     }
 
     public String getHoraCompra() {
@@ -39,14 +46,6 @@ public class Passagem {
 
     public void setHoraCompra(String horaCompra) {
         this.horaCompra = horaCompra;
-    }
-
-    public String getAssento() {
-        return assento;
-    }
-
-    public void setAssento(String assento) {
-        this.assento = assento;
     }
 
     public boolean isPaga() {
@@ -63,14 +62,6 @@ public class Passagem {
 
     public void setPaga(boolean paga) {
         this.paga = paga;
-    }
-
-    public boolean isCheckin() {
-        return checkin;
-    }
-
-    public void setCheckin(boolean checkin) {
-        this.checkin = checkin;
     }
 
     public float getValor() {
@@ -127,29 +118,25 @@ public class Passagem {
     }
     
     public static Passagem[] buscarDados(String cpf){
-        PassagemDAO p = new PassagemDAO();
-        return p.getFromDb(cpf);
+        return PassagemDAO.pegarPassagensDoCliente(cpf);
     }
     
     public static Passagem[] buscarPassagens(String cpf){
-        PassagemDAO p = new PassagemDAO();
-        return p.pegarPassagens(cpf);
+        return PassagemDAO.pegarPassagensNaoCanceladasDoCliente(cpf);
     }
     
     public static Passagem[] buscarPassagensPelaData(String data){
-        PassagemDAO p = new PassagemDAO();
-        return p.pegarPassagensPelaData(data);
+        return PassagemDAO.pegarPassagensPelaData(data);
     }
     
     public static Passagem[] buscarPassagensComReclamacao(String cpf){
-        PassagemDAO p = new PassagemDAO();
-        return p.pegarPassagensComReclamcao(cpf);
+        return PassagemDAO.pegarPassagensComReclamacao(cpf);
     }
     
     public boolean buscarDados(){
         this.setProgramacao(new Programacao());
         PassagemDAO p = new PassagemDAO();
-        p.getFromDb(this);
+        p.pegarPassagem(this);
         return true;
     }
 }

@@ -24,12 +24,12 @@
               <!-- Navigation -->
               <div class="android-navigation-container">
                 <nav class="android-navigation mdl-navigation GoBystrok-navigation-color">
-                    <a class="mdl-navigation__link" href="index.jsp">HOME</a>
-                    <a class="mdl-navigation__link mdl-typography--text-uppercase" href="opcoesPassagem">Opções de Passagem</a>
+                    <a class="mdl-navigation__link" href="index">HOME</a>
+                    <a class="mdl-navigation__link mdl-typography--text-uppercase" href="OpcoesPassagem">Opções de Passagem</a>
                     <a class="mdl-navigation__link mdl-typography--text-uppercase" href="reclamacao.jsp">Reclamação</a>
                     <% Modelo.Cliente cliente = (Modelo.Cliente) session.getAttribute("clienteAutenticado"); %>
                     <a class="mdl-typography--text-uppercase">Olá, <%=cliente.getNome()%></a> 
-                    <a href="finalizarSessaoPagina.jsp">
+                    <a href="FinalizarSessao">
                       <button class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect mdl-button--mini-fab">
                         Sair
                       </button>
@@ -55,14 +55,14 @@
                 FlyFlaming
             </span>
             <nav class="mdl-navigation">
-              <a class="mdl-navigation__link" href="opcoesPassagem">Opçoes de Passagem</a>
-              <a class="mdl-navigation__link" href="consulta-reclamacao.jsp">Acompanhar Reclamação</a>
+              <a class="mdl-navigation__link" href="OpcoesPassagem">Opções de Passagem</a>
+              <a class="mdl-navigation__link" href="ConsultarReclamacao">Acompanhar Reclamação</a>
               <a class="mdl-navigation__link" href="trocar-senha.jsp">Trocar Senha</a> 
               <div class="android-drawer-separator"></div>
               <span class="mdl-navigation__link" href="">Dúvidas</span>
-              <a class="mdl-navigation__link" href="">Contato</a>                                                             
+              <a class="mdl-navigation__link" href="index#contato">Contato</a>                                                       
               <div class="android-drawer-separator"></div>
               <span class="mdl-navigation__link" href="">Usuário</span>
-              <a class="mdl-navigation__link" href="perfil">Perfil</a>
+              <a class="mdl-navigation__link" href="Perfil">Perfil</a>
             </nav>
           </div>

@@ -21,7 +21,7 @@
                     %>
             <div class="logo-font GoBystrok-title GoBystrok-slogan">Alterar Dados do Cliente</div>
             
-            <form action="updateDadosCliente" method="POST" name="updateForm" class="" onsubmit="return verificarCamposCadastro()">
+            <form action="UpdateDadosCliente" method="POST" name="updateForm" class="" onsubmit="return verificarCamposCadastro()">
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam">
                     <h2 class="mdl-card__title-text color-white">Dados Pessoais</h2>
                 </div>

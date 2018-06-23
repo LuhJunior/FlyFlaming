@@ -1,8 +1,12 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Controle;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Júnior
  */
-@WebServlet(name = "atualizarReclamacao", urlPatterns = {"/atualizarReclamacao"})
-public class atualizarReclamacao extends HttpServlet {
+@WebServlet(name = "FinalizarSessao", urlPatterns = {"/FinalizarSessao"})
+public class FinalizarSessao extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -27,13 +31,8 @@ public class atualizarReclamacao extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Modelo.Reclamacao r = new Modelo.Reclamacao();
-        r.setCodReclamacao(request.getParameter("codReclamacacao"));
-        r.setDescricao(request.getParameter("descricao"));
-        if(r.atualizarReclamacao()) request.setAttribute("Mensagem", "Que não vai dá pai");
-        else request.setAttribute("Mensagem", "Não vai dá não");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("ConsultarReclamacao");
-        dispatcher.forward(request, response);
+        request.getSession().removeAttribute("clienteAutenticado");
+        response.sendRedirect("index");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

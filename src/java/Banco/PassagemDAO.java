@@ -1,5 +1,6 @@
 package Banco;
 
+import Modelo.Assento;
 import Modelo.Passagem;
 import Modelo.Programacao;
 import java.sql.Connection;
@@ -47,7 +48,7 @@ public class PassagemDAO {
     public boolean updateCheckin(Passagem pa){
         int r = 0;
         try{
-            String sql = "UPDATE PASSAGEM SET CHECKIN=1 WHERE IDPASSAGEM = ?";
+            String sql = "UPDATE PASSAGEM SET CHECKIN=NOW() WHERE IDPASSAGEM = ?";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement p = conn.prepareStatement(sql);
             p.setInt(1, pa.getCodigo());
@@ -65,7 +66,7 @@ public class PassagemDAO {
     public boolean updateCancelamento(Passagem pa){
         int r = 0;
         try{
-            String sql = "UPDATE PASSAGEM SET CANCELAMENTO=1 WHERE IDPASSAGEM = ?";
+            String sql = "UPDATE PASSAGEM SET CANCELAMENTO=NOW() WHERE IDPASSAGEM = ?";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement p = conn.prepareStatement(sql);
             p.setInt(1, pa.getCodigo());
@@ -80,52 +81,60 @@ public class PassagemDAO {
         }
     }
     
-    public void getFromDb(Passagem pa){
+    public void pegarPassagem(Passagem p){
         try{
-            String sql = "SELECT IDPROGRAMACAO, COD_POLTRONA, DATAHORA_COMPRA, CHECKIN,"
-                    + "CANCELAMENTO, VALOR_FINAL, CPF FROM PASSAGEM AS P JOIN PAGAMENTO AS PG ON P.IDPASSAGEM=PG.IDPASSAGEM"
-                    + " WHERE P.IDPASSAGEM = ?";
+            String sql = "SELECT P.IDPROGRAMACAO, P.DATAHORA_COMPRA, P.CHECKIN, P.CANCELAMENTO, PG.VALOR_FINAL, "
+                    + "A.FILEIRA, A.CADEIRA, A.TIPO FROM PASSAGEM AS P INNER JOIN ASSENTO AS A "
+                    + "ON P.ASSENTO = A.NUMERO INNER JOIN PAGAMENTO AS PG ON P.IDPASSAGEM=PG.IDPASSAGEM "
+                    + "WHERE P.IDPASSAGEM = ?";
             Connection conn = ConnectionFactory.getConnection();
-            PreparedStatement p = conn.prepareStatement(sql);
-            p.setInt(1, pa.getCodigo());
-            ResultSet rs = p.executeQuery();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, p.getCodigo());
+            ResultSet rs = ps.executeQuery();
             if(rs != null && rs.next()){
-                pa.getProgramacao().pegarProgramacao(rs.getInt("IDPROGRAMACAO"));
-                pa.setAssento(rs.getString("COD_POLTRONA"));
-                pa.setHoraCompra(rs.getString("DATAHORA_COMPRA"));
-                pa.setCheckin(rs.getInt("CHECKIN") == 1);
-                pa.setCancelada(rs.getInt("CANCELAMENTO") == 1);
-                pa.setValor(rs.getFloat("VALOR_FINAL"));
+                p.getProgramacao().pegarProgramacao(rs.getInt("P.IDPROGRAMACAO"));
+                p.setAssento(new Assento());
+                p.getAssento().setFileira(rs.getInt("A.FILEIRA"));
+                p.getAssento().setCadeira(rs.getInt("A.CADEIRA"));
+                p.getAssento().setTipo(rs.getString("A.TIPO"));
+                p.setHoraCompra(rs.getString("P.DATAHORA_COMPRA"));
+                p.setCheckin(rs.getString("P.CHECKIN"));
+                p.setCancelamento(rs.getString("P.CANCELAMENTO"));
+                p.setValor(rs.getFloat("PG.VALOR_FINAL"));
             }
-            ConnectionFactory.closeConnection(conn, p, rs);
+            ConnectionFactory.closeConnection(conn, ps, rs);
         }
         catch(SQLException e){
             throw new RuntimeException(e);
         }  
     }
-    public Passagem[] getFromDb(String cpf){
+    public static Passagem[] pegarPassagensDoCliente(String cpf){
         ArrayList<Passagem> passagens = new ArrayList<>();
         try{
-            String sql = "SELECT IDPROGRAMACAO, IDPROGRAMACAO, COD_POLTRONA, DATAHORA_COMPRA, CHECKIN,"
-                    + "CANCELAMENTO, VALOR_FINAL FROM PASSAGEM AS P JOIN PAGAMENTO AS PG ON P.IDPASSAGEM=PG.IDPASSAGEM"
-                    + " WHERE P.CPF = ?";
+            String sql = "SELECT P.IDPASSAGEM, P.IDPROGRAMACAO, P.DATAHORA_COMPRA, P.CHECKIN, P.CANCELAMENTO, PG.VALOR_FINAL, "
+                    + "A.FILEIRA, A.CADEIRA, A.TIPO FROM PASSAGEM AS P INNER JOIN ASSENTO AS A "
+                    + "ON P.ASSENTO = A.NUMERO INNER JOIN PAGAMENTO AS PG ON P.IDPASSAGEM=PG.IDPASSAGEM "
+                    + "WHERE P.CPF = ?";
             Connection conn = ConnectionFactory.getConnection();
-            PreparedStatement p = conn.prepareStatement(sql);
-            p.setString(1, cpf);
-            ResultSet rs = p.executeQuery();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, cpf);
+            ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                Passagem pa = new Passagem();
-                pa.setProgramacao(new Programacao());
-                pa.setCodigo(rs.getInt("IDPASSAGEM"));
-                pa.getProgramacao().pegarProgramacao(rs.getInt("IDPROGRAMACAO"));
-                pa.setAssento(rs.getString("COD_POLTRONA"));
-                pa.setHoraCompra(rs.getString("DATAHORA_COMPRA"));
-                pa.setCheckin(rs.getInt("CHECKIN") == 1);
-                pa.setCancelada(rs.getInt("CANCELAMENTO") == 1);
-                pa.setValor(rs.getFloat("VALOR_FINAL"));
-                passagens.add(pa);
+                Passagem p = new Passagem();
+                //p.getProgramacao().pegarProgramacao(rs.getInt("P.IDPROGRAMACAO"));
+                p.setAssento(new Assento());
+                p.getAssento().setFileira(rs.getInt("A.FILEIRA"));
+                p.getAssento().setCadeira(rs.getInt("A.CADEIRA"));
+                p.getAssento().setTipo(rs.getString("A.TIPO"));
+                p.setCodigo(rs.getInt("P.IDPASSAGEM"));
+                p.setHoraCompra(rs.getString("P.DATAHORA_COMPRA"));
+                p.setCheckin(rs.getString("P.CHECKIN"));
+                p.setCancelamento(rs.getString("P.CANCELAMENTO"));
+                p.setValor(rs.getFloat("PG.VALOR_FINAL"));
+                p.consultarReclamacao();
+                passagens.add(p);
             }
-            ConnectionFactory.closeConnection(conn, p, rs);
+            ConnectionFactory.closeConnection(conn, ps, rs);
         }
         catch(SQLException e){
             throw new RuntimeException(e);
@@ -133,30 +142,33 @@ public class PassagemDAO {
         return (Passagem[]) passagens.toArray();     
     }
     
-    public Passagem[] pegarPassagens(String cpf){
+    public static Passagem[] pegarPassagensNaoCanceladasDoCliente(String cpf){
         ArrayList<Passagem> passagens = new ArrayList<>();
         try{
-            String sql = "SELECT P.IDPASSAGEM, IDPROGRAMACAO, COD_POLTRONA, DATAHORA_COMPRA, CHECKIN,"
-                    + "CANCELAMENTO, VALOR_FINAL FROM PASSAGEM AS P JOIN PAGAMENTO AS PG ON P.IDPASSAGEM=PG.IDPASSAGEM"
-                    + " WHERE P.CPF = ?";
+            String sql = "SELECT P.IDPASSAGEM, P.IDPROGRAMACAO, P.DATAHORA_COMPRA, P.CHECKIN, P.CANCELAMENTO, PG.VALOR_FINAL, "
+                    + "A.FILEIRA, A.CADEIRA, A.TIPO FROM PASSAGEM AS P INNER JOIN ASSENTO AS A "
+                    + "ON P.ASSENTO = A.NUMERO INNER JOIN PAGAMENTO AS PG ON P.IDPASSAGEM=PG.IDPASSAGEM "
+                    + " WHERE P.CPF = ? AND CHECKIN IS NULL AND CANCELAMENTO IS NULL";
             Connection conn = ConnectionFactory.getConnection();
-            PreparedStatement p = conn.prepareStatement(sql);
-            p.setString(1, cpf);
-            ResultSet rs = p.executeQuery();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, cpf);
+            ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                Passagem pa = new Passagem();
-                pa.setProgramacao(new Programacao());
-                pa.setCodigo(rs.getInt("IDPASSAGEM"));
-                pa.getProgramacao().pegarProgramacao(rs.getInt("IDPROGRAMACAO"));
-                pa.setAssento(rs.getString("COD_POLTRONA"));
-                pa.setHoraCompra(rs.getString("DATAHORA_COMPRA"));
-                pa.setCheckin(rs.getInt("CHECKIN") == 1);
-                pa.setCancelada(rs.getInt("CANCELAMENTO") == 1);
-                pa.setValor(rs.getFloat("VALOR_FINAL"));
-                pa.consultarReclamacao();
-                if(!(pa.isCancelada() || pa.isCheckin())) passagens.add(pa);
+                Passagem p = new Passagem();
+                //p.getProgramacao().pegarProgramacao(rs.getInt("P.IDPROGRAMACAO"));
+                p.setAssento(new Assento());
+                p.getAssento().setFileira(rs.getInt("A.FILEIRA"));
+                p.getAssento().setCadeira(rs.getInt("A.CADEIRA"));
+                p.getAssento().setTipo(rs.getString("A.TIPO"));
+                p.setCodigo(rs.getInt("P.IDPASSAGEM"));
+                p.setHoraCompra(rs.getString("P.DATAHORA_COMPRA"));
+                p.setCheckin(rs.getString("P.CHECKIN"));
+                p.setCancelamento(rs.getString("P.CANCELAMENTO"));
+                p.setValor(rs.getFloat("PG.VALOR_FINAL"));
+                passagens.add(p);
+                
             }
-            ConnectionFactory.closeConnection(conn, p, rs);
+            ConnectionFactory.closeConnection(conn, ps, rs);
         }
         catch(SQLException e){
             throw new RuntimeException(e);
@@ -164,30 +176,32 @@ public class PassagemDAO {
         return (Passagem[]) passagens.toArray(new Passagem[passagens.size()]);
     }
     
-    public Passagem[] pegarPassagensPelaData(String data){
+    public static  Passagem[] pegarPassagensPelaData(String data){
         ArrayList<Passagem> passagens = new ArrayList<>();
         try{
-            String sql = "SELECT P.IDPASSAGEM, IDPROGRAMACAO, COD_POLTRONA, DATAHORA_COMPRA, CHECKIN,"
-                    + "CANCELAMENTO, VALOR_FINAL FROM PASSAGEM AS P JOIN PAGAMENTO AS PG ON P.IDPASSAGEM=PG.IDPASSAGEM"
-                    + " INNER JOIN PROGRAMACAO AS PR ON PR.IDAPROGRAMACAO = P.IDPROGRAMACAO WHERE PR.DATA_SAIDA = ?";
+            String sql = "SELECT P.IDPASSAGEM, P.IDPROGRAMACAO, P.DATAHORA_COMPRA, P.CHECKIN, P.CANCELAMENTO, PG.VALOR_FINAL, "
+                    + "A.FILEIRA, A.CADEIRA, A.TIPO FROM PASSAGEM AS P INNER JOIN ASSENTO AS A "
+                    + "ON P.ASSENTO = A.NUMERO INNER JOIN PAGAMENTO AS PG ON P.IDPASSAGEM=PG.IDPASSAGEM "
+                    + " INNER JOIN PROGRAMACAO AS PR ON PR.IDAPROGRAMACAO = P.IDPROGRAMACAO WHERE PR.DATA_SAIDA => ?";
             Connection conn = ConnectionFactory.getConnection();
-            PreparedStatement p = conn.prepareStatement(sql);
-            p.setString(1, data);
-            ResultSet rs = p.executeQuery();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, data);
+            ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                Passagem pa = new Passagem();
-                pa.setProgramacao(new Programacao());
-                pa.setCodigo(rs.getInt("IDPASSAGEM"));
-                pa.getProgramacao().pegarProgramacao(rs.getInt("IDPROGRAMACAO"));
-                pa.setAssento(rs.getString("COD_POLTRONA"));
-                pa.setHoraCompra(rs.getString("DATAHORA_COMPRA"));
-                pa.setCheckin(rs.getInt("CHECKIN") == 1);
-                pa.setCancelada(rs.getInt("CANCELAMENTO") == 1);
-                pa.setValor(rs.getFloat("VALOR_FINAL"));
-                pa.consultarReclamacao();
-                passagens.add(pa);
+                Passagem p = new Passagem();
+                //p.getProgramacao().pegarProgramacao(rs.getInt("P.IDPROGRAMACAO"));
+                p.setAssento(new Assento());
+                p.getAssento().setFileira(rs.getInt("A.FILEIRA"));
+                p.getAssento().setCadeira(rs.getInt("A.CADEIRA"));
+                p.getAssento().setTipo(rs.getString("A.TIPO"));
+                p.setCodigo(rs.getInt("P.IDPASSAGEM"));
+                p.setHoraCompra(rs.getString("P.DATAHORA_COMPRA"));
+                p.setCheckin(rs.getString("P.CHECKIN"));
+                p.setCancelamento(rs.getString("P.CANCELAMENTO"));
+                p.setValor(rs.getFloat("PG.VALOR_FINAL"));
+                passagens.add(p);
             }
-            ConnectionFactory.closeConnection(conn, p, rs);
+            ConnectionFactory.closeConnection(conn, ps, rs);
         }
         catch(SQLException e){
             throw new RuntimeException(e);
@@ -195,30 +209,33 @@ public class PassagemDAO {
         return (Passagem[]) passagens.toArray(new Passagem[passagens.size()]);
     }
     
-    public Passagem[] pegarPassagensComReclamcao(String cpf){
+    public static Passagem[] pegarPassagensComReclamacao(String cpf){
         ArrayList<Passagem> passagens = new ArrayList<>();
         try{
-            String sql = "SELECT P.IDPASSAGEM, IDPROGRAMACAO, COD_POLTRONA, DATAHORA_COMPRA, CHECKIN,"
-                    + "CANCELAMENTO, VALOR_FINAL FROM PASSAGEM AS P INNER JOIN PAGAMENTO AS PG ON P.IDPASSAGEM=PG.IDPASSAGEM"
-                    + " WHERE P.CPF = ?";
+            String sql = "SELECT P.IDPASSAGEM, P.IDPROGRAMACAO, P.DATAHORA_COMPRA, P.CHECKIN, P.CANCELAMENTO, PG.VALOR_FINAL, "
+                    + "A.FILEIRA, A.CADEIRA, A.TIPO FROM PASSAGEM AS P INNER JOIN ASSENTO AS A "
+                    + "ON P.ASSENTO = A.NUMERO INNER JOIN PAGAMENTO AS PG ON P.IDPASSAGEM=PG.IDPASSAGEM "
+                    + "INNER JOIN RECLAMACAO AS R ON R.IDPASSAGEM=P.IDPASSAGEM "
+                    + "WHERE P.CPF = ?";
             Connection conn = ConnectionFactory.getConnection();
-            PreparedStatement p = conn.prepareStatement(sql);
-            p.setString(1, cpf);
-            ResultSet rs = p.executeQuery();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, cpf);
+            ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                Passagem pa = new Passagem();
-                pa.setProgramacao(new Programacao());
-                pa.setCodigo(rs.getInt("IDPASSAGEM"));
-                pa.getProgramacao().pegarProgramacao(rs.getInt("IDPROGRAMACAO"));
-                pa.setAssento(rs.getString("COD_POLTRONA"));
-                pa.setHoraCompra(rs.getString("DATAHORA_COMPRA"));
-                pa.setCheckin(rs.getInt("CHECKIN") == 1);
-                pa.setCancelada(rs.getInt("CANCELAMENTO") == 1);
-                pa.setValor(rs.getFloat("VALOR_FINAL"));
-                pa.consultarReclamacao();
-                if(pa.getReclamacao() != null) passagens.add(pa);
+                Passagem p = new Passagem();
+                p.setAssento(new Assento());
+                p.getAssento().setFileira(rs.getInt("A.FILEIRA"));
+                p.getAssento().setCadeira(rs.getInt("A.CADEIRA"));
+                p.getAssento().setTipo(rs.getString("A.TIPO"));
+                p.setCodigo(rs.getInt("P.IDPASSAGEM"));
+                p.setHoraCompra(rs.getString("P.DATAHORA_COMPRA"));
+                p.setCheckin(rs.getString("P.CHECKIN"));
+                p.setCancelamento(rs.getString("P.CANCELAMENTO"));
+                p.setValor(rs.getFloat("PG.VALOR_FINAL"));
+                p.consultarReclamacao();
+                passagens.add(p);
             }
-            ConnectionFactory.closeConnection(conn, p, rs);
+            ConnectionFactory.closeConnection(conn, ps, rs);
         }
         catch(SQLException e){
             throw new RuntimeException(e);

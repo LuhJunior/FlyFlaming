@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Júnior
  */
-@WebServlet(name = "perfil", urlPatterns = {"/perfil"})
-public class perfil extends HttpServlet {
+@WebServlet(name = "AtualizarReclamacao", urlPatterns = {"/AtualizarReclamacao"})
+public class AtualizarReclamacao extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -27,17 +27,13 @@ public class perfil extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Modelo.Cliente c = (Modelo.Cliente)request.getSession().getAttribute("clienteAutenticado");
-        if(c.getFromDb()){
-            request.setAttribute("cliente", c);
-            RequestDispatcher dispacher = request.getRequestDispatcher("perfil.jsp");
-            dispacher.forward(request, response);
-        }
-        else{
-            request.setAttribute("Mensagem2", "ocorreu um erro ao procurar os dados cliente");
-            RequestDispatcher dispacher = request.getRequestDispatcher("perfil.jsp");
-            dispacher.forward(request, response);
-        }
+        Modelo.Reclamacao r = new Modelo.Reclamacao();
+        r.setCodReclamacao(request.getParameter("codReclamacacao"));
+        r.setDescricao(request.getParameter("descricao"));
+        if(r.atualizarReclamacao()) request.setAttribute("Mensagem", "Que não vai dá pai");
+        else request.setAttribute("Mensagem", "Não vai dá não");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ConsultarReclamacao");
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

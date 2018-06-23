@@ -29,7 +29,8 @@ public class index extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("voos", Voo.pegarVoos());
+        request.setAttribute("voos", Voo.pegarVoosDaSemana());
+        request.setAttribute("voosDaSemana", Voo.pegarVoosDaSemana());
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
         dispatcher.forward(request, response);
     }

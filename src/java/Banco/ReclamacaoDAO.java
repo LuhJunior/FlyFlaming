@@ -62,11 +62,11 @@ public class ReclamacaoDAO {
                 r.setDataHora(rs.getString("DATAHORA_RECLAM"));
             }else return false;
             ConnectionFactory.closeConnection(conn, p, rs);
+            return true;
         }
         catch(SQLException e){
             throw new RuntimeException(e);
         }
-        return true;
     }
     
     public boolean deletar(Reclamacao r){

@@ -32,19 +32,12 @@ public class ClienteDAO {
     public boolean updateCliente(Cliente c){
         int r = 0;
         try{
-            String sql = "UPDATE CLIENTE SET NOME = ?, EMAIL = ?"
-                    /*+ "RUA = ?, BAIRRO = ?,ESTADO = ?, CEP = ? "*/
+            String sql = "UPDATE CLIENTE SET NOME = ?, EMAIL = ? "
                     + "WHERE CPF=?";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement p = conn.prepareStatement(sql);
             p.setString(1, c.getNome());
-            p.setString(2, c.getEmail());/*
-            p.setString(3, c.getEndereco().getRua());
-            p.setString(4, c.getEndereco().getBairro());
-            p.setString(5, c.getEndereco().getEstado());
-            p.setString(6, c.getEndereco().getCEP());
-            p.setString(7, c.getCpf());
-*/
+            p.setString(2, c.getEmail());
             p.setString(3, c.getCpf());
             r = p.executeUpdate();
             ConnectionFactory.closeConnection(conn, p);
@@ -107,6 +100,8 @@ public class ClienteDAO {
                 c.setNome(rs.getString("NOME"));
                 c.setEmail(rs.getString("EMAIL"));
                 c.setTelefone(rs.getString("NUMERO"));
+                c.setEndereco(new Endereco());
+                c.getEndereco().setCEP(rs.getString("CEP"));
                 //c.setDataNascimento(rs.getString(""));
             }
             else c = null;
@@ -155,20 +150,17 @@ public class ClienteDAO {
     
     public void pesquisarEndereco(Cliente c){
         try{
-            String sql = "SELECT RUA, BAIRRO, NOME AS CIDADE, ESTADO, CEP FROM ENDERECO AS E "
-                    + "INNER JOIN CIDADE AS C ON C.IDCIDADE=E.IDCIDADE WHERE E.CPF = ?";
+            String sql = "SELECT RUA, BAIRRO, NOME AS CIDADE, ESTADO FROM ENDERECO AS E "
+                    + "INNER JOIN CIDADE AS C ON C.IDCIDADE=E.IDCIDADE WHERE E.CEP = ?";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement p = conn.prepareStatement(sql);
-            p.setString(1, c.getCpf());
+            p.setString(1, c.getEndereco().getCEP());
             ResultSet rs = p.executeQuery();
             if(rs.next()){
-                c.setEndereco(new Endereco());
                 c.getEndereco().setRua(rs.getString("RUA"));
                 c.getEndereco().setBairro(rs.getString("BAIRRO"));
                 c.getEndereco().setCidade(rs.getString("CIDADE"));
                 c.getEndereco().setEstado(rs.getString("ESTADO"));
-                c.getEndereco().setCEP(rs.getString("CEP"));
-                //c.setDataNascimento(rs.getString(""));
             }
             ConnectionFactory.closeConnection(conn, p, rs);
         }

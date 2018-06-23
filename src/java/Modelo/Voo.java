@@ -77,12 +77,17 @@ public class Voo {
     }
     
     public boolean pegarVoo(){
-        VooDAO v = VooDAO();
+        VooDAO v = new VooDAO();
         v.pesquisar(this);
         return true;
     }
+    
     public static ArrayList<Voo> pegarVooPelaData(String data){
         return VooDAO.pesquisarVoosPelaData(data);
+    }
+    
+    public static ArrayList<Voo> pegarVoosDaSemana(){
+        return VooDAO.pesquisarVoosDaSemana();
     }
     
     public static ArrayList<Voo> pegarVoos(){
