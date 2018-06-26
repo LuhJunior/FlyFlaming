@@ -36,5 +36,6 @@
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" />
     <link rel="stylesheet" href="vendor/styles.css">
     <link rel="stylesheet" href="vendor/GoBystrok.css">
-    <script type="text/javascript" src="vendor/formularios.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="vendor/GoBystrok.js"></script>
   </head>

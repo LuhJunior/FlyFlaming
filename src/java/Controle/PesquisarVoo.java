@@ -34,8 +34,13 @@ public class PesquisarVoo extends HttpServlet {
         String Destino = request.getParameter("Destino");
         String DataIda = request.getParameter("dateIda");
         String DataVolta = request.getParameter("dateVolta");
-        ArrayList<Voo> v = VooDAO.pesquisarVooPelaDataOrigemDestino(Origem, Destino, DataIda, DataVolta);
+        String Escolha = request.getParameter("escolha");
+        System.out.println(Escolha);
+        System.out.println(Origem +'\n'+Destino);
+        ArrayList<Voo> v = VooDAO.pesquisarVooPelaDataOrigemDestino(Origem, Destino, DataIda);
         request.setAttribute("Voos", v);
+        if(v.isEmpty()) request.setAttribute("Mensagem", "Que não vai dá pai");
+        else request.setAttribute("Mensagem", "Não vai dá não");
         RequestDispatcher dispatcher = request.getRequestDispatcher("voos.jsp");
         dispatcher.forward(request, response);
     }

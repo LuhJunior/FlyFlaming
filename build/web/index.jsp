@@ -19,17 +19,17 @@
                         <div class="mdl-card__title mdl-card--expand">
                             <h2 class="mdl-card__title-text color-white">Comprar passagem</h2>
                         </div>
-                        <form name="compraPassagem" method="POST" action="#">
+                        <form name="compraPassagem" method="POST" action="PesquisarVoo" onsubmit="">
                             <div class = "mdl-grid layout-center">
                                 <div class = "mdl-cell mdl-cell--5-col graybox">
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                        <input class="mdl-textfield__input color-white" type="text" id="Origem">
+                                        <input class="mdl-textfield__input color-white" type="text" name="Origem" id="Origem">
                                         <label class="mdl-textfield__label mdl-color-text--orange-50" for="Origem">Origem</label>
                                     </div>
                                 </div>
                                 <div class = "mdl-cell mdl-cell--5-col graybox">
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                        <input class="mdl-textfield__input color-white" type="text" id="Destino">
+                                        <input class="mdl-textfield__input color-white" type="text" name="Destino" id="Destino">
                                         <label class="mdl-textfield__label mdl-color-text--orange-50" for="Destino">Destino</label>
                                     </div>
                                 </div>
@@ -38,13 +38,13 @@
                             <div class="mdl-grid layout-center">
                                 <div class="mdl-cell mdl-cell--5-col graybox">
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                        <input class="mdl-textfield__input mdl-color-text--orange-50" type="date" id="dateIda">
+                                        <input class="mdl-textfield__input mdl-color-text--orange-50" type="date" name="dateIda" id="dateIda">
                                         <label class="mdl-textfield__label mdl-color-text--orange-50" for="dateIda"></label>
                                     </div>
                                 </div>
                                 <div class="mdl-cell mdl-cell--5-col graybox">
                                     <div id="VoltaS" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                        <input class="mdl-textfield__input mdl-color-text--orange-50" type="date" id="dateVolta">
+                                        <input class="mdl-textfield__input mdl-color-text--orange-50" type="date" name="dateVolta" id="dateVolta">
                                         <label class="mdl-textfield__label mdl-color-text--orange-50" for="dateVolta"></label>
                                     </div>
                                 </div>
@@ -53,12 +53,12 @@
                             <div class="mdl-grid">
                                 <div class="mdl-cell mdl-cell--7-col graybox">
                                     <label class="mdl-radio mdl-js-radio" for="option1">
-                                        <input type="radio" id="option1" name="gender" class="mdl-radio__button mdl-color-text--orange-50" checked>
+                                        <input type="radio" id="option1" name="escolha" value="IdaVolta" class="mdl-radio__button mdl-color-text--orange-50" checked>
                                         <span class="mdl-radio__label mdl-color-text--orange-50">Ida e Volta</span>
                                     </label>
                                     <span style="padding-left: 20px;">
                                         <label class="mdl-radio mdl-js-radio" for="option2">
-                                            <input type="radio" id="option2" name="gender" class="mdl-radio__button mdl-color-text--orange-50">
+                                            <input type="radio" id="option2" name="escolha" value="Ida" class="mdl-radio__button mdl-color-text--orange-50">
                                             <span class="mdl-radio__label mdl-color-text--orange-50">Somente Ida</span>
                                         </label>
                                     </span>

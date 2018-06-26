@@ -4,47 +4,63 @@
     Author     : Diego Malta
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <jsp:include page="layout/header.jsp"/>    
     <jsp:include page="layout/navbar.jsp"/>
 <div class="android-content mdl-layout__content">
-    <div class="android-be-together-section">
+    <div class="android-be-together-section" style="right:22%;">
         <div  class="formulario color-orange ">     
             <div style="position: absolute;" class="mdl-grid center-items color-orange">
-                    <div class="logo-font GoBystrok-title GoBystrok-slogan">Opções de Voos</div>
-                    <table style="margin-top: 20px;" class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp ">
+                <div class="logo-font GoBystrok-title GoBystrok-slogan">Opções de Voos</div>
+                <form name="ComprarPassagem" method="POST" action="" onsubmit="">
+                    <table style="margin-top: 20px;" class="mdl-data-table mdl-shadow--2dp ">
                         <thead>
                             <tr>
-                                <th class="mdl-data-table__cell--non-numeric">Voo</th>
+                                <th class="mdl-data-table__cell--non-numeric">Número do Voo</th>
+                                <th>Origem</th>
                                 <th>Destino</th>
-                                <th>Data</th>
-                                <th>Hora</th>
+                                <th>Valor</th>
+                                <th>Data Saída</th>
+                                <th>Data Chegada</th>
+                                <th>Hora Saída</th>
+                                <th>Hora Chegada</th>
                                 <th>Executivo</th>
                                 <th>Econômico</th>
-                                <th>Valor</th>
+                                <th>Opção<th>
                             </tr>
                         </thead>
                         <tbody>
+                            <% ArrayList<Modelo.Voo> v = (ArrayList<Modelo.Voo>)request.getAttribute("Voos");
+                                if(!v.isEmpty()){
+                                    int i=0;
+                                    for(Modelo.Voo voo: v){%>
                             <tr>
-                                <td class="mdl-data-table__cell--non-numeric">242</td>
-                                <td>São Paulo</td>
-                                <td>15/04/2018</td>
-                                <td>08:25</td>
-                                <td>20</td>
-                                <td>36</td>
-                                <td>R$ 749,65</td>
+                                <td class="mdl-data-table__cell--non-numeric"><%=voo.getNumero()%></td>
+                                <td><%=voo.getOrigem()%></td>
+                                <td><%=voo.getDestino()%></td>
+                                <td>R$ <%=voo.getValor()%></td>
+                                <td><%=voo.getProgramacao().getDataSaida()%></td>
+                                <td><%=voo.getProgramacao().getDataChegada() %></td>
+                                <td><%=voo.getProgramacao().getHoraSaida()%></td>
+                                <td><%=voo.getProgramacao().getHoraChegada()%></td>
+                                <td><%=voo.getProgramacao().getQuantidadeExec() %></td>
+                                <td><%=voo.getProgramacao().getQuantidadeEcon()%></td>
+                                <td><button name="Comprar[]" type="submit" value="<%=i%>" class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect">Comprar</button></td>
                             </tr>
+                            <%i++;}}
+                                else {%>
+                                    <tr>
+                                    <td colspan="11">Não há Voos para as opções escolhidas</td>
+                                    </tr> 
+                                <%}%>
                         </tbody>
                     </table>
-                    <button style="margin-top: 40px;" class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect mdl-button--mini-fab">
-                        Avançar
-                    </button>
-                    <button style="margin-top: 40px; margin-left: 15px;" class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect mdl-button--mini-fab">
-                        Voltar
-                    </button>
+                </form>
+                <a href="index"><button style="margin-top: 40px; margin-left: 15px;" class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect mdl-button--mini-fab">
+                    Voltar
+                </button></a>
             </div>
-
         </div>
     </div>
-    <div class="android-screen-section mdl-typography--text-center GoBystrok-spacer color-orange"></div>
     <div class="mdl-grid center-items color-orange"></div>
 <jsp:include page="layout/footer.jsp"/> 

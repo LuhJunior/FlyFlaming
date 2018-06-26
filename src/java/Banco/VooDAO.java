@@ -47,8 +47,7 @@ public class VooDAO {
     }
     
        
-    public static ArrayList<Voo> pesquisarVooPelaDataOrigemDestino(String Origem, String Destino, String dataIda,
-            String dataVolta){
+    public static ArrayList<Voo> pesquisarVooPelaDataOrigemDestino(String Origem, String Destino, String dataIda){
         ArrayList<Voo> v = new ArrayList<>();
         try{
             String sql = "SELECT V.PREFIXO AS PREFIXO, V.NUM_VOO AS 'NUMERO DO VOO', C1.NOME AS 'CIDADE DE ORIGEM', "
@@ -59,15 +58,14 @@ public class VooDAO {
                     + "P.ECON_DISPONIVEL AS ECON FROM VOO AS V INNER JOIN PROGRAMACAO AS P " 
                     + "ON V.NUM_VOO = P.NUM_VOO INNER JOIN CIDADE AS C1 " 
                     + "ON V.CID_ORIGEM = C1.IDCIDADE INNER JOIN CIDADE AS C2 "
-                    + "ON V.CID_DESTINO = C2.IDCIDADE WHERE 'DATA DE SAIDA' >= ? AND 'DATA DE CHEGADA' >= ?"
+                    + "ON V.CID_DESTINO = C2.IDCIDADE WHERE 'DATA DE SAIDA' >= ?"
                     + "AND 'CIDADE DE ORIGEM' = ? AND 'CIDADE DE DESTINO' = ?;";
             
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, dataIda);
-            ps.setString(2, dataVolta);
-            ps.setString(3, Origem);
-            ps.setString(4, Destino);
+            ps.setString(2, Origem);
+            ps.setString(3, Destino);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 Voo auxV = new Voo();

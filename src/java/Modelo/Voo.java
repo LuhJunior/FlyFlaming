@@ -84,7 +84,7 @@ public class Voo {
     
     public static ArrayList<Voo> pegarVooPelaDataOrigemDestino(String Origem, String Destino, String dataIda, String
             dataVolta){
-        return VooDAO.pesquisarVooPelaDataOrigemDestino(Origem, Destino, dataIda, dataVolta);
+        return VooDAO.pesquisarVooPelaDataOrigemDestino(Origem, Destino, dataIda);
     }
     
     public static ArrayList<Voo> pegarVooPelaData(String data){

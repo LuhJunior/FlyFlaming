@@ -27,9 +27,10 @@
                 </div>
 
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
-                    <input class="mdl-textfield__input color-white" type="text" name="CPF" maxlength="11" pattern = "-?[0-9]*(\.[0-9]+)?" id="sample3">
+                    <input class="mdl-textfield__input color-white" type="text" name="CPF" maxlength="14" minlength="14"
+                           onkeydown="javascript: fMasc(this, mCPF);" id="sample3">
                     <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">CPF</label>
-                    <span class="mdl-textfield__error color-white">Use somente números</span>
+                    <span class="mdl-textfield__error color-white">Cpf incompleto</span>
                 </div>
 
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
@@ -45,9 +46,9 @@
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
                     <input class="mdl-textfield__input color-white" type="text" name="Telefone" 
-                           pattern = "-?[0-9]*(\.[0-9]+)?" minlength="9" maxlength="15" id="sample3">
+                           onkeydown="javascript: fMasc(this, mTel);" minlength="14" maxlength="14" id="sample3">
                     <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Telefone</label>
-                    <span class="mdl-textfield__error color-white">Use somente números</span>
+                    <span class="mdl-textfield__error color-white">Número incompleto</span>
                 </div>
 
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam">
@@ -55,7 +56,7 @@
                 </div>
 
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
-                    <input class="mdl-textfield__input color-white" type="text" name="Rua" id="sample5">     
+                    <input class="mdl-textfield__input color-white" type="text" name="Rua" id="sample3">     
                     <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample5">Rua</label>
                 </div>  
 
@@ -78,15 +79,16 @@
                     <input class="mdl-textfield__input color-white" name="Estado" type="text" id="sample6">      
                     <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample6">Estado</label>
                     <ul for="sample6" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-                        <li class="mdl-menu__item" data-val="BA">Bahia</li>
-                        <li class="mdl-menu__item" data-val="SP">Sao Paulo</li>
-                        <li class="mdl-menu__item" data-val="RS">Porto Alegre</li>
+                        <li class="mdl-menu__item" onclick="cadastroForm.Estado.value='Acre'" data-val="BA">Acre</li>
+                        <li class="mdl-menu__item" onclick="cadastroForm.Estado.value='Bahia'" data-val="BA">Bahia</li>
+                        <li class="mdl-menu__item" onclick="cadastroForm.Estado.value='São Paulo'"data-val="SP">Sao Paulo</li>
+                        <li class="mdl-menu__item" onclick="cadastroForm.Estado.value='Porto Alegre'"data-val="RS">Porto Alegre</li>
                     </ul>
                 </div>
 
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
-                    <input class="mdl-textfield__input color-white" type="text" minlength=8 
-                           maxlength="8" name="CEP" pattern = "-?[0-9]*(\.[0-9]+)?" id="sample3">
+                    <input class="mdl-textfield__input color-white" type="text" minlength=10 
+                           maxlength="10" name="CEP" onkeydown="javascript: fMasc(this, mCEP);" id="sample3">
                     <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">CEP</label>
                     <span class="mdl-textfield__error color-white">Use somente números</span>
                 </div>
