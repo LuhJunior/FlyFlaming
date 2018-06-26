@@ -1,60 +1,43 @@
-/* To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controle;
 
-import Modelo.Cliente;
+import Banco.VooDAO;
+import Modelo.Voo;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author hspacheco
+ * @author Junior
  */
-@WebServlet(name = "Login", urlPatterns = {"/Login"})
-public class Login extends HttpServlet {
-  
+@WebServlet(name = "PesquisarVoo", urlPatterns = {"/PesquisarVoo"})
+public class PesquisarVoo extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        if(request.getParameter("recuperar") != null ) {
-            request.getRequestDispatcher("esqueci-senha.jsp").forward(request, response);
-        }
-        
-        
-        String cpf = (String) request.getParameter("CPF");    
-        String senha = (String) request.getParameter("Senha");
-        
-           
-        Cliente c = new Cliente();
-        c.setCpf(cpf);
-        c.setSenha(senha);
-        
-        HttpSession session = request.getSession();        
-        
-        if(c.validarCliente()) {
-
-            System.out.println("Cliente valido"); 
-            session.setAttribute("clienteAutenticado", c.autenticarCliente());
-            response.sendRedirect("index");
-            //request.getRequestDispatcher("reclamacao.jsp").forward(request, response);
-            
-        } else {
-            System.out.println("nao valido");  
-            response.sendRedirect("login.jsp");
-            //request.getRequestDispatcher("login.jsp").forward(request, response);
-            
-        }
-        
-        
-        
+        String Origem = request.getParameter("Origem");
+        String Destino = request.getParameter("Destino");
+        String DataIda = request.getParameter("dateIda");
+        String DataVolta = request.getParameter("dateVolta");
+        ArrayList<Voo> v = VooDAO.pesquisarVooPelaDataOrigemDestino(Origem, Destino, DataIda, DataVolta);
+        request.setAttribute("Voos", v);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("voos.jsp");
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

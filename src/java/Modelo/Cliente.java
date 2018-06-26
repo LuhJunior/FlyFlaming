@@ -90,7 +90,9 @@ public class Cliente {
     
     public boolean addOnDb(){
         ClienteDAO c = new ClienteDAO();
-        return (c.inserir(this) && c.inserirTelefone(this) && c.inserirEndereco(this));
+        c.pesquisarEndereco(this);
+        if(!c.verificarCEP(this.getEndereco().getCEP())) c.inserirEndereco(this);
+        return (c.inserir(this) && c.inserirTelefone(this));
     }
     
     public boolean validarCliente() {
@@ -121,6 +123,7 @@ public class Cliente {
     
     public boolean atualizarDados(){
         ClienteDAO c = new ClienteDAO(); 
+        if(!c.verificarCEP(this.getEndereco().getCEP())) c.inserirEndereco(this);
         return c.updateCliente(this) && c.updateTelefone(this);
     }
 }

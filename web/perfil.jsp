@@ -26,9 +26,9 @@
                         if(c.getTelefone() == null) c.setTelefone("");
                         if(c.getEndereco() == null) c.setEndereco(new Modelo.Endereco());
                     %>
-                    <div class="logo-font GoBystrok-title GoBystrok-slogan">Perfil</div>
+                    <div style="right: -28%;" class="logo-font center-items GoBystrok-title GoBystrok-slogan">Perfil</div>
                     
-                        <table style="margin-top: 100px;" class="mdl-data-table mdl-shadow--2dp">
+                        <table style="margin-top: 100px; right: 10%;" class=" mdl-data-table mdl-shadow--2dp">
                             <tr>
                                 <td>Dados Pessoais</td>
                             </tr>

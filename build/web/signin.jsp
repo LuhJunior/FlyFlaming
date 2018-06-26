@@ -15,12 +15,12 @@
                 <script>alert("<%=men%>");</script>
             <%}%>
             <div class="logo-font GoBystrok-title GoBystrok-slogan">Cadastrar-se</div>
-            <form action="cadastrarCliente" method="POST" name="cadastroForm" class="" onsubmit="return verificarCamposCadastro()">
+            <form action="CadastrarCliente" method="POST" name="cadastroForm" class="" onsubmit="return verificarCamposCadastro()">
 
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam">
                     <h2 class="mdl-card__title-text color-white">Dados Pessoais</h2>
                 </div>
-                <tavl
+                
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
                     <input class="mdl-textfield__input color-white" type="text" name="Nome" maxlength="50" id="sample3">
                     <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Nome</label>
@@ -75,8 +75,7 @@
                 </div>
 
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
-                    <input class="mdl-textfield__input color-white" name="Estado" type="text" minlength=8 
-                           maxlength="8" id="sample6">      
+                    <input class="mdl-textfield__input color-white" name="Estado" type="text" id="sample6">      
                     <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample6">Estado</label>
                     <ul for="sample6" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
                         <li class="mdl-menu__item" data-val="BA">Bahia</li>
@@ -86,7 +85,8 @@
                 </div>
 
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
-                    <input class="mdl-textfield__input color-white" type="text" name="CEP" pattern = "-?[0-9]*(\.[0-9]+)?" id="sample3">
+                    <input class="mdl-textfield__input color-white" type="text" minlength=8 
+                           maxlength="8" name="CEP" pattern = "-?[0-9]*(\.[0-9]+)?" id="sample3">
                     <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">CEP</label>
                     <span class="mdl-textfield__error color-white">Use somente números</span>
                 </div>
@@ -96,8 +96,8 @@
                 </div>
             </form>
         </div>
-      </div>
-    </div>   
+      </div> 
+    </div>
     <div class="android-screen-section mdl-typography--text-center GoBystrok-spacer"></div>
     <div class="android-screen-section mdl-typography--text-center GoBystrok-spacer"></div>
     <div class="mdl-grid center-items color-orange"></div>

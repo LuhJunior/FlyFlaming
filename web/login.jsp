@@ -22,8 +22,7 @@
                 <div class="mdl-grid center-items color-orange">
                     <div class="logo-font GoBystrok-title GoBystrok-slogan">Login</div>
                     
-                    <form method="POST" action="Login" onsubmit="return verificarCamposLogin()">
-                        
+                    <form method="POST" action="Login" name="loginForm" onsubmit="return verificarCamposLogin()">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
                             <input class="mdl-textfield__input color-white" 
                                    type="text" 
@@ -41,7 +40,7 @@
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
                             <input class="mdl-textfield__input color-white" 
                                    type="password" 
-                                   name="senha" 
+                                   name="Senha" 
                                    minlength="8" 
                                    maxlength="16" 
                                    id="sample4">
@@ -58,7 +57,6 @@
                                     name="recuperar"
                                     value="Recuperar">Esqueci minha senha</button>
                         </div>
-                        
                     </form>
                 </div>
             </div>

@@ -44,13 +44,13 @@ public class UpdateDadosCliente extends HttpServlet {
         if(c.atualizarDados()){
             System.out.println("deubom");
             request.setAttribute("Mensagem", "Que Não vai dá pai");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("perfil");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("Perfil");
             dispatcher.forward(request, response);
         }
         else{
             request.setAttribute("Mensagem", "Não vai da não");
             System.out.println("deuruim");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("perfil");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("Perfil");
             dispatcher.forward(request, response);
         }
     }

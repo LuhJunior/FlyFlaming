@@ -2,6 +2,7 @@ package Banco;
 
 import Modelo.Voo;
 import Banco.ConnectionFactory;
+import Modelo.Assento;
 import Modelo.Programacao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -44,6 +45,53 @@ public class VooDAO {
             return (r>0);
         }
     }
+    
+       
+    public static ArrayList<Voo> pesquisarVooPelaDataOrigemDestino(String Origem, String Destino, String dataIda,
+            String dataVolta){
+        ArrayList<Voo> v = new ArrayList<>();
+        try{
+            String sql = "SELECT V.PREFIXO AS PREFIXO, V.NUM_VOO AS 'NUMERO DO VOO', C1.NOME AS 'CIDADE DE ORIGEM', "
+                    + "C2.NOME AS 'CIDADE DE DESTINO', V.VALOR_PASSAGEM AS VALOR, DATE(P.DATAHORA_CHEGADA) "
+                    + "AS 'DATA DE CHEGADA', TIME(P.DATAHORA_CHEGADA) AS 'HORA DE CHEGADA', "
+                    + "DATE(P.DATAHORA_SAIDA) AS 'DATA DE SAIDA', TIME(P.DATAHORA_SAIDA) AS 'HORA DE SAIDA'"
+                    + ", P.EXEC_DISPONIVEL AS EXEC, "
+                    + "P.ECON_DISPONIVEL AS ECON FROM VOO AS V INNER JOIN PROGRAMACAO AS P " 
+                    + "ON V.NUM_VOO = P.NUM_VOO INNER JOIN CIDADE AS C1 " 
+                    + "ON V.CID_ORIGEM = C1.IDCIDADE INNER JOIN CIDADE AS C2 "
+                    + "ON V.CID_DESTINO = C2.IDCIDADE WHERE 'DATA DE SAIDA' >= ? AND 'DATA DE CHEGADA' >= ?"
+                    + "AND 'CIDADE DE ORIGEM' = ? AND 'CIDADE DE DESTINO' = ?;";
+            
+            Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, dataIda);
+            ps.setString(2, dataVolta);
+            ps.setString(3, Origem);
+            ps.setString(4, Destino);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Voo auxV = new Voo();
+                auxV.setNumero(rs.getInt("NUMERO DO VOO"));
+                auxV.setOrigem(rs.getString("CIDADE DE ORIGEM"));
+                auxV.setDestino(rs.getString("CIDADE DE DESTINO"));
+                auxV.setValor(rs.getDouble("VALOR"));
+                auxV.setProgramacao(new Programacao());
+                auxV.getProgramacao().setDataChegada(rs.getString("DATA DE CHEGADA"));
+                auxV.getProgramacao().setDataSaida(rs.getString("DATA DE SAIDA"));
+                auxV.getProgramacao().setHoraChegada(rs.getString("HORA DE CHEGAD)"));
+                auxV.getProgramacao().setHoraSaida(rs.getString("HORA DE SAIDA"));
+                auxV.getProgramacao().setQuantidadeExec(rs.getInt("EXEC"));
+                auxV.getProgramacao().setQuantidadeEcon(rs.getInt("ECON"));
+                v.add(auxV);
+            }
+            ConnectionFactory.closeConnection(conn, ps, rs);
+        }
+        catch(SQLException e){
+            throw new RuntimeException(e);
+        }
+        return v;
+    }
+    
     
     public static ArrayList<Voo> pesquisarVoosPelaData(String data){
         ArrayList<Voo> v = new ArrayList<>();

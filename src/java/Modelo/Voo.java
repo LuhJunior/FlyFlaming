@@ -82,6 +82,11 @@ public class Voo {
         return true;
     }
     
+    public static ArrayList<Voo> pegarVooPelaDataOrigemDestino(String Origem, String Destino, String dataIda, String
+            dataVolta){
+        return VooDAO.pesquisarVooPelaDataOrigemDestino(Origem, Destino, dataIda, dataVolta);
+    }
+    
     public static ArrayList<Voo> pegarVooPelaData(String data){
         return VooDAO.pesquisarVoosPelaData(data);
     }

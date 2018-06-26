@@ -11,13 +11,14 @@ public class ClienteDAO {
     public boolean inserir(Cliente c){
         int r = 0;
         try{
-            String sql = "INSERT INTO CLIENTE (CPF, NOME, EMAIL, SENHA) VALUES(?, ?, ?, ?)";
+            String sql = "INSERT INTO CLIENTE (CPF, NOME, EMAIL, SENHA, CEP) VALUES(?, ?, ?, ?, ?)";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement p = conn.prepareStatement(sql);
             p.setString(1, c.getCpf());
             p.setString(2, c.getNome());
             p.setString(3, c.getEmail());
             p.setString(4, c.getSenha());
+            p.setString(5, c.getEndereco().getCEP());
             r = p.executeUpdate();
             ConnectionFactory.closeConnection(conn, p);
         }
@@ -32,13 +33,14 @@ public class ClienteDAO {
     public boolean updateCliente(Cliente c){
         int r = 0;
         try{
-            String sql = "UPDATE CLIENTE SET NOME = ?, EMAIL = ? "
+            String sql = "UPDATE CLIENTE SET NOME = ?, EMAIL = ? , CEP = ?"
                     + "WHERE CPF=?";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement p = conn.prepareStatement(sql);
             p.setString(1, c.getNome());
             p.setString(2, c.getEmail());
             p.setString(3, c.getCpf());
+            p.setString(4, c.getEndereco().getCEP());
             r = p.executeUpdate();
             ConnectionFactory.closeConnection(conn, p);
         }
@@ -111,6 +113,7 @@ public class ClienteDAO {
             throw new RuntimeException(e);
         }  
     }
+    
     public void pesquisarTelefone(Cliente c){
         try{
             String sql = "SELECT NUMERO FROM TELEFONE WHERE CPF = ?";
@@ -150,7 +153,7 @@ public class ClienteDAO {
     
     public void pesquisarEndereco(Cliente c){
         try{
-            String sql = "SELECT RUA, BAIRRO, NOME AS CIDADE, ESTADO FROM ENDERECO AS E "
+            String sql = "SELECT RUA, BAIRRO, C.NOME AS CIDADE, ESTADO FROM ENDERECO AS E "
                     + "INNER JOIN CIDADE AS C ON C.IDCIDADE=E.IDCIDADE WHERE E.CEP = ?";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement p = conn.prepareStatement(sql);
@@ -169,10 +172,31 @@ public class ClienteDAO {
         }  
     }
     
+    public boolean verificarCEP(String CEP){
+        try{
+            String sql = "SELECT * FROM ENDERECO WHERE CEP = ?";
+            Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement p = conn.prepareStatement(sql);
+            p.setString(1, CEP);
+            ResultSet rs = p.executeQuery();
+            if(rs.next()){
+                ConnectionFactory.closeConnection(conn, p, rs);
+                return true;
+            }
+            else{
+                ConnectionFactory.closeConnection(conn, p, rs);
+                return false;
+            }
+        }
+        catch(SQLException e){
+            throw new RuntimeException(e);
+        }
+    }    
+    
     public boolean inserirEndereco(Cliente c){
         int resp = 0;
         try{
-            String sql = "INSERT INTO ENDERECO(CPF, RUA, BAIRRO, IDCIDADE, CEP) VALUES(?, ?, ?,"
+            String sql = "INSERT INTO ENDERECO(RUA, BAIRRO, IDCIDADE, CEP) VALUES(?, ?, ?,"
                     + " (SELECT IDCIDADE FROM CIDADE WHERE NOME = ? AND ESTADO = ?), ?)";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement p = conn.prepareStatement(sql);
@@ -199,9 +223,7 @@ public class ClienteDAO {
         Connection conn = ConnectionFactory.getConnection();
         PreparedStatement p = null;
         ResultSet rs = null;
-        
         try {
-            
             String sql = "SELECT * FROM CLIENTE WHERE CPF = ? AND SENHA = ? ";
             p = conn.prepareStatement(sql);
             p.setString(1, c.getCpf());
@@ -216,7 +238,6 @@ public class ClienteDAO {
                 cli.setSenha(rs.getString("SENHA"));
             }
      
-            
         } catch(SQLException e) {
             
             throw new RuntimeException(e);

@@ -29,7 +29,6 @@ public class CadastrarCliente extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         Cliente c = new Cliente();
         c.setNome(request.getParameter("Nome"));
         c.setCpf(request.getParameter("CPF"));
