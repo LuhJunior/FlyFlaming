@@ -15,9 +15,8 @@
         </footer>
       </div>
     </div>   
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-      crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <script src="GoBystrok.js"></script>
+    <script type="text/javascript" src="vendor/GoBystrok.js"></script>
   </body>
 </html>

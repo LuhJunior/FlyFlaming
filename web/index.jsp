@@ -51,18 +51,18 @@
                             </div>
 
                             <div class="mdl-grid">
-                                <div class="mdl-cell mdl-cell--7-col graybox">
-                                    <label class="mdl-radio mdl-js-radio" for="option1">
-                                        <input type="radio" id="option1" name="gender" class="mdl-radio__button mdl-color-text--orange-50" checked>
-                                        <span class="mdl-radio__label mdl-color-text--orange-50">Ida e Volta</span>
-                                    </label>
-                                    <span style="padding-left: 20px;">
-                                        <label class="mdl-radio mdl-js-radio" for="option2">
-                                            <input type="radio" id="option2" name="gender" class="mdl-radio__button mdl-color-text--orange-50">
-                                            <span class="mdl-radio__label mdl-color-text--orange-50">Somente Ida</span>
-                                        </label>
-                                    </span>
-                                </div>
+                              <div class="mdl-cell mdl-cell--7-col graybox">
+                                <label class="mdl-radio mdl-js-radio" for="option1">
+                                  <input type="radio" id="option1" name="gender" class="mdl-radio__button mdl-color-text--orange-50" checked>
+                                  <span class="mdl-radio__label mdl-color-text--orange-50">Ida e Volta            </span>
+                                </label>
+                                <span style="padding-left: 20px;">
+                                  <label class="mdl-radio mdl-js-radio" for="option2">
+                                    <input type="radio" id="option2" name="gender" class="mdl-radio__button mdl-color-text--orange-50">
+                                    <span class="mdl-radio__label mdl-color-text--orange-50">Somente Ida</span>
+                                  </label>
+                                </span>
+                              </div>
                             </div>
 
                             <button type="submit" name="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect margin-top">
@@ -72,7 +72,7 @@
                     </div>
                 </div>
             </section>
-            <section id="ofertasPassagens">
+            <section style="margin-top: 120px;" id="ofertasPassagens">
                 <div class="android-screen-section mdl-typography--text-center GoBystrok-spacer"></div>
                 <div class="mdl-typography--display-1-color-contrast mdl-typography--text-center GoBystrok-title-section GoBystrok-title">Ofertas Imperdíveis!</div>
                     <% ArrayList<Modelo.Voo> vs = (ArrayList<Modelo.Voo> ) request.getAttribute("voosDaSemana");
@@ -138,7 +138,7 @@
                     </div>
                 </div>
             </section>
-            <section id="contato">
+<!--            <section id="contato">
                     <div class="mdl-grid center-items color-orange">
                         <div class="logo-font GoBystrok-title GoBystrok-slogan">Contato</div>
                         <form method="POST"  class="">
@@ -164,6 +164,6 @@
                             </div>
                         </form>
                     </div>
-            </section>
+            </section>-->
         </div>
 <jsp:include page="layout/footer.jsp"/>  

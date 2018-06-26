@@ -37,4 +37,5 @@
     <link rel="stylesheet" href="vendor/styles.css">
     <link rel="stylesheet" href="vendor/GoBystrok.css">
     <script type="text/javascript" src="vendor/formularios.js"></script>
+    
   </head>
