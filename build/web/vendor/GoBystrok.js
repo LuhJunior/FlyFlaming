@@ -11,7 +11,6 @@ $("form[name='compraPassagem']").submit( function(event) {
 
     if ($("#Origem").val() === "" || $("#Destino").val() === "" || $("#dateIda").val() === "" || $("#dateVolta").val() === "") {
         alert("Falta preencher o(s) campo(s).");
-        console.log('desgraça');
     }
     event.preventDefault();
 });

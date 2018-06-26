@@ -1,6 +1,7 @@
 package Modelo;
 
 import Banco.ClienteDAO;
+import java.util.Arrays;
 import java.util.Calendar;
 
 public class Cliente {
@@ -22,6 +23,12 @@ public class Cliente {
 
     public String getNome() {
         return nome;
+    }
+    
+    public String getOneNome() {
+        String array[] = new String[5];
+        array = nome.split(" ");
+        return array[0];
     }
 
     public String getSenha() {

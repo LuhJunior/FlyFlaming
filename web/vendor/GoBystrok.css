@@ -30,7 +30,7 @@ nav.GoBystrok-navigation-color > a {
 	color: white !important;
 	font-family: 'Poppins', arial;
 	font-size: 14px;
-	margin-right: 8px !important;
+	/*margin-right: 8px !important;*/
 }
 
 nav.GoBystrok-navigation-color > a:hover {
