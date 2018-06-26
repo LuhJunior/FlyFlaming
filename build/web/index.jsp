@@ -19,7 +19,7 @@
                         <div class="mdl-card__title mdl-card--expand">
                             <h2 class="mdl-card__title-text color-white">Comprar passagem</h2>
                         </div>
-                        <form name="compraPassagem" method="POST" action="#">
+                        <form name="compraPassagem" method="POST" action="/FlyFlaming/BuscarPassagem">
                             <div class = "mdl-grid layout-center">
                                 <div class = "mdl-cell mdl-cell--5-col graybox">
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
