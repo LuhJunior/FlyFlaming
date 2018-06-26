@@ -21,6 +21,10 @@
         <servlet-name>EscolhendoAcento</servlet-name>
         <servlet-class>Controle.EscolhendoAcento</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PagamentoPassagem</servlet-name>
+        <servlet-class>Controle.PagamentoPassagem</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -36,6 +40,10 @@
     <servlet-mapping>
         <servlet-name>EscolhendoAcento</servlet-name>
         <url-pattern>/EscolhendoAcento</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PagamentoPassagem</servlet-name>
+        <url-pattern>/PagamentoPassagem</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

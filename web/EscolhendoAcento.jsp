@@ -12,6 +12,7 @@
             <div class="android-customized-section-image">
                 <div style="padding-top: 20px;" class="logo-font GoBystrok-title GoBystrok-slogan">Selecione os Acentos</div>
                 <div style="padding-top: 20px;" class="logo-font GoBystrok-title GoBystrok-slogan"class="GoBystrok-fab padding-form">
+                    <form name="formAcento" method="POST" action="">
                     <div class="formularioa color-orange">  
                         <div class="plane color-orange">
                             <div class="cockpit"></div>
@@ -304,10 +305,10 @@
                                 type="submit" 
                                 name="entrar"
                                 value="Entrar">Continuar
-                        </button>
+                            </button>
                         </div>   
-                        
-                    </div>                    
+                    </div>       
+                        </form>
                 </div>
             </div>                  
         </div>
