@@ -18,10 +18,11 @@
                 <div class="android-navigation-container">
                     <nav class="android-navigation mdl-navigation GoBystrok-navigation-color">
                         <a class="mdl-navigation__link mdl-typography--text-uppercase" href="#pesquisarPassagem">Procurar Passagem</a>
-                        <a class="mdl-navigation__link mdl-typography--text-uppercase" href="#ofertasPassagens">Voo</a>
-                        <a class="mdl-navigation__link mdl-typography--text-uppercase" href="#contato">Contato</a>
+                        <!--<a class="mdl-navigation__link mdl-typography--text-uppercase" href="#contato">Contato</a>-->
                         <a class="mdl-navigation__link mdl-typography--text-uppercase" href="OpcoesPassagem">Passagem</a>
                         <a class="mdl-navigation__link mdl-typography--text-uppercase" href="reclamacao.jsp">RECLAMAÇÃO</a>
+                        <a class="mdl-navigation__link mdl-typography--text-uppercase" href="#ofertasPassagens">Voo</a>
+
                         <% Modelo.Cliente cliente = (Modelo.Cliente) session.getAttribute("clienteAutenticado"); %>
                         <a style="margin-top: 8px;" class="mdl-typography--text-uppercase">Olá, <%=cliente.getOneNome()%></a> 
                         <a style="padding-left: 8px;" class="mdl-typography--text-uppercase" href="FinalizarSessao">
