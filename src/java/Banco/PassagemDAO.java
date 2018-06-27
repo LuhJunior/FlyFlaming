@@ -14,12 +14,40 @@ public class PassagemDAO {
     public boolean inserir(Passagem p, String cpf){
         int r = 0;
         try{
-            String sql = "INSERT INTO PASSAGEM(IDPROGRAMACAO, CPF, DATAHORA_COMPRA) VALUES(?, ?, NOW())";
+            String sql = "INSERT INTO PASSAGEM VALUES(NULL, ?, ?, NOW(), ?, NULL, NULL, ?)";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, p.getProgramacao().getId());
             ps.setString(2, cpf);
+            if(p.getAssento().getTipo().equals("Executivo"))ps.setString(3, "Executiva");
+            else ps.setString(3, "Economica");
+            ps.setInt(4, p.getAssento().getNumero());
+            System.out.println(cpf);
+            System.out.println(p.getAssento().getTipo());
+            System.out.println(p.getAssento().getNumero());
             r = ps.executeUpdate();
+            System.out.println(cpf);
+            ConnectionFactory.closeConnection(conn, ps);
+        }
+        catch(SQLException e){
+            throw new RuntimeException(e);
+        }  
+        finally{
+            return (r>0);
+        }
+    }
+    
+    public boolean inserirSemAssento(Passagem p, String cpf, String tAssento){
+        int r = 0;
+        try{
+            String sql = "INSERT INTO PASSAGEM VALUES(NULL, ?, ?, NOW(), ?, NULL, NULL, NULL)";
+            Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, p.getProgramacao().getId());
+            ps.setString(2, cpf);
+            ps.setString(3, tAssento);
+            r = ps.executeUpdate();
+            System.out.println(cpf);
             ConnectionFactory.closeConnection(conn, ps);
         }
         catch(SQLException e){
@@ -38,6 +66,25 @@ public class PassagemDAO {
             PreparedStatement p = conn.prepareStatement(sql);
             ResultSet rs = p.executeQuery();
             ConnectionFactory.closeConnection(conn, p, rs);
+        }
+        catch(SQLException e){
+            throw new RuntimeException(e);
+        }  
+        finally{
+            return (r>0);
+        }
+    }
+    
+    public boolean updateAssento(Passagem p){
+        int r = 0;
+        try{
+            String sql = "UPDATE PASSAGEM SET ASSENTO=? WHERE IDPASSAGEM = ?";
+            Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, p.getAssento().getNumero());
+            ps.setInt(2, p.getCodigo());
+            r = ps.executeUpdate();
+            ConnectionFactory.closeConnection(conn, ps);
         }
         catch(SQLException e){
             throw new RuntimeException(e);
@@ -74,6 +121,24 @@ public class PassagemDAO {
             p.setInt(1, pa.getCodigo());
             r = p.executeUpdate();
             ConnectionFactory.closeConnection(conn, p);
+        }
+        catch(SQLException e){
+            throw new RuntimeException(e);
+        }  
+        finally{
+            return (r>0);
+        }
+    }
+    
+    public static boolean updatePassagemCancelamento(){
+        int r = 0;
+        try{
+            String sql = "UPDATE PASSAGEM SET CANCELAMENTO=NOW() WHERE NOW()>(SELECT DATAHORA_SAIDA FROM PROGRAMACAO"
+                    + ") AND CHECKIN IS NULL AND CANCELAMENTO IS NULL";
+            Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            r = ps.executeUpdate();
+            ConnectionFactory.closeConnection(conn, ps);
         }
         catch(SQLException e){
             throw new RuntimeException(e);
@@ -141,7 +206,7 @@ public class PassagemDAO {
         catch(SQLException e){
             throw new RuntimeException(e);
         }
-        return (Passagem[]) passagens.toArray();     
+        return (Passagem[]) passagens.toArray(new Passagem[passagens.size()]);     
     }
     
     public static Passagem[] pegarPassagensNaoCanceladasDoCliente(String cpf){

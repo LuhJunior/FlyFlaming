@@ -5,8 +5,11 @@
  */
 package Controle;
 
+import Modelo.Cliente;
+import Modelo.Passagem;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,10 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Júnior
+ * @author Junior
  */
-@WebServlet(name = "FinalizarSessao", urlPatterns = {"/FinalizarSessao"})
-public class FinalizarSessao extends HttpServlet {
+@WebServlet(name = "ExibirPassagens", urlPatterns = {"/ExibirPassagens"})
+public class ExibirPassagens extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,8 +34,13 @@ public class FinalizarSessao extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if(request.getSession().getAttribute("clienteAutenticado") != null) request.getSession().removeAttribute("clienteAutenticado");
-        response.sendRedirect("index");
+        response.setContentType("text/html;charset=UTF-8");
+        Cliente c = (Cliente) request.getSession().getAttribute("clienteAutenticado");
+        Passagem p[] = Passagem.buscarDados(c.getCpf());
+        if(p.length == 0) request.setAttribute("Mensagem", "O cliente não possui passagens compradas");
+        request.setAttribute("Passagens", p);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("passagens.jsp");
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

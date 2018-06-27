@@ -28,7 +28,7 @@ public class Login extends HttpServlet {
             request.getRequestDispatcher("esqueci-senha.jsp").forward(request, response);
         }
         
-        
+        System.out.println((char)(('A'+1)));
         String cpf = (String) request.getParameter("CPF");    
         String senha = (String) request.getParameter("Senha");
         

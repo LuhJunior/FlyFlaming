@@ -87,6 +87,30 @@ public class AssentoDAO {
         return assentos;
     }
     
+    public static ArrayList<Assento> pegarAssentos(String aeronave){
+        ArrayList<Assento> assentos = new ArrayList<>();
+        try{
+            String sql = "SELECT NUMERO, FILEIRA, CADEIRA, TIPO FROM ASSENTO WHERE AERONAVE = ?";
+            Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement p = conn.prepareStatement(sql);
+            p.setString(1, aeronave);
+            ResultSet rs = p.executeQuery();            
+            while(rs.next()){
+                Assento a = new Assento();
+                a.setNumero(rs.getInt("NUMERO"));
+                a.setFileira(rs.getInt("FILEIRA"));
+                a.setCadeira(rs.getInt("CADEIRA"));
+                a.setTipo(rs.getString("TIPO"));
+                assentos.add(a);
+            }
+            ConnectionFactory.closeConnection(conn, p, rs);
+        }
+        catch(SQLException e){
+            throw new RuntimeException(e);
+        }
+        return assentos;
+    }
+    
     public boolean deletar(Assento a){
         int r = 0;
         try{

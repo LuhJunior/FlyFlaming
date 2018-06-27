@@ -41,10 +41,17 @@ public class AeronaveDAO {
     
     public void pesquisar(Aeronave a){
         try{
-            String sql = "";
+            String sql = "SELECT * FROM AERONAVE WHERE PREFIXO = ?";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement p = conn.prepareStatement(sql);
+            p.setString(1, a.getPrefixo());
             ResultSet rs = p.executeQuery();
+            if(rs.next()){
+                a.setFileiras(rs.getInt("QNTD_FILEIRA"));
+                a.setColunas(rs.getInt("QNTD_COLUNA"));
+                a.setCapacEconomica(rs.getInt("TOTALCADEIRAS_ECON"));
+                a.setCapacPrimeira(rs.getInt("TOTACADEIRAS_EXEC"));
+            }
             ConnectionFactory.closeConnection(conn, p, rs);
         }
         catch(SQLException e){

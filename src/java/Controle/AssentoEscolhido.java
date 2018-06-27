@@ -7,6 +7,7 @@ package Controle;
 
 import Modelo.Assento;
 import Modelo.Cliente;
+import Modelo.Passagem;
 import Modelo.Voo;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Junior
  */
-@WebServlet(name = "ComprarPassagem", urlPatterns = {"/ComprarPassagem"})
-public class ComprarPassagem extends HttpServlet {
+@WebServlet(name = "AssentoEscolhido", urlPatterns = {"/AssentoEscolhido"})
+public class AssentoEscolhido extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,26 +38,45 @@ public class ComprarPassagem extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         Cliente c = (Cliente) request.getSession().getAttribute("clienteAutenticado");
-        if(c != null){
-            String num = request.getParameter("Comprar");
-            System.out.println(num);
-            int NumVoo = Integer.parseInt(request.getParameter("NumVoo["+num+"]"));
-            System.out.println(NumVoo);
-            Voo v = new Voo();
-            v.setNumero(NumVoo);
-            v.pegarVoo();
-            System.out.println(v.getAviao().getPrefixo());
-            v.getAviao().pegarAeronave();
-            System.out.println(v.getAviao().getColunas());
-            request.setAttribute("Voo", v);
-            request.setAttribute("Assentos", Assento.pegarAssentosAeronave(v.getAviao().getPrefixo()));
-            RequestDispatcher dispatcher = request.getRequestDispatcher("EscolhendoAssento.jsp");
-            dispatcher.forward(request, response);
+        int NumVoo = Integer.parseInt(request.getParameter("NumVoo"));
+        Voo v = new Voo();
+        Passagem p = new Passagem();
+        v.setNumero(NumVoo);
+        v.pegarVoo();
+        Assento a = new Assento();
+        System.out.println(request.getParameter("Assento"));
+        a.setNumero(Integer.parseInt(request.getParameter("Assento")));
+        a.pegarAssento();
+        if(request.getParameter("Codigo") == null){
+            p.setAssento(a);
+            p.setProgramacao(v.getProgramacao());
+            p.setValor(v.getValor());
+            System.out.println(p.getAssento().getNumero());
+            if(p.inserirPassagem(c.getCpf())){
+                request.setAttribute("Mensagem", "Passagem Comprada com Sucesso!");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("ExibirPassagens");
+                dispatcher.forward(request, response);
+            }
+            else{
+                request.setAttribute("Mensagem", "Ocorreu um erro!");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("ExibirPassagens");
+                dispatcher.forward(request, response);
+            }
         }
         else{
-            request.setAttribute("Mensagem", "Login Nescessário");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
-            dispatcher.forward(request, response);
+            p.setCodigo(Integer.parseInt(request.getParameter("Codigo")));
+            p.buscarDados();
+            p.setAssento(a);
+            if(p.atualizaAssento()){
+                request.setAttribute("Mensagem", "Assento Escolhido com Sucesso!");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("passagens.jsp");
+                dispatcher.forward(request, response);
+            }
+            else{
+                request.setAttribute("Mensagem", "Ocorreu um erro!");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("passagens.jsp");
+                dispatcher.forward(request, response);
+            }
         }
     }
 

@@ -43,6 +43,7 @@
                 FlyFlaming
             </span>
             <nav class="mdl-navigation">
+                <a class="mdl-navigation__link " href="ExibirPassagens">Exibir Passagens</a>
                 <a class="mdl-navigation__link" href="OpcoesPassagem">Opções de Passagem</a>
                 <a class="mdl-navigation__link" href="ConsultarReclamacao">Acompanhar Reclamação</a> 
                 <a class="mdl-navigation__link" href="trocar-senha.jsp">Trocar Senha</a> 

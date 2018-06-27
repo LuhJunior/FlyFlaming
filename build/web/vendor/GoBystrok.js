@@ -149,7 +149,7 @@ function ShowMensagem(Mensagem){
 }
 
 function ShowMensagemErro(Mensagem){
-    swal(Mensagem, "warning");
+    swal(Mensagem, "","warning");
 }
 
 function AlertPreencherCampos(Mensagem){

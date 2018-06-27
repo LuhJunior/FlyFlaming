@@ -5,6 +5,7 @@
  */
 package Controle;
 
+import Modelo.Passagem;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -15,10 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Júnior
+ * @author Junior
  */
-@WebServlet(name = "FinalizarSessao", urlPatterns = {"/FinalizarSessao"})
-public class FinalizarSessao extends HttpServlet {
+@WebServlet(name = "CancelarPassagensSemCheckin", urlPatterns = {"/CancelarPassagensSemCheckin"})
+public class CancelarPassagensSemCheckin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,7 +32,8 @@ public class FinalizarSessao extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if(request.getSession().getAttribute("clienteAutenticado") != null) request.getSession().removeAttribute("clienteAutenticado");
+        response.setContentType("text/html;charset=UTF-8");
+        Passagem.cancelarPassagemSemCheckin();
         response.sendRedirect("index");
     }
 

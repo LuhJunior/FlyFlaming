@@ -12,10 +12,10 @@
                 <div class="mdl-grid center-items color-orange">
                     <% Modelo.Passagem[] p = (Modelo.Passagem[]) request.getAttribute("passagens"); 
                         String Mensagem = (String) request.getAttribute("Mensagem");
-                        if(Mensagem != null){%> <script>alert("<%=Mensagem%>")</script><%}%>
+                    %>
                     <div class="logo-font GoBystrok-title GoBystrok-slogan">Opções de Passagem</div>
                     <div class="center-items">
-                        <form action="CheckarCancelar" method="POST" name="checkinForm" class="" onsubmit="return verificarCamposCheckin()">
+                        <form action="" method="POST" name="" class="">
                             <table style="margin-top: 20px;" class="mdl-data-table mdl-shadow--2dp">
                                 <thead>
                                     <tr>
@@ -44,7 +44,7 @@
                                         </tr>
                                         <%}
                                     }else{%>
-                                        <script>alert("Não sem check-in ou cancelamento feitos");</script>
+                                        <script>ShowMensagem("Não tem check-in ou cancelamento feitos");</script>
                                     <%}%>
                                 </tbody>
                             </table> 
@@ -56,7 +56,6 @@
         <div class="mdl-grid center-items color-orange"></div>
     </div>
 <jsp:include page="layout/footer.jsp"/> 
-<% String men = (String)request.getAttribute("VaiDa");%>
-<% if(men != null){%>
-    <script>alert("<%=men%>");</script>
+<% if(Mensagem != null){%>
+    <script>swal("<%=Mensagem%>");</script>
 <%}%>

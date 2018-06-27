@@ -6,13 +6,13 @@
 
 <%@page import="java.util.ArrayList"%>
 <jsp:include page="layout/header.jsp"/>    
-    <jsp:include page="layout/navbar.jsp"/>
+    <jsp:include page="layout/navbarDinamica.jsp"/>
 <div class="android-content mdl-layout__content">
     <div class="android-be-together-section" style="right:22%;">
         <div  class="formulario color-orange ">     
             <div style="position: absolute;" class="mdl-grid center-items color-orange">
                 <div class="logo-font GoBystrok-title GoBystrok-slogan">Opções de Voos</div>
-                <form name="ComprarPassagem" method="POST" action="ComprarPassagem" onsubmit="return verificarLogin()">
+                <form name="ComprarPassagemForm" method="POST" action="ComprarPassagem">
                     <table style="margin-top: 20px;" class="mdl-data-table mdl-shadow--2dp ">
                         <thead>
                             <tr>
@@ -40,7 +40,7 @@
                                 for(Modelo.Voo voo: v){%>
                             <tr>
                                 <td class="mdl-data-table__cell--non-numeric"><input type="hidden" name="NumVoo[<%=i%>]" value="<%=voo.getNumero()%>"><%=voo.getNumero()%></td>
-                                <td><input type="hidden" name="Origem[<%=i%>]" value="<%=voo.getNumero()%>"><%=voo.getNumero()%><%=voo.getOrigem()%></td>
+                                <td><input type="hidden" name="Origem[<%=i%>]" value="<%=voo.getOrigem()%>"><%=voo.getOrigem()%></td>
                                 <td><%=voo.getDestino()%></td>
                                 <td>R$ <%=voo.getValor()%></td>
                                 <td><%=voo.getProgramacao().getDataSaida()%></td>
@@ -49,7 +49,7 @@
                                 <td><%=voo.getProgramacao().getHoraChegada()%></td>
                                 <td><%=voo.getProgramacao().getQuantidadeExec() %></td>
                                 <td><%=voo.getProgramacao().getQuantidadeEcon()%></td>
-                                <td><button name="Comprar[]" type="submit" value="<%=i%>" class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect">Comprar</button></td>
+                                <td><button name="Comprar" type="submit" value="<%=i%>" class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect">Comprar</button></td>
                             </tr>
                             <%i++;}}
                             else {%>
@@ -60,13 +60,13 @@
                             
                             <%if(v2 != null){
                                 if(!v2.isEmpty()){
-                                int i=5;%>
+                                int i=0;%>
                                 <tr>
                                     <td colspan="11">Voos de Volta</td>
                                 </tr> 
                                 <%for(Modelo.Voo voo: v2){%>
                             <tr>
-                                <td class="mdl-data-table__cell--non-numeric"><%=voo.getNumero()%></td>
+                                <td class="mdl-data-table__cell--non-numeric"><input type="hidden" name="NumVoo2[<%=i%>]" value="<%=voo.getNumero()%>"><%=voo.getNumero()%></td>
                                 <td><%=voo.getOrigem()%></td>
                                 <td><%=voo.getDestino()%></td>
                                 <td>R$ <%=voo.getValor()%></td>
@@ -76,7 +76,7 @@
                                 <td><%=voo.getProgramacao().getHoraChegada()%></td>
                                 <td><%=voo.getProgramacao().getQuantidadeExec() %></td>
                                 <td><%=voo.getProgramacao().getQuantidadeEcon()%></td>
-                                <td><button name="Comprar2[]" type="submit" value="<%=i%>" class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect">Comprar</button></td>
+                                <td><button name="Comprar2" type="submit" value="<%=i%>" class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect">Comprar</button></td>
                             </tr>
                             <%i++;}}
                             else{%>

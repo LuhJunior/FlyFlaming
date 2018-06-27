@@ -3,18 +3,26 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
             <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Banco/PassagemDAO.java</file>
-            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/layout/header.jsp</file>
-            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Controle/PesquisarVoo.java</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Modelo/Aeronave.java</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Banco/AeronaveDAO.java</file>
             <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/voos.jsp</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Controle/AssentoEscolhido.java</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Modelo/Passagem.java</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Controle/ExibirPassagens.java</file>
             <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Modelo/Voo.java</file>
             <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/index.jsp</file>
             <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Banco/VooDAO.java</file>
-            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/vendor/formularios.js</file>
-=======
-            <file>file:/C:/Users/Diego%20Malta/Desktop/FlyFlaming/web/EscolhendoAcento.jsp</file>
->>>>>>> master
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Modelo/Assento.java</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/layout/navbarIndexLogado.jsp</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/EscolhendoAssento.jsp</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Controle/ComprarPassagem.java</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/passagem.jsp</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/vendor/GoBystrok.js</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Controle/PesquisarVoo.java</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/passagens.jsp</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Banco/AssentoDAO.java</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/layout/navbarLogado.jsp</file>
         </group>
     </open-files>
 </project-private>

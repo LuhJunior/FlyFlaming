@@ -2,6 +2,7 @@ package Banco;
 
 import Modelo.Voo;
 import Banco.ConnectionFactory;
+import Modelo.Aeronave;
 import Modelo.Assento;
 import Modelo.Programacao;
 import java.sql.Connection;
@@ -217,24 +218,26 @@ public class VooDAO {
                         + "P.ECON_DISPONIVEL AS ECON FROM VOO AS V INNER JOIN PROGRAMACAO AS P " 
                         + "ON V.NUM_VOO = P.NUM_VOO INNER JOIN CIDADE AS C1 " 
                         + "ON V.CID_ORIGEM = C1.IDCIDADE INNER JOIN CIDADE AS C2 "
-                        + "ON V.CID_DESTINO = C2.IDCIDADE WHERE 'NUMERO DO VOO' = ?;";
+                        + "ON V.CID_DESTINO = C2.IDCIDADE WHERE V.NUM_VOO = ?;";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement p = conn.prepareStatement(sql);
             p.setInt(1, v.getNumero());
             ResultSet rs = p.executeQuery();
             if(rs.next()){
+                v.setAviao(new Aeronave());
+                v.getAviao().setPrefixo(rs.getString("PREFIXO"));
                 v.setNumero(rs.getInt("NUMERO DO VOO"));
                 v.setOrigem(rs.getString("CIDADE DE ORIGEM"));
                 v.setDestino(rs.getString("CIDADE DE DESTINO"));
                 v.setValor(rs.getDouble("VALOR"));
                 v.setProgramacao(new Programacao());
-                v.getProgramacao().setId(rs.getInt("P.IDPROGRAMACAO"));
                 v.getProgramacao().setDataChegada(rs.getString("DATA DE CHEGADA"));
                 v.getProgramacao().setDataSaida(rs.getString("DATA DE SAIDA"));
                 v.getProgramacao().setHoraChegada(rs.getString("HORA DE CHEGADA"));
                 v.getProgramacao().setHoraSaida(rs.getString("HORA DE SAIDA"));
                 v.getProgramacao().setQuantidadeExec(rs.getInt("EXEC"));
                 v.getProgramacao().setQuantidadeEcon(rs.getInt("ECON"));
+                v.getProgramacao().setId(rs.getInt("P.IDPROGRAMACAO"));
             }
             ConnectionFactory.closeConnection(conn, p, rs);
         }

@@ -1,6 +1,7 @@
 package Modelo;
 
 import Banco.AssentoDAO;
+import java.util.ArrayList;
 
 /**
  *
@@ -55,5 +56,17 @@ public class Assento {
     public void pegarAssento(){
         AssentoDAO a = new AssentoDAO();
         a.pegarAssento(this);
+    }
+    
+    public static ArrayList<Assento> pegarAssentosAeronave(String aeronave){
+        return AssentoDAO.pegarAssentos(aeronave);
+    }
+    
+    public static Assento procurarAssentoArray(int fileira, int coluna, ArrayList<Assento> a){
+        for(Assento as: a){
+            //System.out.println(as.numero);
+            if(as.getFileira() == fileira && as.getCadeira() == coluna) return as;
+        }
+        return null;
     }
 }

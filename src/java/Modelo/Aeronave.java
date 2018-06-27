@@ -1,5 +1,7 @@
 package Modelo;
 
+import Banco.AeronaveDAO;
+
 public class Aeronave {
     String prefixo;
     int capacPrimeira, capacEconomica, fileiras, colunas;
@@ -70,6 +72,12 @@ public class Aeronave {
         return true;
     }
 
+    public boolean pegarAeronave(){
+        AeronaveDAO a = new AeronaveDAO();
+        a.pesquisar(this);
+        return true;
+    }
+    
     boolean addOnDb(){ 
         return true;
     }

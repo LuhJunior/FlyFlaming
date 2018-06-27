@@ -113,10 +113,21 @@ public class Passagem {
         return true;
     }
     
-    public boolean inserirDados(String cpf){ 
+    public boolean inserirPassagem(String cpf){ 
         PassagemDAO p = new PassagemDAO();
         p.inserir(this, cpf);
         return true;
+    }
+    
+    public boolean inserirPassagemSemAssento(String cpf, String tAssento){ 
+        PassagemDAO p = new PassagemDAO();
+        p.inserirSemAssento(this, cpf, tAssento);
+        return true;
+    }
+    
+    public boolean atualizaAssento(){
+        PassagemDAO p = new PassagemDAO();
+        return p.updateAssento(this);
     }
     
     public static Passagem[] buscarDados(String cpf){
@@ -140,5 +151,9 @@ public class Passagem {
         PassagemDAO p = new PassagemDAO();
         p.pegarPassagem(this);
         return true;
+    }
+    
+    public static boolean cancelarPassagemSemCheckin(){
+        return PassagemDAO.updatePassagemCancelamento();
     }
 }
