@@ -95,13 +95,11 @@ public class Cliente {
     public boolean comprarPassagem(int NumVoo){
         Voo v = new Voo();
         Passagem p = new Passagem();
-        
         v.setNumero(NumVoo);
         if(!v.pegarVoo()) return false;
         p.setProgramacao(v.getProgramacao());
         p.setValor(v.getValor());
         return p.inserirPassagem(this.getCpf());
-
     }
     
     public boolean addOnDb(){

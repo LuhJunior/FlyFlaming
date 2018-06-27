@@ -231,6 +231,7 @@ public class VooDAO {
                 v.setDestino(rs.getString("CIDADE DE DESTINO"));
                 v.setValor(rs.getDouble("VALOR"));
                 v.setProgramacao(new Programacao());
+                v.getProgramacao().setId(rs.getInt("P.IDPROGRAMACAO"));
                 v.getProgramacao().setDataChegada(rs.getString("DATA DE CHEGADA"));
                 v.getProgramacao().setDataSaida(rs.getString("DATA DE SAIDA"));
                 v.getProgramacao().setHoraChegada(rs.getString("HORA DE CHEGADA"));

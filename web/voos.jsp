@@ -40,6 +40,7 @@
                                 for(Modelo.Voo voo: v){%>
                             <tr>
                                 <td class="mdl-data-table__cell--non-numeric"><input type="hidden" name="NumVoo[<%=i%>]" value="<%=voo.getNumero()%>"><%=voo.getNumero()%></td>
+
                                 <td><input type="hidden" name="Origem[<%=i%>]" value="<%=voo.getOrigem()%>"><%=voo.getOrigem()%></td>
                                 <td><%=voo.getDestino()%></td>
                                 <td>R$ <%=voo.getValor()%></td>
@@ -49,6 +50,7 @@
                                 <td><%=voo.getProgramacao().getHoraChegada()%></td>
                                 <td><%=voo.getProgramacao().getQuantidadeExec() %></td>
                                 <td><%=voo.getProgramacao().getQuantidadeEcon()%></td>
+
                                 <td><button name="Comprar" type="submit" value="<%=i%>" class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect">Comprar</button></td>
                             </tr>
                             <%i++;}}
@@ -60,7 +62,9 @@
                             
                             <%if(v2 != null){
                                 if(!v2.isEmpty()){
+
                                 int i=0;%>
+
                                 <tr>
                                     <td colspan="11">Voos de Volta</td>
                                 </tr> 
@@ -76,7 +80,9 @@
                                 <td><%=voo.getProgramacao().getHoraChegada()%></td>
                                 <td><%=voo.getProgramacao().getQuantidadeExec() %></td>
                                 <td><%=voo.getProgramacao().getQuantidadeEcon()%></td>
+
                                 <td><button name="Comprar2" type="submit" value="<%=i%>" class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect">Comprar</button></td>
+
                             </tr>
                             <%i++;}}
                             else{%>

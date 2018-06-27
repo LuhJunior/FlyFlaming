@@ -15,6 +15,7 @@ public class PassagemDAO {
         int r = 0;
         try{
             String sql = "INSERT INTO PASSAGEM VALUES(NULL, ?, ?, NOW(), ?, NULL, NULL, ?)";
+
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, p.getProgramacao().getId());

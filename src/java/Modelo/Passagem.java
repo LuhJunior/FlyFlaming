@@ -113,6 +113,7 @@ public class Passagem {
         return true;
     }
     
+
     public boolean inserirPassagem(String cpf){ 
         PassagemDAO p = new PassagemDAO();
         p.inserir(this, cpf);

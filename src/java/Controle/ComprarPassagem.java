@@ -8,6 +8,7 @@ package Controle;
 import Modelo.Assento;
 import Modelo.Cliente;
 import Modelo.Voo;
+import Modelo.Cliente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
