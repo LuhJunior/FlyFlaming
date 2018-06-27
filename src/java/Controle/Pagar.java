@@ -5,10 +5,7 @@
  */
 package Controle;
 
-import Modelo.Assento;
-import Modelo.Cliente;
 import Modelo.Passagem;
-import Modelo.Voo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -22,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Junior
  */
-@WebServlet(name = "AssentoEscolhido", urlPatterns = {"/AssentoEscolhido"})
-public class AssentoEscolhido extends HttpServlet {
+@WebServlet(name = "Pagar", urlPatterns = {"/Pagar"})
+public class Pagar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,47 +34,13 @@ public class AssentoEscolhido extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        Cliente c = (Cliente) request.getSession().getAttribute("clienteAutenticado");
-        int NumVoo = Integer.parseInt(request.getParameter("NumVoo"));
-        Voo v = new Voo();
         Passagem p = new Passagem();
-        v.setNumero(NumVoo);
-        v.pegarVoo();
-        Assento a = new Assento();
-        System.out.println(request.getParameter("Assento"));
-        a.setNumero(Integer.parseInt(request.getParameter("Assento")));
-        a.pegarAssento();
-        if(request.getParameter("Codigo") == null){
-            p.setAssento(a);
-            p.setProgramacao(v.getProgramacao());
-            p.setValor(v.getValor());
-            System.out.println(p.getAssento().getNumero());
-            if(p.inserirPassagem(c.getCpf())){
-                request.setAttribute("Passagem", p);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("pagamento.jsp");
-                dispatcher.forward(request, response);
-            }
-            else{
-                request.setAttribute("Mensagem", "Ocorreu um erro!");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("ExibirPassagens");
-                dispatcher.forward(request, response);
-            }
-        }
-        else{
-            p.setCodigo(Integer.parseInt(request.getParameter("Codigo")));
-            p.buscarDados();
-            p.setAssento(a);
-            if(p.atualizaAssento()){
-                request.setAttribute("Mensagem", "Assento Escolhido com Sucesso!");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("passagens.jsp");
-                dispatcher.forward(request, response);
-            }
-            else{
-                request.setAttribute("Mensagem", "Ocorreu um erro!");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("passagens.jsp");
-                dispatcher.forward(request, response);
-            }
-        }
+        p.setCodigo(Integer.parseInt(request.getParameter("Codigo")));
+        p.setValor(Double.parseDouble(request.getParameter("valor")));
+        if(p.pagarPassagem()) request.setAttribute("Mensagem", "Compra feita com sucesso");
+        else request.setAttribute("Mensagem", "Ocorreu um erro");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("index");
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

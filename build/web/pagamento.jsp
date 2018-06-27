@@ -11,7 +11,11 @@
                     <div class="formulario color-orange ">     
                         <div class="mdl-grid center-items color-orange">
                                 <div class="logo-font GoBystrok-title GoBystrok-slogan">Pagamento</div>
-                            <form method="POST" name="pagamentoForm" class="" onsubmit="return verificarCamposPagamento()">
+                            <form method="POST" name="pagamentoForm" action="Pagar" onsubmit="return verificarCamposPagamento()">
+                                <% Modelo.Passagem p = (Modelo.Passagem)request.getAttribute("Passagem");
+                                    if(p != null)
+                                %>
+                                    <input type="hidden" name="Codigo" value="<%=p.getCodigo()%>">
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
                                     <input class="mdl-textfield__input color-white" type="number" name="numCard" pattern = "-?[0-9]*(\.[0-9]+)?" id="sample3">
                                     <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Número do Cartão</label>
@@ -22,7 +26,7 @@
                                     <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Senha</label>
                                 </div>
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
-                                    <input class="mdl-textfield__input color-white" type="text" pattern = "-?[0-9]*(\.[0-9]+)?" name="valor" id="sample3">
+                                    <input class="mdl-textfield__input color-white" type="text" pattern = "-?[0-9]*(\.[0-9]+)?" name="valor" value="<%=p.getValor()%>" id="sample3">
                                     <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Valor R$</label>
                                 </div>
                                 <div id="parcelasDiv" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam">

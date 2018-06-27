@@ -3,10 +3,6 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 0b7c533e3967d21964ce123b88da68a73e2d73de
             <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Banco/PassagemDAO.java</file>
             <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Modelo/Aeronave.java</file>
             <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Banco/AeronaveDAO.java</file>
@@ -17,8 +13,8 @@
             <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Modelo/Voo.java</file>
             <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/index.jsp</file>
             <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Banco/VooDAO.java</file>
-<<<<<<< HEAD
             <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Modelo/Assento.java</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Modelo/Cliente.java</file>
             <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/layout/navbarIndexLogado.jsp</file>
             <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/EscolhendoAssento.jsp</file>
             <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Controle/ComprarPassagem.java</file>
@@ -28,12 +24,6 @@
             <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/passagens.jsp</file>
             <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Banco/AssentoDAO.java</file>
             <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/layout/navbarLogado.jsp</file>
-=======
-            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/vendor/formularios.js</file>
-=======
-            <file>file:/C:/Users/Diego%20Malta/Desktop/FlyFlaming/web/EscolhendoAcento.jsp</file>
->>>>>>> master
->>>>>>> 0b7c533e3967d21964ce123b88da68a73e2d73de
         </group>
     </open-files>
 </project-private>

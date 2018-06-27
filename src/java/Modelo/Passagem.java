@@ -113,6 +113,11 @@ public class Passagem {
         return true;
     }
     
+    public boolean pagarPassagem(){ 
+        PassagemDAO p = new PassagemDAO();
+        p.pagar(this);
+        return true;
+    }
 
     public boolean inserirPassagem(String cpf){ 
         PassagemDAO p = new PassagemDAO();
