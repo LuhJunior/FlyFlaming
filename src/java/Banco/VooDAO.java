@@ -58,9 +58,8 @@ public class VooDAO {
                     + "P.ECON_DISPONIVEL AS ECON FROM VOO AS V INNER JOIN PROGRAMACAO AS P " 
                     + "ON V.NUM_VOO = P.NUM_VOO INNER JOIN CIDADE AS C1 " 
                     + "ON V.CID_ORIGEM = C1.IDCIDADE INNER JOIN CIDADE AS C2 "
-                    + "ON V.CID_DESTINO = C2.IDCIDADE WHERE 'DATA DE SAIDA' >= ?"
-                    + "AND 'CIDADE DE ORIGEM' = ? AND 'CIDADE DE DESTINO' = ?;";
-            
+                    + "ON V.CID_DESTINO = C2.IDCIDADE WHERE DATE(P.DATAHORA_SAIDA) >= ?"
+                    + "AND C1.NOME = ? AND C2.NOME = ?;";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, dataIda);
@@ -76,7 +75,7 @@ public class VooDAO {
                 auxV.setProgramacao(new Programacao());
                 auxV.getProgramacao().setDataChegada(rs.getString("DATA DE CHEGADA"));
                 auxV.getProgramacao().setDataSaida(rs.getString("DATA DE SAIDA"));
-                auxV.getProgramacao().setHoraChegada(rs.getString("HORA DE CHEGAD)"));
+                auxV.getProgramacao().setHoraChegada(rs.getString("HORA DE CHEGADA"));
                 auxV.getProgramacao().setHoraSaida(rs.getString("HORA DE SAIDA"));
                 auxV.getProgramacao().setQuantidadeExec(rs.getInt("EXEC"));
                 auxV.getProgramacao().setQuantidadeEcon(rs.getInt("ECON"));
@@ -214,7 +213,7 @@ public class VooDAO {
                         + "C2.NOME AS 'CIDADE DE DESTINO', V.VALOR_PASSAGEM AS VALOR, DATE(P.DATAHORA_CHEGADA) "
                         + "AS 'DATA DE CHEGADA', TIME(P.DATAHORA_CHEGADA) AS 'HORA DE CHEGADA', "
                         + "DATE(P.DATAHORA_SAIDA) AS 'DATA DE SAIDA', TIME(P.DATAHORA_SAIDA) AS 'HORA DE SAIDA'"
-                        + ", P.EXEC_DISPONIVEL AS EXEC, "
+                        + ", P.EXEC_DISPONIVEL AS EXEC, P.IDPROGRAMACAO, "
                         + "P.ECON_DISPONIVEL AS ECON FROM VOO AS V INNER JOIN PROGRAMACAO AS P " 
                         + "ON V.NUM_VOO = P.NUM_VOO INNER JOIN CIDADE AS C1 " 
                         + "ON V.CID_ORIGEM = C1.IDCIDADE INNER JOIN CIDADE AS C2 "
@@ -229,6 +228,7 @@ public class VooDAO {
                 v.setDestino(rs.getString("CIDADE DE DESTINO"));
                 v.setValor(rs.getDouble("VALOR"));
                 v.setProgramacao(new Programacao());
+                v.getProgramacao().setId(rs.getInt("P.IDPROGRAMACAO"));
                 v.getProgramacao().setDataChegada(rs.getString("DATA DE CHEGADA"));
                 v.getProgramacao().setDataSaida(rs.getString("DATA DE SAIDA"));
                 v.getProgramacao().setHoraChegada(rs.getString("HORA DE CHEGADA"));

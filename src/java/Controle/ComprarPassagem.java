@@ -1,10 +1,13 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Controle;
 
-import Banco.VooDAO;
-import Modelo.Voo;
+import Modelo.Cliente;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Junior
  */
-@WebServlet(name = "PesquisarVoo", urlPatterns = {"/PesquisarVoo"})
-public class PesquisarVoo extends HttpServlet {
+@WebServlet(name = "ComprarPassagem", urlPatterns = {"/ComprarPassagem"})
+public class ComprarPassagem extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,19 +33,17 @@ public class PesquisarVoo extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String Origem = request.getParameter("Origem");
-        String Destino = request.getParameter("Destino");
-        String DataIda = request.getParameter("dateIda");
-        String DataVolta = request.getParameter("dateVolta");
-        String Escolha = request.getParameter("escolha");
-        System.out.println(Escolha);
-        System.out.println(Origem +'\n'+Destino);
-        System.out.println(DataIda+'\n'+DataVolta);
-        ArrayList<Voo> v = VooDAO.pesquisarVooPelaDataOrigemDestino(Origem, Destino, DataIda), v2 = null;
-        if(Escolha.equals("IdaeVolta")) v2 = VooDAO.pesquisarVooPelaDataOrigemDestino(Destino, Origem, DataVolta);
-        request.setAttribute("Voos", v);
-        request.setAttribute("Voos2", v2);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("voos.jsp");
+        response.setContentType("text/html;charset=UTF-8");
+        Cliente c = (Cliente) request.getAttribute("cliAutenticado");
+        String num = request.getParameter("Comprar[]");
+        int NumVoo = Integer.parseInt(request.getParameter("NumVoo["+num+"]"));
+        if(c.comprarPassagem(NumVoo)){
+            request.setAttribute("Mensagem", "Que não vai dá pai");
+        }
+        else{
+            request.setAttribute("Mensegem", "Não vai dá não");
+        }
+        RequestDispatcher dispatcher = request.getRequestDispatcher("index");
         dispatcher.forward(request, response);
     }
 
