@@ -3,7 +3,7 @@ package Modelo;
 import Banco.ProgramacaoDAO;
 
 public class Programacao {
-    int quantidadeEcon, quantidadeExec;
+    int quantidadeEcon, quantidadeExec, id;
     String dataChegada, dataSaida, horaChegada, horaSaida;
     
     public Programacao() {
@@ -52,6 +52,14 @@ public class Programacao {
 
     public void setHoraChegada(String horaChegada) {
         this.horaChegada = horaChegada;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getHoraSaida() {

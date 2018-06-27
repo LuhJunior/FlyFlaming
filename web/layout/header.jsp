@@ -37,5 +37,4 @@
     <link rel="stylesheet" href="vendor/styles.css">
     <link rel="stylesheet" href="vendor/GoBystrok.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script type="text/javascript" src="vendor/GoBystrok.js"></script>
   </head>

@@ -7,7 +7,7 @@ import java.util.Calendar;
 public class Passagem {
     int codigo;
     boolean paga;
-    float valor;
+    double valor;
     String horaCompra, checkin, cancelamento;
     Programacao programacao;
     Assento assento;
@@ -64,11 +64,11 @@ public class Passagem {
         this.paga = paga;
     }
 
-    public float getValor() {
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(float valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
 
@@ -113,7 +113,9 @@ public class Passagem {
         return true;
     }
     
-    public boolean inserirDados(){ 
+    public boolean inserirDados(String cpf){ 
+        PassagemDAO p = new PassagemDAO();
+        p.inserir(this, cpf);
         return true;
     }
     

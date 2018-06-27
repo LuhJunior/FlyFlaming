@@ -53,7 +53,7 @@
                             <div class="mdl-grid">
                                 <div class="mdl-cell mdl-cell--7-col graybox">
                                     <label class="mdl-radio mdl-js-radio" for="option1">
-                                        <input type="radio" id="option1" name="escolha" value="IdaVolta" class="mdl-radio__button mdl-color-text--orange-50" checked>
+                                        <input type="radio" id="option1" name="escolha" value="IdaeVolta" class="mdl-radio__button mdl-color-text--orange-50" checked>
                                         <span class="mdl-radio__label mdl-color-text--orange-50">Ida e Volta</span>
                                     </label>
                                     <span style="padding-left: 20px;">
@@ -72,14 +72,15 @@
                     </div>
                 </div>
             </section>
-            <section id="ofertasPassagens">
+            <section style="margin-top: 120px;" id="ofertasPassagens">
                 <div class="android-screen-section mdl-typography--text-center GoBystrok-spacer"></div>
                 <div class="mdl-typography--display-1-color-contrast mdl-typography--text-center GoBystrok-title-section GoBystrok-title">Ofertas Imperdíveis!</div>
                     <% ArrayList<Modelo.Voo> vs = (ArrayList<Modelo.Voo> ) request.getAttribute("voosDaSemana");
                     %>
                     <!-- SECTION OFERTAS - ROW  -->
                     <div class="mdl-grid layout-center padding-sale">  
-                    <% for (Modelo.Voo v: vs){%>  
+                    <% if(vs != null){
+                        for (Modelo.Voo v: vs){%>  
                             <div class="mdl-cell mdl-cell--4-col margin-negative">
                                 <div class="demo-card-square mdl-card mdl-shadow--2dp">
                                 <div class="mdl-card__title mdl-card--expand">
@@ -95,7 +96,7 @@
                                 </div>
                             </div>                    
                         </div>
-                    <%}%>
+                    <%}}%>
                     </div> <!-- ./END SECTION OFERTAS - ROW 1 -->
                     <div style="padding-bottom: 50px;" class="mdl-grid layout-center padding-sale"></div>
                     <div class="android-customized-section">
@@ -103,10 +104,12 @@
                         <div style="padding-top: 20px;" class="logo-font GoBystrok-title GoBystrok-slogan">Voos da semana</div>
                         <div class="GoBystrok-fab padding-form">
                             <div class="center-items">
+                            <% ArrayList<Modelo.Voo> v = (ArrayList<Modelo.Voo> ) request.getAttribute("voos");%>
                             <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp ">
                                 <thead>
                                     <tr>
-                                        <th class="mdl-data-table__cell--non-numeric">Voo</th>
+                                        <%if(v == null || v.isEmpty()){%> <th>Voo</th><%}
+                                        else{%> <th class="mdl-data-table__cell--non-numeric">Voo</th><%}%>
                                         <th>Origem</th>
                                         <th>Destino</th>
                                         <th>Data</th>
@@ -117,11 +120,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <% ArrayList<Modelo.Voo> v = (ArrayList<Modelo.Voo> ) request.getAttribute("voos");
-                                        for (Modelo.Voo aux: v) 
-                                            {%>
+                                    <%if(v != null && !v.isEmpty()){
+                                        for (Modelo.Voo aux: v){%>
                                             <tr>
-                                                <td class="mdl-data-table__cell--non-numeric"> <%=aux.getNumero()%> </td>
+                                                <td><%=aux.getNumero()%></td>
                                                 <td><%=aux.getOrigem()%></td>
                                                 <td><%=aux.getDestino()%></td>
                                                 <td><%=aux.getProgramacao().getDataSaida()%></td>
@@ -130,6 +132,12 @@
                                                 <td><%=aux.getProgramacao().getQuantidadeEcon()%></td>
                                                 <td><%=aux.getValor()%></td>
                                             </tr>
+                                      <%}
+                                    }
+                                    else{%>
+                                        <tr>
+                                            <td colspan="8">Não há Voos esta Semana</td>
+                                        </tr> 
                                     <%}%>
                                 </tbody>
                             </table>
@@ -138,7 +146,7 @@
                     </div>
                 </div>
             </section>
-            <section id="contato">
+<!--            <section id="contato">
                     <div class="mdl-grid center-items color-orange">
                         <div class="logo-font GoBystrok-title GoBystrok-slogan">Contato</div>
                         <form method="POST"  class="">
@@ -164,6 +172,5 @@
                             </div>
                         </form>
                     </div>
-            </section>
-        </div>
+            </section>-->
 <jsp:include page="layout/footer.jsp"/>  

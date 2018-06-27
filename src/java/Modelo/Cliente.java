@@ -1,6 +1,8 @@
 package Modelo;
 
 import Banco.ClienteDAO;
+import Banco.VooDAO;
+import java.util.Arrays;
 import java.util.Calendar;
 
 public class Cliente {
@@ -22,6 +24,12 @@ public class Cliente {
 
     public String getNome() {
         return nome;
+    }
+    
+    public String getOneNome() {
+        String array[] = new String[5];
+        array = nome.split(" ");
+        return array[0];
     }
 
     public String getSenha() {
@@ -84,8 +92,15 @@ public class Cliente {
         this.dataNascimento = dataNascimento;
     }
     
-    public boolean comprarPassagem(){
-        return true;
+    public boolean comprarPassagem(int NumVoo){
+        Voo v = new Voo();
+        Passagem p = new Passagem();
+        v.setNumero(NumVoo);
+        if(!v.pegarVoo()) return false;
+        p.setProgramacao(v.getProgramacao());
+        p.setValor(v.getValor());
+        return p.inserirDados(this.getCpf());
+
     }
     
     public boolean addOnDb(){

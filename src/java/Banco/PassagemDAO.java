@@ -11,14 +11,16 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class PassagemDAO {
-    public boolean inserir(Passagem pa){
+    public boolean inserir(Passagem p, String cpf){
         int r = 0;
         try{
-            String sql = "";
+            String sql = "INSERT INTO PASSAGEM(IDPROGRAMACAO, CPF, DATAHORA_COMPRA) VALUES(?, ?, NOW())";
             Connection conn = ConnectionFactory.getConnection();
-            PreparedStatement p = conn.prepareStatement(sql);
-            ResultSet rs = p.executeQuery();
-            ConnectionFactory.closeConnection(conn, p, rs);
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, p.getProgramacao().getId());
+            ps.setString(2, cpf);
+            r = ps.executeUpdate();
+            ConnectionFactory.closeConnection(conn, ps);
         }
         catch(SQLException e){
             throw new RuntimeException(e);

@@ -16,12 +16,12 @@ public class PassagemExecutiva extends Passagem{
     }
 
     @Override
-    public float getValor() {
+    public double getValor() {
         return valor;
     }
 
     @Override
-    public void setValor(float valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
 
