@@ -408,6 +408,27 @@ a img{
   background-size: cover;
 }
 
+.android-be-together-sectionA {
+  position: relative;
+  height: 1300px;
+  width: auto;
+  background-color: #f3f3f3;
+  background: url('images/slide01.jpeg') center 30% no-repeat fixed;
+  background-size: cover;
+}
+
+.android-be-together-sectionA:before {
+   position: absolute;
+   z-index: 0;
+   content:'';
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   opacity: .5;
+   background: #1A1A1A;
+}
+
 .android-be-together-section:before {
    position: absolute;
    z-index: 0;

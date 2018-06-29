@@ -12,8 +12,11 @@ body {
 }
 .demo-card-square > .mdl-card__title {
   color: #fff;
-  background:
-    url('') bottom right 15% no-repeat #46B6AC;
+  background:  url('https://st2.depositphotos.com/5398292/9972/v/950/depositphotos_99721528-stock-illustration-travel-bag-and-world-map.jpg') #46B6AC;
+  max-width: 350px;
+  max-height: 220px;
+  width: auto;
+  height: auto;
 }
 
 /* ==================== NAVBAR/TOPO/ESQUERDA ========================== */
@@ -180,8 +183,8 @@ form {
 }
 
 .col-tam {
-	width: 50%;
-    margin-left: 26%;
+    width: 80%;
+    margin-left: 0px;
     left: auto;
     right: auto;
 }

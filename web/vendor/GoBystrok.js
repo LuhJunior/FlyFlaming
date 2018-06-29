@@ -14,4 +14,11 @@ $("form[name='compraPassagem']").submit( function(event) {
     }
     event.preventDefault();
 });
-    
+
+
+$("#senha2").focusout(function(){
+    if (!($('#senha').val() === $('#senha2').val())) {
+        alert('As senhas digitadas nao coincidem.');
+    }
+    console.log('Verificando senhas...');
+});
