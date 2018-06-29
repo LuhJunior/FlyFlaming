@@ -189,6 +189,13 @@ form {
     right: auto;
 }
 
+.col-tam2 {
+    width: 80%;
+    margin-left: 80px;
+    left: auto;
+    right: auto;
+}
+
 .contact-form {
     margin-left: -20px;
 }

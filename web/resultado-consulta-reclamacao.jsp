@@ -51,13 +51,12 @@
                         </table>
                     </form>
                     </div>
-                    <div>
-                        <a href="reclamacao.jsp">
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect" type="submit" name="submit">Voltar</button>
-                        </a>
-                    </div>
+                </div>
+                <div style="padding: 50px;">
+                    <a class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect" href="reclamacao.jsp">                    
+                        Voltar
+                    </a>
                 </div>
             </div>
         </div>
-    </div>
 <jsp:include page="layout/footer.jsp"/> 

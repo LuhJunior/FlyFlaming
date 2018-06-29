@@ -53,8 +53,7 @@
                 </div>
             </div>
         </div>
-        <div class="mdl-grid center-items color-orange"></div>
-    </div>
+        
 <jsp:include page="layout/footer.jsp"/> 
 <% String men = (String)request.getAttribute("VaiDa");%>
 <% if(men != null){%>

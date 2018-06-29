@@ -43,14 +43,14 @@ public class CadastrarCliente extends HttpServlet {
         c.getEndereco().setEstado(request.getParameter("Estado"));
         c.getEndereco().setCEP(request.getParameter("CEP"));
         if(c.addOnDb()){
-            request.setAttribute("Mensagem", "Que não vai dá oq");
-            System.out.println("deubom");
+            request.setAttribute("Mensagem", "Usuário Cadastrado com Sucesso");
+            System.out.println("Usuário cadastrado...");
             RequestDispatcher dispatcher = request.getRequestDispatcher("signin.jsp");
             dispatcher.forward(request, response);
         }
         else{
-            request.setAttribute("Mensagem", "Não vai da não");
-            System.out.println("deuruim");
+            request.setAttribute("Mensagem", "Usuário não Cadastrado");
+            System.out.println("Usuário não cadastrado...");
             RequestDispatcher dispatcher = request.getRequestDispatcher("signin.jsp");
             dispatcher.forward(request, response);
         }

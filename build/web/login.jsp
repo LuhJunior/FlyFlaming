@@ -18,13 +18,13 @@
 
     <div class="android-content mdl-layout__content">
         <div class="android-be-together-section">
-            <div class="formulario color-orange padding-form">     
+            <div class="formulario-cadastro color-orange padding-form">     
                 <div class="mdl-grid center-items color-orange">
                     <div class="logo-font GoBystrok-title GoBystrok-slogan">Login</div>
                     
                     <form method="POST" action="Login" onsubmit="return verificarCamposLogin()">
                         
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam2 ">
                             <input class="mdl-textfield__input color-white" 
                                    type="text" 
                                    minlength="11" 
@@ -38,7 +38,7 @@
                             
                         </div>
                         
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam2 ">
                             <input class="mdl-textfield__input color-white" 
                                    type="password" 
                                    name="senha" 
@@ -58,10 +58,8 @@
                                     name="recuperar"
                                     value="Recuperar">Esqueci minha senha</button>
                         </div>
-                        
                     </form>
                 </div>
             </div>
-        </div>
-        <div class="mdl-grid center-items color-orange"></div>                
+        </div>            
 <jsp:include page="layout/footer.jsp"/>  
