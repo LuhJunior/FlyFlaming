@@ -32,7 +32,7 @@
                 </div>
 <%--
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
-                    <input class="mdl-textfield__input color-white" type="text" name="CPF" maxlength="11" pattern = "-?[0-9]*(\.[0-9]+)?" id="sample3" value="<%=c.getCpf()%>">
+                    <input class="mdl-textfield__input color-white" type="text" name="CPF" maxlength="14" minlength="14" onkeydown="javascript: fMasc(this, mCPF);" id="sample3" value="<%=c.getCpf()%>">
                     <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">CPF</label>
                     <span class="mdl-textfield__error color-white">Use somente números</span>
                 </div>
@@ -44,7 +44,7 @@
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
                     <input class="mdl-textfield__input color-white" type="text" name="Telefone" 
-                           pattern = "-?[0-9]*(\.[0-9]+)?" minlength="9" maxlength="15" id="sample3" value="<%=c.getTelefone()%>">
+                            minlength="14" maxlength="14" onkeydown="javascript: fMasc(this, mTel)" id="sample3" value="<%=c.getTelefone()%>">
                     <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Telefone</label>
                     <span class="mdl-textfield__error color-white">Use somente números</span>
                 </div>
@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
-                    <input class="mdl-textfield__input color-white" type="text" name="CEP" pattern = "-?[0-9]*(\.[0-9]+)?" id="sample3" value="<%=c.getEndereco().getCEP()%>">
+                    <input class="mdl-textfield__input color-white" type="text" name="CEP" minlength=10 maxlength="10" onkeydown="javascript: fMasc(this, mCEP);"  id="sample3" value="<%=c.getEndereco().getCEP()%>">
                     <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">CEP</label>
                     <span class="mdl-textfield__error color-white">Use somente números</span>
                 </div>

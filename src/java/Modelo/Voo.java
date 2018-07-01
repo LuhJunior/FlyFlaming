@@ -4,6 +4,7 @@ import Banco.VooDAO;
 import Banco.VooDAO;
 import Modelo.Aeronave;
 import Modelo.Programacao;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Voo {
@@ -59,6 +60,11 @@ public class Voo {
     public double getValor() {
         return valor;
     }
+    
+    public String getValorFormat() {
+        DecimalFormat df = new DecimalFormat("#0.00");  
+        return df.format(this.valor);
+    }
 
     public void setValor(double valor) {
         this.valor = valor;
@@ -92,7 +98,8 @@ public class Voo {
     }
     
     public static ArrayList<Voo> pegarVoosDaSemana(){
-        return VooDAO.pesquisarVoosDaSemana();
+        ArrayList<Voo> arrayVooOfertas = new ArrayList<Voo>(VooDAO.pesquisarVoosDaSemana());
+        return arrayVooOfertas;
     }
     
     public static ArrayList<Voo> pegarVoos(){

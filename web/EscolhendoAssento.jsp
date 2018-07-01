@@ -7,7 +7,7 @@
 <%@page import="Modelo.Assento"%>
 <%@page import="java.util.ArrayList"%>
 <jsp:include page="layout/header.jsp"/>
-<jsp:include page="layout/navbarDinamicaIndex.jsp"/>
+<jsp:include page="layout/navbarDinamica.jsp"/>
 <div class="android-content mdl-layout__content">
     <section id="pesquisarPassagem">
         <div class="android-customized-section">

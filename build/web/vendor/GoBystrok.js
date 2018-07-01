@@ -26,15 +26,15 @@ function verificarCamposLogin(){
 
 function verificarCamposCadastro(){
     var Campos = "";
-    if(cadastroForm.Nome.value == "") Campos = "Nome";
-    if(cadastroForm.CPF.value == "") Campos += ", CPF";
-    if(cadastroForm.Email.value == "") Campos += ", Email";
-    if(cadastroForm.Telefone.value == "")Campos += ", Telefone";
-    if(cadastroForm.Rua.value == "") Campos += ", Rua";
-    if(cadastroForm.Bairro.value == "") Campos += ", Bairro";
-    if(cadastroForm.Cidade.value == "") Campos += ", Cidade";
-    if(cadastroForm.Estado.value == "") Campos += ", Estado";
-    if(cadastroForm.CEP.value == "") Campos += ", CEP";
+    if(cadastrarCliente.Nome.value == "") Campos = "Nome";
+    if(cadastrarCliente.CPF.value == "") Campos += ", CPF";
+    if(cadastrarCliente.Email.value == "") Campos += ", Email";
+    if(cadastrarCliente.Telefone.value == "")Campos += ", Telefone";
+    if(cadastrarCliente.Rua.value == "") Campos += ", Rua";
+    if(cadastrarCliente.Bairro.value == "") Campos += ", Bairro";
+    if(cadastrarCliente.Cidade.value == "") Campos += ", Cidade";
+    if(cadastrarCliente.Estado.value == "") Campos += ", Estado";
+    if(cadastrarCliente.CEP.value == "") Campos += ", CEP";
     if(Campos !== "") AlertPreencherCampos(Campos);
     return Campos === "";
 }
@@ -155,3 +155,11 @@ function ShowMensagemErro(Mensagem){
 function AlertPreencherCampos(Mensagem){
     swal("Preencha o(s) Campo(s)", Mensagem, "warning");
 } 
+
+$("#senha2").focusout(function(){
+    if (!($('#senha').val() === $('#senha2').val())) {
+        alert('As senhas digitadas nao coincidem.');
+    }
+    console.log('Verificando senhas...');
+});
+

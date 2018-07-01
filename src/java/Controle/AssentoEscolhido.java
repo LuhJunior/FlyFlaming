@@ -55,6 +55,7 @@ public class AssentoEscolhido extends HttpServlet {
             if(p.inserirPassagem(c.getCpf())){
                 request.setAttribute("Mensagem", "Passagem Comprada com Sucesso!");
                 RequestDispatcher dispatcher = request.getRequestDispatcher("ExibirPassagens");
+                
                 dispatcher.forward(request, response);
             }
             else{

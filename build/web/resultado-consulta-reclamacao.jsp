@@ -8,15 +8,15 @@
     <jsp:include page="layout/navbarLogado.jsp"/>
     <div class="android-content mdl-layout__content">
         <div class="android-be-together-section">
-            <div class="formulario color-orange">     
-                <div class="mdl-grid center-items color-orange" style="left: 10%;right: 10%;">
+            <div class="formulario color-orange" style="left: 20%; right: 20%; justify-content: center;">     
+                <div class="mdl-grid center-items">
                     <div class="logo-font GoBystrok-title GoBystrok-slogan">Reclamações</div>
                     <% Modelo.Passagem[] p = (Modelo.Passagem[]) request.getAttribute("passagens");
                         String Mensagem = (String) request.getAttribute("Mensagem");
                         if(Mensagem != null){%> <script>alert("<%=Mensagem%>")</script><%}%>
                     <div class="center-items">
                     <form action="UpdateDeleteReclamacao" method="post" name="UpdateDeleteReclamacaoForm" onsubmit="">
-                        <table style="margin-top: 20px;" class="mdl-data-table mdl-shadow--2dp">
+                        <table style="margin-top: 20px; overflow: auto;" class="mdl-data-table mdl-shadow--2dp">
                             <thead>
                                 <tr>
                                     <th class="mdl-data-table__cell--non-numeric">Código da Passagem</th>
@@ -51,13 +51,12 @@
                         </table>
                     </form>
                     </div>
-                    <div>
-                        <a href="reclamacao.jsp">
-                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect" type="submit" name="submit">Voltar</button>
-                        </a>
-                    </div>
+                </div>
+                <div style="padding: 50px;">
+                    <a class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect" href="reclamacao.jsp">                    
+                        Voltar
+                    </a>
                 </div>
             </div>
         </div>
-    </div>
 <jsp:include page="layout/footer.jsp"/> 

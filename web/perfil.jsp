@@ -8,9 +8,9 @@
 <jsp:include page="layout/header.jsp"/>    
     <jsp:include page="layout/navbarLogado.jsp"/>
     <div class="android-content mdl-layout__content">
-        <div class="android-be-together-section">
-            <div class="formulario-cadastro color-orange"> 
-                <div class="mdl-grid center-items color-orange">
+        <div class="android-be-together-section" style="height: 1000px">
+            <div class="color-orange" style="right: 30%; left: 30%; top:10%; position: absolute;"> 
+                <div class="mdl-grid center-items">
                     <% Modelo.Cliente c = (Modelo.Cliente)request.getAttribute("cliente");
                         String men = (String)request.getAttribute("Mensagem");
                         String men2 = (String)request.getAttribute("Mensagem2");
@@ -18,15 +18,15 @@
                             c = new Modelo.Cliente();
                         }
                         if(men != null){
-                    %><script>alert("<%=men%>")</script> <%
+                    %><script>ShowMensagem("<%=men%>")</script> <%
                         }
                         if(men2 != null){
-                    %><script>alert("<%=men2%>")</script> <%
+                    %><script>ShowMensagem("<%=men2%>")</script> <%
                         }
                         if(c.getTelefone() == null) c.setTelefone("");
                         if(c.getEndereco() == null) c.setEndereco(new Modelo.Endereco());
                     %>
-                    <div style="right: -28%;" class="logo-font center-items GoBystrok-title GoBystrok-slogan">Perfil</div>
+                    <div style="right: 35%; left: 35%" class="logo-font center-items GoBystrok-title GoBystrok-slogan">Perfil</div>
                     
                         <table style="margin-top: 100px; right: 10%;" class=" mdl-data-table mdl-shadow--2dp">
                             <tr>
@@ -78,7 +78,5 @@
                 </div>
             </div>
         </div>
-    <div class="android-screen-section mdl-typography--text-center GoBystrok-spacer"></div>
-    <div class="android-screen-section mdl-typography--text-center GoBystrok-spacer"></div>
     <div class="mdl-grid center-items color-orange"></div>
 <jsp:include page="layout/footer.jsp"/> 

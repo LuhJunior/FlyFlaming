@@ -5,7 +5,6 @@
 --%>
 
 <%@page import="java.util.ArrayList"%>
-<%@page import="Negocio.ofertasNeg"%>
 <jsp:include page="layout/header.jsp"/>
     <jsp:include page="layout/navbarDinamicaIndex.jsp"/>
         <div class="android-content mdl-layout__content">
@@ -86,8 +85,8 @@
                                 <div class="mdl-card__title mdl-card--expand">
                                     <h2 class="mdl-card__title-text"><%=v.getDestino()%></h2>
                                 </div>
-                                <div class="mdl-card__supporting-text">
-                                    <%="A partir de R$ "+v.getValor()+" à vista"%>
+                                <div style="font-size: 14px;" class="mdl-card__supporting-text">
+                                    <%="A partir de R$ <strong>"+v.getValorFormat()+"</strong> à vista"%>
                                 </div>
                                 <div class="mdl-card__actions mdl-card--border">
                                     <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
@@ -97,6 +96,7 @@
                             </div>                    
                         </div>
                     <%}}%>
+
                     </div> <!-- ./END SECTION OFERTAS - ROW 1 -->
                     <div style="padding-bottom: 50px;" class="mdl-grid layout-center padding-sale"></div>
                     <div class="android-customized-section">
@@ -130,7 +130,7 @@
                                                 <td><%=aux.getProgramacao().getHoraSaida()%></td>
                                                 <td><%=aux.getProgramacao().getQuantidadeExec()%></td>
                                                 <td><%=aux.getProgramacao().getQuantidadeEcon()%></td>
-                                                <td><%=aux.getValor()%></td>
+                                                <td><%="R$ " + aux.getValorFormat()%></td>
                                             </tr>
                                       <%}
                                     }
@@ -146,31 +146,4 @@
                     </div>
                 </div>
             </section>
-<!--            <section id="contato">
-                    <div class="mdl-grid center-items color-orange">
-                        <div class="logo-font GoBystrok-title GoBystrok-slogan">Contato</div>
-                        <form method="POST"  class="">
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
-                                <input class="mdl-textfield__input" type="text" id="sample3">
-                                <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Nome Completo</label>
-                            </div>
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
-                                <input class="mdl-textfield__input" type="text" id="sample3">
-                                <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Email</label>
-                            </div>
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
-                                <input class="mdl-textfield__input" type="text" id="sample3">
-                                <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Assunto</label>
-                            </div>
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
-                                <textarea class="mdl-textfield__input" type="text" rows= "5" id="sample5" ></textarea>
-                                <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample5">Descrição</label>
-                            </div>
-                            <div class="toolbar-section">
-                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect margin-top" type="submit" name="submit">Enviar</button>
-                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect margin-top" type="reset" name="reset">Cancelar</button>
-                            </div>
-                        </form>
-                    </div>
-            </section>-->
 <jsp:include page="layout/footer.jsp"/>  

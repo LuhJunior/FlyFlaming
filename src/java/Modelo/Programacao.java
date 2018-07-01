@@ -1,6 +1,11 @@
 package Modelo;
 
 import Banco.ProgramacaoDAO;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class Programacao {
     int quantidadeEcon, quantidadeExec, id;
@@ -30,8 +35,12 @@ public class Programacao {
         this.dataChegada = dataChegada;
     }
 
-    public String getDataSaida() {
-        return dataSaida;
+    public String getDataSaida() throws ParseException {
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");  
+        SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
+        java.util.Date data = fmt.parse(dataSaida); 
+        String outputText = outputFormat.format(data); 
+        return outputText;
     }
 
     public void setDataSaida(String dataSaida) {

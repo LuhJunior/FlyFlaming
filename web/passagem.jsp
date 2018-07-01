@@ -7,8 +7,8 @@
 <jsp:include page="layout/header.jsp"/>   
     <jsp:include page="layout/navbarLogado.jsp"/>
     <div class="android-content mdl-layout__content">
-        <div class="android-be-together-section">
-            <div class="formulario color-orange"> 
+        <div class="android-be-together-section" style="height: 1000px;">
+            <div class="formulario color-orange" style="right: 7%; left: 7%; overflow: auto;"> 
                 <div class="mdl-grid center-items color-orange">
                     <% Modelo.Passagem[] p = (Modelo.Passagem[]) request.getAttribute("passagens"); 
                         String Mensagem = (String) request.getAttribute("Mensagem");
@@ -53,8 +53,7 @@
                 </div>
             </div>
         </div>
-        <div class="mdl-grid center-items color-orange"></div>
-    </div>
+        
 <jsp:include page="layout/footer.jsp"/> 
 <% if(Mensagem != null){%>
     <script>swal("<%=Mensagem%>");</script>

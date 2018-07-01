@@ -8,15 +8,15 @@
 <jsp:include page="layout/header.jsp"/>   
     <jsp:include page="layout/navbarLogado.jsp"/>
     <div class="android-content mdl-layout__content">
-        <div class="android-be-together-section">
-            <div class="formulario color-orange"> 
-                <div class="mdl-grid center-items color-orange">
+        <div class="android-be-together-section" style="height: 1000px">
+            <div class="formulario color-orange" style="right: 16%; left: 16%; overflow: auto;"> 
+                <div class="mdl-grid center-items">
                     <% Modelo.Passagem[] p = (Modelo.Passagem[]) request.getAttribute("Passagens"); 
                         String Mensagem = (String) request.getAttribute("Mensagem");
                         if(Mensagem != null){%> <script>alert("<%=Mensagem%>")</script><%}%>
                     <div class="logo-font GoBystrok-title GoBystrok-slogan">Opções de Passagem</div>
                     <div class="center-items">
-                        <form action="CheckarCancelar" method="POST" name="checkinForm" class="" onsubmit="return verificarCamposCheckin()">
+                        <form action="CheckarCancelar" method="POST" name="checkinForm" class=""  onsubmit="return verificarCamposCheckin()">
                             <table style="margin-top: 20px;" class="mdl-data-table mdl-shadow--2dp">
                                 <thead>
                                     <tr>
