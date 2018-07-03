@@ -8,12 +8,10 @@
     <jsp:include page="layout/navbarLogado.jsp"/>
     <div class="android-content mdl-layout__content">
         <div class="android-be-together-section">
-            <div class="formulario color-orange" style="left: 20%; right: 20%; justify-content: center;">     
+            <div class="formulario color-orange" style="width: 720px;">     
                 <div class="mdl-grid center-items">
                     <div class="logo-font GoBystrok-title GoBystrok-slogan">Reclamações</div>
-                    <% Modelo.Passagem[] p = (Modelo.Passagem[]) request.getAttribute("passagens");
-                        String Mensagem = (String) request.getAttribute("Mensagem");
-                        if(Mensagem != null){%> <script>alert("<%=Mensagem%>")</script><%}%>
+                    <% Modelo.Passagem[] p = (Modelo.Passagem[]) request.getAttribute("passagens");%>
                     <div class="center-items">
                     <form action="UpdateDeleteReclamacao" method="post" name="UpdateDeleteReclamacaoForm" onsubmit="">
                         <table style="margin-top: 20px; overflow: auto;" class="mdl-data-table mdl-shadow--2dp">
@@ -44,19 +42,30 @@
                                         </td>   
                                     </tr>
                                     <%}
-                                }else{%>
-                                    <script>alert("Não existe passagens com reclamação");</script>
+                                }
+                                else{%>
+                                    <tr>
+                                        <td class="mdl-data-table__cell--non-numeric" colspan="4">Não existe passagens com reclamação</td>
+                                    </tr> 
                                 <%}%>
                             </tbody>
                         </table>
                     </form>
+                    <div style="padding: 20px">
+                        <a class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect" href="reclamacao.jsp">                    
+                            Voltar
+                        </a>
                     </div>
-                </div>
-                <div style="padding: 50px;">
-                    <a class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect" href="reclamacao.jsp">                    
-                        Voltar
-                    </a>
+                    </div>
                 </div>
             </div>
         </div>
 <jsp:include page="layout/footer.jsp"/> 
+<% String Mensagem = (String) request.getAttribute("Mensagem");
+    String Erro = (String) request.getAttribute("Erro");
+    if(Mensagem != null){%>
+    <script>ShowMensagemSucesso("<%=Mensagem%>");</script>
+<%}
+    if(Erro != null){%>
+    <script>ShowMensagemErro("<%=Erro%>");</script>
+<%}%>

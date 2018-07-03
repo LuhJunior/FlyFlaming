@@ -12,16 +12,8 @@
             <div class="color-orange" style="right: 30%; left: 30%; top:10%; position: absolute;"> 
                 <div class="mdl-grid center-items">
                     <% Modelo.Cliente c = (Modelo.Cliente)request.getAttribute("cliente");
-                        String men = (String)request.getAttribute("Mensagem");
-                        String men2 = (String)request.getAttribute("Mensagem2");
                         if(c == null) {
                             c = new Modelo.Cliente();
-                        }
-                        if(men != null){
-                    %><script>ShowMensagem("<%=men%>")</script> <%
-                        }
-                        if(men2 != null){
-                    %><script>ShowMensagem("<%=men2%>")</script> <%
                         }
                         if(c.getTelefone() == null) c.setTelefone("");
                         if(c.getEndereco() == null) c.setEndereco(new Modelo.Endereco());
@@ -72,7 +64,7 @@
                                 <td><%=c.getEndereco().getCEP()%></td>
                             <tr>
                         </table>
-                        <div class="toolbar-section">
+                            <div class="toolbar-section" style="right: 100px;">
                             <a href="UpdateCliente"> <button class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect margin-top">Alterar Dados</button></a>
                         </div>
                 </div>
@@ -80,3 +72,11 @@
         </div>
     <div class="mdl-grid center-items color-orange"></div>
 <jsp:include page="layout/footer.jsp"/> 
+<% String Mensagem = (String) request.getAttribute("Mensagem");
+    String Erro = (String) request.getAttribute("Erro");
+    if(Mensagem != null){%>
+    <script>ShowMensagemSucesso("<%=Mensagem%>");</script>
+<%}
+    if(Erro != null){%>
+    <script>ShowMensagemErro("<%=Erro%>");</script>
+<%}%>

@@ -27,12 +27,9 @@ public class Login extends HttpServlet {
         if(request.getParameter("recuperar") != null ) {
             request.getRequestDispatcher("esqueci-senha.jsp").forward(request, response);
         }
-        
-        System.out.println((char)(('A'+1)));
         String cpf = (String) request.getParameter("CPF");    
         String senha = (String) request.getParameter("Senha");
         
-           
         Cliente c = new Cliente();
         c.setCpf(cpf);
         c.setSenha(senha);
@@ -40,20 +37,13 @@ public class Login extends HttpServlet {
         HttpSession session = request.getSession();        
         
         if(c.validarCliente()) {
-
-            System.out.println("Cliente valido"); 
+            System.out.println("Cliente valido");
             session.setAttribute("clienteAutenticado", c.autenticarCliente());
             response.sendRedirect("index");
-            //request.getRequestDispatcher("reclamacao.jsp").forward(request, response);
-            
-        } else {
-            System.out.println("nao valido");  
+        } else { 
+            request.setAttribute("Erro", "Login ou Senha invalidos!");
             response.sendRedirect("login.jsp");
-            //request.getRequestDispatcher("login.jsp").forward(request, response);
-            
         }
-        
-        
         
     }
 

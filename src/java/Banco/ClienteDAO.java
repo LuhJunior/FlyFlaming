@@ -33,14 +33,14 @@ public class ClienteDAO {
     public boolean updateCliente(Cliente c){
         int r = 0;
         try{
-            String sql = "UPDATE CLIENTE SET NOME = ?, EMAIL = ? , CEP = ?"
-                    + "WHERE CPF=?";
+            String sql = "UPDATE CLIENTE SET NOME = ?, EMAIL = ?, CEP = ?"
+                    + " WHERE CPF=?";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement p = conn.prepareStatement(sql);
             p.setString(1, c.getNome());
             p.setString(2, c.getEmail());
-            p.setString(3, c.getCpf());
-            p.setString(4, c.getEndereco().getCEP());
+            p.setString(3, c.getEndereco().getCEP());
+            p.setString(4, c.getCpf());
             r = p.executeUpdate();
             ConnectionFactory.closeConnection(conn, p);
         }
@@ -74,6 +74,7 @@ public class ClienteDAO {
     public boolean updateTelefone(Cliente c){
         int r = 0;
         try{
+            System.out.println("batata");
             String sql = "UPDATE TELEFONE SET NUMERO = ? WHERE CPF = ?";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement p = conn.prepareStatement(sql);
@@ -99,14 +100,12 @@ public class ClienteDAO {
             p.setString(2, c.getSenha());
             ResultSet rs = p.executeQuery();
             if(rs.next()){
-                c.setNome(rs.getString("NOME"));
-                c.setEmail(rs.getString("EMAIL"));
-                c.setTelefone(rs.getString("NUMERO"));
+                c.setNome(rs.getString("C.NOME"));
+                c.setEmail(rs.getString("C.EMAIL"));
+                c.setTelefone(rs.getString("T.NUMERO"));
                 c.setEndereco(new Endereco());
-                c.getEndereco().setCEP(rs.getString("CEP"));
-                //c.setDataNascimento(rs.getString(""));
+                c.getEndereco().setCEP(rs.getString("C.CEP"));
             }
-            else c = null;
             ConnectionFactory.closeConnection(conn, p, rs);
         }
         catch(SQLException e){
@@ -143,7 +142,6 @@ public class ClienteDAO {
             ConnectionFactory.closeConnection(conn, p);
         }
         catch(SQLException e){
-            System.out.println("Não vai dá não!");
             throw new RuntimeException(e);
         }  
         finally{
@@ -228,26 +226,18 @@ public class ClienteDAO {
             p = conn.prepareStatement(sql);
             p.setString(1, c.getCpf());
             p.setString(2, c.getSenha());
-            
             rs = p.executeQuery();
-            
-            while(rs.next()) {
+            if(rs.next()){
                 cli.setNome(rs.getString("NOME"));
                 cli.setCpf(rs.getString("CPF"));
                 cli.setEmail(rs.getString("EMAIL"));
                 cli.setSenha(rs.getString("SENHA"));
             }
-     
         } catch(SQLException e) {
-            
             throw new RuntimeException(e);
-            
         } finally {
-            
             ConnectionFactory.closeConnection(conn, p, rs);
-            
         }
-        
         return cli;
     }
     

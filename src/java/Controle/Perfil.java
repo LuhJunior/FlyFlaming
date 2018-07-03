@@ -28,14 +28,25 @@ public class Perfil extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Modelo.Cliente c = (Modelo.Cliente)request.getSession().getAttribute("clienteAutenticado");
-        if(c.getFromDb()){
-            request.setAttribute("cliente", c);
-            RequestDispatcher dispacher = request.getRequestDispatcher("perfil.jsp");
-            dispacher.forward(request, response);
+        if(c != null){
+            String Mensagem = (String) request.getAttribute("Mensagem");
+            String Erro = (String) request.getAttribute("Erro");
+            request.setAttribute("Erro", Erro);
+            request.setAttribute("Mensagem", Mensagem);
+            if(c.getFromDb()){
+                request.setAttribute("cliente", c);
+                RequestDispatcher dispacher = request.getRequestDispatcher("perfil.jsp");
+                dispacher.forward(request, response);
+            }
+            else{
+                request.setAttribute("Erro", "ocorreu um erro ao procurar os dados cliente");
+                RequestDispatcher dispacher = request.getRequestDispatcher("index");
+                dispacher.forward(request, response);
+            }
         }
         else{
-            request.setAttribute("Mensagem2", "ocorreu um erro ao procurar os dados cliente");
-            RequestDispatcher dispacher = request.getRequestDispatcher("perfil.jsp");
+            request.setAttribute("Erro", "Login necessário");
+            RequestDispatcher dispacher = request.getRequestDispatcher("login.jsp");
             dispacher.forward(request, response);
         }
     }

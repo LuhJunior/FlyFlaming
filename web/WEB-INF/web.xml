@@ -14,10 +14,6 @@
         <servlet-class>Controle.ConsultarReclamacao</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>BuscarPassagem</servlet-name>
-        <servlet-class>Controle.BuscarPassagem</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>EscolhendoAcento</servlet-name>
         <servlet-class>Controle.EscolhendoAcento</servlet-class>
     </servlet>
@@ -32,10 +28,6 @@
     <servlet-mapping>
         <servlet-name>ConsultarReclamacao</servlet-name>
         <url-pattern>/ConsultarReclamacao</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>BuscarPassagem</servlet-name>
-        <url-pattern>/BuscarPassagem</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EscolhendoAcento</servlet-name>

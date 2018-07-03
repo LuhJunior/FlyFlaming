@@ -147,3 +147,11 @@
                 </div>
             </section>
 <jsp:include page="layout/footer.jsp"/>  
+<% String Mensagem = (String) request.getAttribute("Mensagem");
+    String Erro = (String) request.getAttribute("Erro");
+    if(Mensagem != null){%>
+    <script>ShowMensagemSucesso("<%=Mensagem%>");</script>
+<%}
+    if(Erro != null){%>
+    <script>ShowMensagemErro("<%=Erro%>");</script>
+<%}%>

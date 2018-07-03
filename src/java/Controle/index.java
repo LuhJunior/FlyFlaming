@@ -31,6 +31,10 @@ public class index extends HttpServlet {
             throws ServletException, IOException {
         request.setAttribute("voos", Voo.pegarVoosDaSemana());
         request.setAttribute("voosDaSemana", Voo.pegarVoosDaSemana());
+        String Mensagem = (String) request.getAttribute("Mensagem");
+        String Erro = (String) request.getAttribute("Erro");
+        request.setAttribute("Erro", Erro);
+        request.setAttribute("Mensagem", Mensagem);
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
         dispatcher.forward(request, response);
     }

@@ -35,11 +35,23 @@ public class PesquisarVoo extends HttpServlet {
         String DataIda = request.getParameter("dateIda");
         String DataVolta = request.getParameter("dateVolta");
         String Escolha = request.getParameter("escolha");
-        System.out.println(Escolha);
-        System.out.println(Origem +'\n'+Destino);
-        System.out.println(DataIda+'\n'+DataVolta);
         ArrayList<Voo> v = VooDAO.pesquisarVooPelaDataOrigemDestino(Origem, Destino, DataIda), v2 = null;
-        if(Escolha.equals("IdaeVolta")) v2 = VooDAO.pesquisarVooPelaDataOrigemDestino(Destino, Origem, DataVolta);
+        if(Escolha.equals("IdaeVolta")){
+            v2 = VooDAO.pesquisarVooPelaDataOrigemDestino(Destino, Origem, DataVolta);
+            if(!v2.isEmpty()){
+                request.getSession().setAttribute("Origem", Destino);
+                request.getSession().setAttribute("Destino", Origem);
+                request.getSession().setAttribute("dateVolta", DataVolta);
+                request.getSession().setAttribute("Volta", true);
+            }
+            else{
+                request.getSession().setAttribute("Volta", false);
+                request.setAttribute("Erro", "Não existe voos de volta cadastrados para as opções escolhidas");
+            }
+        }
+        else{
+            request.getSession().setAttribute("Volta", false);
+        }
         request.setAttribute("Voos", v);
         request.setAttribute("Voos2", v2);
         RequestDispatcher dispatcher = request.getRequestDispatcher("voos.jsp");

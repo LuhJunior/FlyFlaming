@@ -95,13 +95,11 @@ public class Cliente {
     public boolean comprarPassagem(int NumVoo){
         Voo v = new Voo();
         Passagem p = new Passagem();
-        
         v.setNumero(NumVoo);
         if(!v.pegarVoo()) return false;
         p.setProgramacao(v.getProgramacao());
         p.setValor(v.getValor());
         return p.inserirPassagem(this.getCpf());
-
     }
     
     public boolean addOnDb(){
@@ -124,7 +122,7 @@ public class Cliente {
     public boolean getFromDb(){
         ClienteDAO c = new ClienteDAO();
         c.pesquisar(this);
-        if(this != null){
+        if(this.getEndereco() != null){
             c.pesquisarEndereco(this);
             return true;
         }
@@ -140,6 +138,6 @@ public class Cliente {
     public boolean atualizarDados(){
         ClienteDAO c = new ClienteDAO(); 
         if(!c.verificarCEP(this.getEndereco().getCEP())) c.inserirEndereco(this);
-        return c.updateCliente(this) && c.updateTelefone(this);
+        return (c.updateCliente(this) && c.updateTelefone(this));
     }
 }

@@ -7,22 +7,27 @@
     <jsp:include page="layout/header.jsp"/>    
         <jsp:include page="layout/navbarLogado.jsp"/>
             <div class="android-content mdl-layout__content">
-                <div class="android-be-together-section">
+                <div class="android-be-together-section" style="height: 900px;">
                     <div class="formulario color-orange ">     
                         <div class="mdl-grid center-items color-orange">
                                 <div class="logo-font GoBystrok-title GoBystrok-slogan">Pagamento</div>
-                            <form method="POST" name="pagamentoForm" class="" onsubmit="return verificarCamposPagamento()">
+                            <form method="POST" name="pagamentoForm" action="Pagar" onsubmit="return verificarCamposPagamento()">
+                                <% Modelo.Passagem p = (Modelo.Passagem)request.getSession().getAttribute("Passagem");
+                                    if(p != null)
+                                %>
+                                    <input type="hidden" name="Codigo" value="<%=p.getCodigo()%>">
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
-                                    <input class="mdl-textfield__input color-white" type="number" name="numCard" pattern = "-?[0-9]*(\.[0-9]+)?" id="sample3">
+                                    <input class="mdl-textfield__input color-white" type="text" name="numCard" minlength="19" maxlength="19" onkeypress="fMasc(this, mCartao)" id="sample3">
                                     <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Número do Cartão</label>
-                                    <span class="mdl-textfield__error color-white">Use somente números</span>
+                                    <span class="mdl-textfield__error color-white">Tamanho inválido</span>
                                 </div>
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
-                                    <input class="mdl-textfield__input color-white" type="password" name="Senha" id="sample3">
+                                    <input class="mdl-textfield__input color-white" type="password" minlength="4" maxlength="8" name="Senha" id="sample3">
                                     <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Senha</label>
+                                    <span class="mdl-textfield__error color-white">Use no mínimo 4 dígitos</span>
                                 </div>
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
-                                    <input class="mdl-textfield__input color-white" type="text" pattern = "-?[0-9]*(\.[0-9]+)?" name="valor" id="sample3">
+                                    <input class="mdl-textfield__input color-white" type="text" pattern = "-?[0-9]*(\.[0-9]+)?" name="valor" value="<%=p.getValor()%>" id="sample3">
                                     <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Valor R$</label>
                                 </div>
                                 <div id="parcelasDiv" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam">
@@ -45,6 +50,5 @@
                         </div>
                     </div>
                 </div>
-                <div class="mdl-grid center-items color-orange"></div>   
             </div>
 <jsp:include page="layout/footer.jsp"/> 

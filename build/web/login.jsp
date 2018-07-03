@@ -18,9 +18,9 @@
 
     <div class="android-content mdl-layout__content">
         <div class="android-be-together-section">
-            <div class="formulario-cadastro color-orange padding-form">     
-                <div class="mdl-grid center-items color-orange">
-                    <div class="logo-font GoBystrok-title GoBystrok-slogan">Login</div>
+            <div class="formulario-cadastro color-orange padding-form" style="width: 600px;">     
+                <div class="mdl-grid center-items" style="padding-right: 80px;">
+                    <div class="logo-font GoBystrok-title GoBystrok-slogan" style="padding-left: 50px;">Login</div>
                     
                     <form method="POST" action="Login" name="loginForm" onsubmit="return verificarCamposLogin()">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam2 ">
@@ -47,7 +47,7 @@
                             <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Senha</label>
                         </div>
 
-                        <div class="toolbar-section">
+                        <div class="" style="padding-left: 80px;">
                             <button class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect margin-top" 
                                     type="submit" 
                                     name="entrar"
@@ -62,3 +62,11 @@
             </div>
         </div>            
 <jsp:include page="layout/footer.jsp"/>  
+<% String Mensagem = (String) request.getAttribute("Mensagem");
+    String Erro = (String) request.getAttribute("Erro");
+    if(Mensagem != null){%>
+    <script>ShowMensagemSucesso("<%=Mensagem%>");</script>
+<%}
+    if(Erro != null){%>
+    <script>ShowMensagemErro("<%=Erro%>");</script>
+<%}%>

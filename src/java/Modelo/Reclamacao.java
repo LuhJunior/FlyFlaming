@@ -35,6 +35,7 @@ public class Reclamacao {
     }
 
     public void setDescricao(String descricao) {
+        if(descricao == null) descricao = "Não efetuada";
         this.descricao = descricao;
     }
 

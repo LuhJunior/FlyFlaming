@@ -3,19 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Controle/AtualizarReclamacao.java</file>
             <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Banco/PassagemDAO.java</file>
-            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/BuscarPassagem.jsp</file>
-            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/voos.jsp</file>
-            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Modelo/Voo.java</file>
-            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/index.jsp</file>
-            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/reclamacao.jsp</file>
-            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/EscolhendoAssento.jsp</file>
-            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/passagem.jsp</file>
-            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/perfil.jsp</file>
-            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Controle/PesquisarVoo.java</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Controle/UpdateDeleteReclamacao.java</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Controle/index.java</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/resultado-consulta-reclamacao.jsp</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/vendor/GoBystrok.js</file>
             <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/passagens.jsp</file>
-            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/vendor/GoBystrok.css</file>
-            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/vendor/styles.css</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/voos.jsp</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Controle/ConsultarReclamacao.java</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/src/java/Modelo/Passagem.java</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/index.jsp</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/FlyFlaming/web/updateReclamacao.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -8,6 +8,7 @@ package Controle;
 import Modelo.Assento;
 import Modelo.Cliente;
 import Modelo.Voo;
+import Modelo.Cliente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -39,15 +40,18 @@ public class ComprarPassagem extends HttpServlet {
         Cliente c = (Cliente) request.getSession().getAttribute("clienteAutenticado");
         if(c != null){
             String num = request.getParameter("Comprar");
-            System.out.println(num);
-            int NumVoo = Integer.parseInt(request.getParameter("NumVoo["+num+"]"));
-            System.out.println(NumVoo);
+            int NumVoo;
+            if(num != null){
+                NumVoo = Integer.parseInt(request.getParameter("NumVoo["+num+"]"));
+            }
+            else{
+                num = request.getParameter("Comprar2");
+                NumVoo = Integer.parseInt(request.getParameter("NumVoo["+num+"]"));
+            }
             Voo v = new Voo();
             v.setNumero(NumVoo);
             v.pegarVoo();
-            System.out.println(v.getAviao().getPrefixo());
             v.getAviao().pegarAeronave();
-            System.out.println(v.getAviao().getColunas());
             request.setAttribute("Voo", v);
             request.setAttribute("Assentos", Assento.pegarAssentosAeronave(v.getAviao().getPrefixo()));
             RequestDispatcher dispatcher = request.getRequestDispatcher("EscolhendoAssento.jsp");

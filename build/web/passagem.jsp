@@ -15,13 +15,15 @@
                     %>
                     <div class="logo-font GoBystrok-title GoBystrok-slogan">Opções de Passagem</div>
                     <div class="center-items">
-                        <form action="" method="POST" name="" class="">
+                        <form action="CheckarCancelar" method="POST" name="" class="" onsubmit="">
                             <table style="margin-top: 20px;" class="mdl-data-table mdl-shadow--2dp">
                                 <thead>
                                     <tr>
                                         <th class="mdl-data-table__cell--non-numeric">Código da Passagem</th>
                                         <th>Fileira</th>
                                         <th>Cadeira da Fileira</th>
+                                        <th>Checkin</th>
+                                        <th>Cancelamento</th>
                                         <th>Valor</th>
                                         <th>Data e Hora da Compra</th>
                                         <th>Opções</th>
@@ -35,6 +37,8 @@
                                             <td class="mdl-data-table__cell--non-numeric"><input type="hidden" name="codPassagem[<%=i%>]" value="<%=p[i].getCodigo()%>"><%=p[i].getCodigo()%></td>
                                             <td class="mdl-data-table__cell--non-numeric"><input type="hidden" name="Fileira[<%=i%>]" value="<%=p[i].getAssento().getFileira()%>"><%=p[i].getAssento().getFileira()%></td>
                                             <td class="mdl-data-table__cell--non-numeric"><input type="hidden" name="Cadeira[<%=i%>]" value="<%=p[i].getAssento().getCadeira()%>"><%=p[i].getAssento().getCadeira()%></td>
+                                            <td class="mdl-data-table__cell--non-numeric"><input type="hidden" name="Checkin[<%=i%>]" value="<%=p[i].getCheckin()%>"><%=p[i].getCheckin()%></td>
+                                            <td class="mdl-data-table__cell--non-numeric"><input type="hidden" name="Cancelamento[<%=i%>]" value="<%=p[i].getCancelamento()%>"><%=p[i].getCancelamento()%></td>
                                             <td class="mdl-data-table__cell--non-numeric"><input type="hidden" name="Valor[<%=i%>]" value="<%=p[i].getValor()%>"><%=p[i].getValor()%></td>
                                             <td class="mdl-data-table__cell--non-numeric"><input type="hidden" name="Data[<%=i%>]" value="<%=p[i].getHoraCompra()%>"><%=p[i].getHoraCompra()%></td>
                                             <td>
@@ -44,7 +48,9 @@
                                         </tr>
                                         <%}
                                     }else{%>
-                                        <script>ShowMensagem("Não tem check-in ou cancelamento feitos");</script>
+                                        <tr>
+                                            <td class="mdl-data-table__cell--non-numeric" colspan="6">Não Existe Passagens Compradas</td>
+                                        </tr> 
                                     <%}%>
                                 </tbody>
                             </table> 

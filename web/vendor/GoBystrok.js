@@ -144,12 +144,24 @@ function mNum(num){
     return num;
 }
 
+function mCartao(v){
+    v = v.replace(/\D/g,""); // Permite apenas dígitos
+    v = v.replace(/(\d{4})/g, "$1."); // Coloca um ponto a cada 4 caracteres
+    v = v.replace(/\.$/, ""); // Remove o ponto se estiver sobrando
+    v = v.substring(0, 19)// Limita o tamanho
+    return v;
+}
+
 function ShowMensagem(Mensagem){
     swal(Mensagem);
 }
 
 function ShowMensagemErro(Mensagem){
     swal(Mensagem, "","warning");
+}
+
+function ShowMensagemSucesso(Mensagem){
+    swal(Mensagem, "","success");
 }
 
 function AlertPreencherCampos(Mensagem){
@@ -163,3 +175,20 @@ $("#senha2").focusout(function(){
     console.log('Verificando senhas...');
 });
 
+function clickReset ()
+{
+    var isChecked = false,
+        clicked = $(this),
+        set = $('.' + clicked.attr('class') + ':checked').not (clicked);
+
+    if (isChecked = clicked.attr('checked'))
+    {
+        set.attr('checked', false);
+    }
+    return true;
+}
+
+$(function ()
+{
+    $('.test').click (clickReset);
+});

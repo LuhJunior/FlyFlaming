@@ -11,9 +11,7 @@
         <div class="android-be-together-section" style="height: 1000px">
             <div class="formulario color-orange" style="right: 16%; left: 16%; overflow: auto;"> 
                 <div class="mdl-grid center-items">
-                    <% Modelo.Passagem[] p = (Modelo.Passagem[]) request.getAttribute("Passagens"); 
-                        String Mensagem = (String) request.getAttribute("Mensagem");
-                        if(Mensagem != null){%> <script>alert("<%=Mensagem%>")</script><%}%>
+                    <% Modelo.Passagem[] p = (Modelo.Passagem[]) request.getAttribute("Passagens");%> 
                     <div class="logo-font GoBystrok-title GoBystrok-slogan">Opções de Passagem</div>
                     <div class="center-items">
                         <form action="CheckarCancelar" method="POST" name="checkinForm" class=""  onsubmit="return verificarCamposCheckin()">
@@ -43,9 +41,11 @@
                                             
                                             
                                         </tr>
-                                        <%}
-                                    }else{%>
-                                        <script>alert("Não sem check-in ou cancelamento feitos");</script>
+                                    <%}}
+                                    else{%>
+                                        <tr>
+                                            <td colspan="5" class="mdl-data-table__cell--non-numeric">O Cliente Não Possui passagens compradas</td>
+                                        </tr>
                                     <%}%>
                                 </tbody>
                             </table> 
@@ -59,5 +59,5 @@
 <jsp:include page="layout/footer.jsp"/> 
 <% String men = (String)request.getAttribute("Mensagem");%>
 <% if(men != null){%>
-    <script>swal("<%=men%>");</script>
+    <script>ShowMensagemErro("<%=men%>");</script>
 <%}%>

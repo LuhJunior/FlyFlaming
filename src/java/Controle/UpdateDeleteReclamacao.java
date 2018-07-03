@@ -49,8 +49,8 @@ public class UpdateDeleteReclamacao extends HttpServlet {
             int row = Integer.parseInt(selected.substring(8));
             Reclamacao r = new Reclamacao();
             r.getFromDb(Integer.parseInt(request.getParameter("codPassagem["+row+"]")));
-            if(r.deletarReclamacao()) request.setAttribute("Mensagem", "Que não vai dá pai");
-            else request.setAttribute("Mensagem", "Não vai dá não");
+            if(r.deletarReclamacao()) request.setAttribute("Mensagem", "Reclamação excluída!");
+            else request.setAttribute("Erro", "Ocorreu um erro");
             RequestDispatcher dispatcher = request.getRequestDispatcher("ConsultarReclamacao");
             dispatcher.forward(request, response);
         }

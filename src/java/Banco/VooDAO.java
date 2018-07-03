@@ -72,7 +72,7 @@ public class VooDAO {
                 auxV.setNumero(rs.getInt("NUMERO DO VOO"));
                 auxV.setOrigem(rs.getString("CIDADE DE ORIGEM"));
                 auxV.setDestino(rs.getString("CIDADE DE DESTINO"));
-                auxV.setValor(rs.getDouble("VALOR"));
+                auxV.setValor(rs.getFloat("VALOR"));
                 auxV.setProgramacao(new Programacao());
                 auxV.getProgramacao().setDataChegada(rs.getString("DATA DE CHEGADA"));
                 auxV.getProgramacao().setDataSaida(rs.getString("DATA DE SAIDA"));
@@ -112,7 +112,7 @@ public class VooDAO {
                 auxV.setNumero(rs.getInt("NUMERO DO VOO"));
                 auxV.setOrigem(rs.getString("CIDADE DE ORIGEM"));
                 auxV.setDestino(rs.getString("CIDADE DE DESTINO"));
-                auxV.setValor(rs.getDouble("VALOR"));
+                auxV.setValor(rs.getFloat("VALOR"));
                 auxV.setProgramacao(new Programacao());
                 auxV.getProgramacao().setDataChegada(rs.getString("DATA DE CHEGADA"));
                 auxV.getProgramacao().setDataSaida(rs.getString("DATA DE SAIDA"));
@@ -152,7 +152,7 @@ public class VooDAO {
                 auxV.setNumero(rs.getInt("NUMERO DO VOO"));
                 auxV.setOrigem(rs.getString("CIDADE DE ORIGEM"));
                 auxV.setDestino(rs.getString("CIDADE DE DESTINO"));
-                auxV.setValor(rs.getDouble("VALOR"));
+                auxV.setValor(rs.getFloat("VALOR"));
                 auxV.setProgramacao(new Programacao());
                 auxV.getProgramacao().setDataChegada(rs.getString("DATA DE CHEGADA"));
                 auxV.getProgramacao().setDataSaida(rs.getString("DATA DE SAIDA"));
@@ -190,7 +190,7 @@ public class VooDAO {
                 auxV.setNumero(rs.getInt("NUMERO DO VOO"));
                 auxV.setOrigem(rs.getString("CIDADE DE ORIGEM"));
                 auxV.setDestino(rs.getString("CIDADE DE DESTINO"));
-                auxV.setValor(rs.getDouble("VALOR"));
+                auxV.setValor(rs.getFloat("VALOR"));
                 auxV.setProgramacao(new Programacao());
                 auxV.getProgramacao().setDataChegada(rs.getString("DATA DE CHEGADA"));
                 auxV.getProgramacao().setDataSaida(rs.getString("DATA DE SAIDA"));
@@ -229,8 +229,9 @@ public class VooDAO {
                 v.setNumero(rs.getInt("NUMERO DO VOO"));
                 v.setOrigem(rs.getString("CIDADE DE ORIGEM"));
                 v.setDestino(rs.getString("CIDADE DE DESTINO"));
-                v.setValor(rs.getDouble("VALOR"));
+                v.setValor(rs.getFloat("VALOR"));
                 v.setProgramacao(new Programacao());
+                v.getProgramacao().setId(rs.getInt("P.IDPROGRAMACAO"));
                 v.getProgramacao().setDataChegada(rs.getString("DATA DE CHEGADA"));
                 v.getProgramacao().setDataSaida(rs.getString("DATA DE SAIDA"));
                 v.getProgramacao().setHoraChegada(rs.getString("HORA DE CHEGADA"));

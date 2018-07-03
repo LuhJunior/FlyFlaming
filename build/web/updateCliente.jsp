@@ -9,7 +9,7 @@
 <jsp:include page="layout/header.jsp"/>    
     <jsp:include page="layout/navbarLogado.jsp"/>
     <div class="android-content mdl-layout__content">
-    <div class="android-be-together-section">
+        <div class="android-be-together-section" style="height: 1000px;">
       <div class="formulario-cadastro color-orange"> 
         <div class="mdl-grid center-items color-orange">
             <% Modelo.Cliente c = (Modelo.Cliente)request.getAttribute("cliente");
@@ -97,7 +97,5 @@
         </div>
       </div>
     </div>
-    <div class="android-screen-section mdl-typography--text-center GoBystrok-spacer"></div>
-    <div class="android-screen-section mdl-typography--text-center GoBystrok-spacer"></div>
     <div class="mdl-grid center-items color-orange"></div>
 <jsp:include page="layout/footer.jsp"/> 

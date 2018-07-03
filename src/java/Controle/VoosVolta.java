@@ -1,12 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controle;
 
+import Banco.VooDAO;
+import Modelo.Passagem;
+import Modelo.Voo;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Diego Malta
+ * @author Junior
  */
-@WebServlet(name = "BuscarPassagem", urlPatterns = {"/BuscarPassagem"})
-public class BuscarPassagem extends HttpServlet {
+@WebServlet(name = "VoosVolta", urlPatterns = {"/VoosVolta"})
+public class VoosVolta extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,10 +32,19 @@ public class BuscarPassagem extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-           RequestDispatcher dispatcher = request.getRequestDispatcher("BuscarPassagem.jsp");
-           dispatcher.forward(request, response);
-        }
+        String Origem = (String) request.getSession().getAttribute("Origem");
+        String Destino = (String) request.getSession().getAttribute("Destino");
+        String DataVolta = (String) request.getSession().getAttribute("dateVolta");
+        request.getSession().removeAttribute("Origem");
+        request.getSession().removeAttribute("Destino");
+        request.getSession().removeAttribute("dateVolta");
+        Passagem p = (Passagem) request.getSession().getAttribute("Passagem");
+        request.getSession().removeAttribute("Passagem");
+        request.getSession().setAttribute("PassagemIda", p);
+        ArrayList<Voo> v = VooDAO.pesquisarVooPelaDataOrigemDestino(Origem, Destino, DataVolta);
+        request.setAttribute("Voos", v);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("voosVolta.jsp");
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -5,9 +5,9 @@ import Banco.ReclamacaoDAO;
 import java.util.Calendar;
 
 public class Passagem {
-    int codigo;
+    int codigo, codigoVolta;
     boolean paga;
-    double valor;
+    float valor;
     String horaCompra, checkin, cancelamento;
     Programacao programacao;
     Assento assento;
@@ -21,7 +21,16 @@ public class Passagem {
     }
 
     public void setCheckin(String checkin) {
+        if(checkin == null) checkin = "Pendente";
         this.checkin = checkin;
+    }
+
+    public int getCodigoVolta() {
+        return codigoVolta;
+    }
+
+    public void setCodigoVolta(int codigoVolta) {
+        this.codigoVolta = codigoVolta;
     }
 
     public String getCancelamento() {
@@ -29,6 +38,7 @@ public class Passagem {
     }
 
     public void setCancelamento(String cancelada) {
+        if(cancelada == null) cancelada = "Pedente";
         this.cancelamento = cancelada;
     }
 
@@ -64,11 +74,11 @@ public class Passagem {
         this.paga = paga;
     }
 
-    public double getValor() {
+    public float getValor() {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public void setValor(float valor) {
         this.valor = valor;
     }
 
@@ -99,10 +109,6 @@ public class Passagem {
         return p.updateCheckin(this);
     }
     
-    public boolean pagar(){
-        return true;
-    }
-    
     public boolean fazerReclamcao(String reclamacao){
         return true;
     }
@@ -113,10 +119,19 @@ public class Passagem {
         return true;
     }
     
+    public boolean pagarPassagem(){ 
+        PassagemDAO p = new PassagemDAO();
+        return p.pagar(this);
+    }
+
     public boolean inserirPassagem(String cpf){ 
         PassagemDAO p = new PassagemDAO();
-        p.inserir(this, cpf);
-        return true;
+        return p.inserir(this, cpf);
+    }
+    
+    public boolean inserirVooVolta(){
+        PassagemDAO p = new PassagemDAO();
+        return p.updateVooVolta(this);
     }
     
     public boolean inserirPassagemSemAssento(String cpf, String tAssento){ 

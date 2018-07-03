@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Voo {
     int numero;
     String origem, destino;
-    double valor;
+    float valor;
     //ArrayList<Programacao> programacao;
     Programacao programacao;
     Aeronave aviao;
@@ -57,7 +57,7 @@ public class Voo {
         this.destino = destino;
     }
 
-    public double getValor() {
+    public float getValor() {
         return valor;
     }
     
@@ -66,7 +66,7 @@ public class Voo {
         return df.format(this.valor);
     }
 
-    public void setValor(double valor) {
+    public void setValor(float valor) {
         this.valor = valor;
     }
 

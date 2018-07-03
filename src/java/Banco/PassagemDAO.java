@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -14,9 +15,9 @@ public class PassagemDAO {
     public boolean inserir(Passagem p, String cpf){
         int r = 0;
         try{
-            String sql = "INSERT INTO PASSAGEM VALUES(NULL, ?, ?, NOW(), ?, NULL, NULL, ?)";
+            String sql = "INSERT INTO PASSAGEM VALUES(NULL, ?, ?, NOW(), ?, NULL, NULL, ?, NULL)";
             Connection conn = ConnectionFactory.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, p.getProgramacao().getId());
             ps.setString(2, cpf);
             if(p.getAssento().getTipo().equals("Executivo"))ps.setString(3, "Executiva");
@@ -24,10 +25,14 @@ public class PassagemDAO {
             ps.setInt(4, p.getAssento().getNumero());
             System.out.println(cpf);
             System.out.println(p.getAssento().getTipo());
+            System.out.println(p.getProgramacao().getId());
             System.out.println(p.getAssento().getNumero());
             r = ps.executeUpdate();
-            System.out.println(cpf);
-            ConnectionFactory.closeConnection(conn, ps);
+            ResultSet rs = ps.getGeneratedKeys();
+            if(rs.next()) p.setCodigo(rs.getInt(1));
+      
+            System.out.println(p.getCodigo());
+            ConnectionFactory.closeConnection(conn, ps, rs);
         }
         catch(SQLException e){
             throw new RuntimeException(e);
@@ -130,6 +135,44 @@ public class PassagemDAO {
         }
     }
     
+    public boolean updateVooVolta(Passagem p){
+        int r = 0;
+        try{
+            String sql = "UPDATE PASSAGEM SET VOLTA = ? WHERE IDPASSAGEM = ?";
+            Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, p.getCodigoVolta());
+            ps.setInt(2, p.getCodigo());
+            r = ps.executeUpdate();
+            ConnectionFactory.closeConnection(conn, ps);
+        }
+        catch(SQLException e){
+            throw new RuntimeException(e);
+        }  
+        finally{
+            return (r>0);
+        }
+    }
+    
+    public boolean pagar(Passagem p){
+        int r = 0;
+        try{
+            String sql = "INSERT INTO PAGAMENTO VALUES(NULL, ?, NULL, ?, 'Aberto')";
+            Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, p.getCodigo());
+            ps.setDouble(2, p.getValor());
+            r = ps.executeUpdate();
+            ConnectionFactory.closeConnection(conn, ps);
+        }
+        catch(SQLException e){
+            throw new RuntimeException(e);
+        }  
+        finally{
+            return (r>0);
+        }
+    }
+    
     public static boolean updatePassagemCancelamento(){
         int r = 0;
         try{
@@ -150,7 +193,7 @@ public class PassagemDAO {
     
     public void pegarPassagem(Passagem p){
         try{
-            String sql = "SELECT P.IDPROGRAMACAO, P.DATAHORA_COMPRA, P.CHECKIN, P.CANCELAMENTO, PG.VALOR_FINAL, "
+            String sql = "SELECT P.IDPROGRAMACAO, P.VOLTA, P.DATAHORA_COMPRA, P.CHECKIN, P.CANCELAMENTO, PG.VALOR_FINAL, "
                     + "A.FILEIRA, A.CADEIRA, A.TIPO FROM PASSAGEM AS P INNER JOIN ASSENTO AS A "
                     + "ON P.ASSENTO = A.NUMERO INNER JOIN PAGAMENTO AS PG ON P.IDPASSAGEM=PG.IDPASSAGEM "
                     + "WHERE P.IDPASSAGEM = ?";
@@ -168,6 +211,7 @@ public class PassagemDAO {
                 p.setCheckin(rs.getString("P.CHECKIN"));
                 p.setCancelamento(rs.getString("P.CANCELAMENTO"));
                 p.setValor(rs.getFloat("PG.VALOR_FINAL"));
+                p.setCodigoVolta(rs.getInt("P.VOLTA"));
             }
             ConnectionFactory.closeConnection(conn, ps, rs);
         }
@@ -178,7 +222,7 @@ public class PassagemDAO {
     public static Passagem[] pegarPassagensDoCliente(String cpf){
         ArrayList<Passagem> passagens = new ArrayList<>();
         try{
-            String sql = "SELECT P.IDPASSAGEM, P.IDPROGRAMACAO, P.DATAHORA_COMPRA, P.CHECKIN, P.CANCELAMENTO, PG.VALOR_FINAL, "
+            String sql = "SELECT P.IDPASSAGEM, P.VOLTA, P.IDPROGRAMACAO, P.DATAHORA_COMPRA, P.CHECKIN, P.CANCELAMENTO, PG.VALOR_FINAL, "
                     + "A.FILEIRA, A.CADEIRA, A.TIPO FROM PASSAGEM AS P INNER JOIN ASSENTO AS A "
                     + "ON P.ASSENTO = A.NUMERO INNER JOIN PAGAMENTO AS PG ON P.IDPASSAGEM=PG.IDPASSAGEM "
                     + "WHERE P.CPF = ?";
@@ -198,6 +242,7 @@ public class PassagemDAO {
                 p.setCheckin(rs.getString("P.CHECKIN"));
                 p.setCancelamento(rs.getString("P.CANCELAMENTO"));
                 p.setValor(rs.getFloat("PG.VALOR_FINAL"));
+                p.setCodigoVolta(rs.getInt("P.VOLTA"));
                 p.consultarReclamacao();
                 passagens.add(p);
             }
@@ -212,7 +257,7 @@ public class PassagemDAO {
     public static Passagem[] pegarPassagensNaoCanceladasDoCliente(String cpf){
         ArrayList<Passagem> passagens = new ArrayList<>();
         try{
-            String sql = "SELECT P.IDPASSAGEM, P.IDPROGRAMACAO, P.DATAHORA_COMPRA, P.CHECKIN, P.CANCELAMENTO, PG.VALOR_FINAL, "
+            String sql = "SELECT P.IDPASSAGEM, P.VOLTA, P.IDPROGRAMACAO, P.DATAHORA_COMPRA, P.CHECKIN, P.CANCELAMENTO, PG.VALOR_FINAL, "
                     + "A.FILEIRA, A.CADEIRA, A.TIPO FROM PASSAGEM AS P INNER JOIN ASSENTO AS A "
                     + "ON P.ASSENTO = A.NUMERO INNER JOIN PAGAMENTO AS PG ON P.IDPASSAGEM=PG.IDPASSAGEM "
                     + " WHERE P.CPF = ? AND CHECKIN IS NULL AND CANCELAMENTO IS NULL";
@@ -232,6 +277,7 @@ public class PassagemDAO {
                 p.setCheckin(rs.getString("P.CHECKIN"));
                 p.setCancelamento(rs.getString("P.CANCELAMENTO"));
                 p.setValor(rs.getFloat("PG.VALOR_FINAL"));
+                p.setCodigoVolta(rs.getInt("P.VOLTA"));
                 passagens.add(p);
                 
             }
@@ -246,7 +292,7 @@ public class PassagemDAO {
     public static  Passagem[] pegarPassagensPelaData(String data){
         ArrayList<Passagem> passagens = new ArrayList<>();
         try{
-            String sql = "SELECT P.IDPASSAGEM, P.IDPROGRAMACAO, P.DATAHORA_COMPRA, P.CHECKIN, P.CANCELAMENTO, PG.VALOR_FINAL, "
+            String sql = "SELECT P.IDPASSAGEM, P.VOLTA, P.IDPROGRAMACAO, P.DATAHORA_COMPRA, P.CHECKIN, P.CANCELAMENTO, PG.VALOR_FINAL, "
                     + "A.FILEIRA, A.CADEIRA, A.TIPO FROM PASSAGEM AS P INNER JOIN ASSENTO AS A "
                     + "ON P.ASSENTO = A.NUMERO INNER JOIN PAGAMENTO AS PG ON P.IDPASSAGEM=PG.IDPASSAGEM "
                     + " INNER JOIN PROGRAMACAO AS PR ON PR.IDAPROGRAMACAO = P.IDPROGRAMACAO WHERE PR.DATA_SAIDA => ?";
@@ -266,6 +312,7 @@ public class PassagemDAO {
                 p.setCheckin(rs.getString("P.CHECKIN"));
                 p.setCancelamento(rs.getString("P.CANCELAMENTO"));
                 p.setValor(rs.getFloat("PG.VALOR_FINAL"));
+                p.setCodigoVolta(rs.getInt("P.VOLTA"));
                 passagens.add(p);
             }
             ConnectionFactory.closeConnection(conn, ps, rs);
@@ -279,7 +326,7 @@ public class PassagemDAO {
     public static Passagem[] pegarPassagensComReclamacao(String cpf){
         ArrayList<Passagem> passagens = new ArrayList<>();
         try{
-            String sql = "SELECT P.IDPASSAGEM, P.IDPROGRAMACAO, P.DATAHORA_COMPRA, P.CHECKIN, P.CANCELAMENTO, PG.VALOR_FINAL, "
+            String sql = "SELECT P.IDPASSAGEM, P.VOLTA, P.IDPROGRAMACAO, P.DATAHORA_COMPRA, P.CHECKIN, P.CANCELAMENTO, PG.VALOR_FINAL, "
                     + "A.FILEIRA, A.CADEIRA, A.TIPO FROM PASSAGEM AS P INNER JOIN ASSENTO AS A "
                     + "ON P.ASSENTO = A.NUMERO INNER JOIN PAGAMENTO AS PG ON P.IDPASSAGEM=PG.IDPASSAGEM "
                     + "INNER JOIN RECLAMACAO AS R ON R.IDPASSAGEM=P.IDPASSAGEM "
@@ -299,6 +346,7 @@ public class PassagemDAO {
                 p.setCheckin(rs.getString("P.CHECKIN"));
                 p.setCancelamento(rs.getString("P.CANCELAMENTO"));
                 p.setValor(rs.getFloat("PG.VALOR_FINAL"));
+                p.setCodigoVolta(rs.getInt("P.VOLTA"));
                 p.consultarReclamacao();
                 passagens.add(p);
             }

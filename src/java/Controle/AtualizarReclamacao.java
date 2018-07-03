@@ -30,8 +30,8 @@ public class AtualizarReclamacao extends HttpServlet {
         Modelo.Reclamacao r = new Modelo.Reclamacao();
         r.setCodReclamacao(request.getParameter("codReclamacacao"));
         r.setDescricao(request.getParameter("descricao"));
-        if(r.atualizarReclamacao()) request.setAttribute("Mensagem", "Que não vai dá pai");
-        else request.setAttribute("Mensagem", "Não vai dá não");
+        if(r.atualizarReclamacao()) request.setAttribute("Mensagem", "Reclamação atualizada!");
+        else request.setAttribute("Erro", "Ocorreu um erro!");
         RequestDispatcher dispatcher = request.getRequestDispatcher("ConsultarReclamacao");
         dispatcher.forward(request, response);
     }

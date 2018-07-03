@@ -35,8 +35,12 @@ public class ConsultarReclamacao extends HttpServlet {
             throws ServletException, IOException {
         Cliente c = (Cliente) request.getSession().getAttribute("clienteAutenticado");
         if(c != null){
+            String Mensagem = (String) request.getAttribute("Mensagem");
+            String Erro = (String) request.getAttribute("Erro");
+            request.setAttribute("Erro", Erro);
+            request.setAttribute("Mensagem", Mensagem);
             c.setPassagens(Passagem.buscarPassagensComReclamacao(c.getCpf()));
-            if(c.getPassagens() != null) request.setAttribute("passagens", c.getPassagens());
+            if(c.getPassagens().length > 0) request.setAttribute("passagens", c.getPassagens());
             RequestDispatcher dispacher = request.getRequestDispatcher("resultado-consulta-reclamacao.jsp");
             dispacher.forward(request, response);
         }

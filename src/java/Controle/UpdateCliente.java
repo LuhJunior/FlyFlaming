@@ -28,14 +28,21 @@ public class UpdateCliente extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Modelo.Cliente c = (Modelo.Cliente)request.getSession().getAttribute("clienteAutenticado");
-        if(c.getFromDb()){
-            request.setAttribute("cliente", c);
-            RequestDispatcher dispacher = request.getRequestDispatcher("updateCliente.jsp");
-            dispacher.forward(request, response);
+        if(c != null){
+            if(c.getFromDb()){
+                request.setAttribute("cliente", c);
+                RequestDispatcher dispacher = request.getRequestDispatcher("updateCliente.jsp");
+                dispacher.forward(request, response);
+            }
+            else{
+                request.setAttribute("Mensagem", "ocorreu um erro");
+                RequestDispatcher dispacher = request.getRequestDispatcher("updateCliente.jsp");
+                dispacher.forward(request, response);
+            }
         }
         else{
-            request.setAttribute("Mensagem", "ocorreu um erro");
-            RequestDispatcher dispacher = request.getRequestDispatcher("updateCliente.jsp");
+            request.setAttribute("Erro", "Login necessário");
+            RequestDispatcher dispacher = request.getRequestDispatcher("login.jsp");
             dispacher.forward(request, response);
         }
     }

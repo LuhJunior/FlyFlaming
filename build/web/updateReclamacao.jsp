@@ -26,6 +26,12 @@
                                     name="submit">Atualizar
                             </button>
                         </div>
+                        <div class="toolbar-section">
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect margin-top" 
+                                    type="submit" 
+                                    name="submit">Voltar
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
