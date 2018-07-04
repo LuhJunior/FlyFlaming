@@ -37,26 +37,28 @@ public class CheckarCancelar extends HttpServlet {
             int row = Integer.parseInt(selected.substring(8));
             System.out.println(row);
             p.setCodigo(Integer.parseInt(request.getParameter("codPassagem["+row+"]")));
-            System.out.println(p.getCodigo());
             if(p.buscarDados() && p.checkin()){
                 request.setAttribute("Mensagem", "Checkin efetuado com sucesso!");
-                System.out.println("Deu bom");
+                System.out.println("Que não vai dá pai");
             }   
             else{
                 request.setAttribute("Erro", "Ocorreu um erro");
-                System.out.println("Deu ruim");
+                System.out.println("Não vai dá não");
             }
         }
         else{
             int row = Integer.parseInt(selected.substring(9));
             p.setCodigo(Integer.parseInt(request.getParameter("codPassagem["+row+"]")));
-            if(p.buscarDados() && p.cancelar()){
-                request.setAttribute("Mensagem", "Checkin efetuado com sucesso!");
-                System.out.println("Deu bom");
+            if(p.buscarDados() && p.cancelar() && p.estornarValorPassagem()){
+                float valor = p.getValor();
+                p.buscarDados();
+                valor = valor - p.getValor();
+                request.setAttribute("Mensagem", "Cancelamento efetuado com sucesso! Valor Estornado: R$"+valor);
+                System.out.println("Que não vai dá pai");
             }
             else{
                 request.setAttribute("Erro", "Ocorreu um erro");
-                System.out.println("Deu ruim");
+                System.out.println("Não vai dá não");
             }
         }
         RequestDispatcher dispatcher = request.getRequestDispatcher("OpcoesPassagem");

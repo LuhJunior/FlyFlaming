@@ -104,8 +104,7 @@ public class Cliente {
     
     public boolean addOnDb(){
         ClienteDAO c = new ClienteDAO();
-        c.pesquisarEndereco(this);
-        if(!c.verificarCEP(this.getEndereco().getCEP())) c.inserirEndereco(this);
+        //c.pesquisarEndereco(this);
         return (c.inserir(this) && c.inserirTelefone(this));
     }
     
@@ -122,11 +121,7 @@ public class Cliente {
     public boolean getFromDb(){
         ClienteDAO c = new ClienteDAO();
         c.pesquisar(this);
-        if(this.getEndereco() != null){
-            c.pesquisarEndereco(this);
-            return true;
-        }
-        return false;
+        return true;
     }
     
     public boolean trocarSenha(){

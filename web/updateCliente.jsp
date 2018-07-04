@@ -46,7 +46,7 @@
                     <input class="mdl-textfield__input color-white" type="text" name="Telefone" 
                             minlength="14" maxlength="14" onkeydown="javascript: fMasc(this, mTel)" id="sample3" value="<%=c.getTelefone()%>">
                     <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Telefone</label>
-                    <span class="mdl-textfield__error color-white">Use somente números</span>
+                    <span class="mdl-textfield__error color-white">Telefone incompleto</span>
                 </div>
 
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam">
@@ -66,28 +66,28 @@
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
                     <input class="mdl-textfield__input color-white" type="text" name="Cidade" id="sample5" value="<%=c.getEndereco().getCidade()%>">   
                     <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample5">Cidade</label>
-                    <ul for="sample5" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                    <!--<ul for="sample5" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
                         <li class="mdl-menu__item" data-val="BA">Salvador</li>
                         <li class="mdl-menu__item" data-val="SP">São Paulo</li>
                         <li class="mdl-menu__item" data-val="RS">Porto Alegre</li>
-                    </ul>
+                    </ul>-->
                 </div>
 
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
                     <input class="mdl-textfield__input color-white" name="Estado" type="text" minlength=8 
                            maxlength="8" id="sample6" value="<%=c.getEndereco().getEstado()%>">      
                     <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample6">Estado</label>
-                    <ul for="sample6" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                    <!--<ul for="sample6" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
                         <li class="mdl-menu__item" data-val="BA">Bahia</li>
                         <li class="mdl-menu__item" data-val="SP">Sao Paulo</li>
                         <li class="mdl-menu__item" data-val="RS">Porto Alegre</li>
-                    </ul>
+                    </ul>-->
                 </div>
 
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
                     <input class="mdl-textfield__input color-white" type="text" name="CEP" minlength=10 maxlength="10" onkeydown="javascript: fMasc(this, mCEP);"  id="sample3" value="<%=c.getEndereco().getCEP()%>">
                     <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">CEP</label>
-                    <span class="mdl-textfield__error color-white">Use somente números</span>
+                    <span class="mdl-textfield__error color-white">CEP incompleto</span>
                 </div>
 
                 <div style="position: absolute; left: -135px;"class="toolbar-section">

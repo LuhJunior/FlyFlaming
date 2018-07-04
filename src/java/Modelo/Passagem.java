@@ -1,5 +1,6 @@
 package Modelo;
 
+import Banco.PagamentoDAO;
 import Banco.PassagemDAO;
 import Banco.ReclamacaoDAO;
 import java.util.Calendar;
@@ -170,5 +171,15 @@ public class Passagem {
     
     public static boolean cancelarPassagemSemCheckin(){
         return PassagemDAO.updatePassagemCancelamento();
+    }
+    
+    public float pegarPercentEstorno(){
+        PassagemDAO p = new PassagemDAO();
+        return p.pegarPercent(this);
+    }
+    
+    public boolean estornarValorPassagem(){
+        PagamentoDAO p = new PagamentoDAO();
+        return p.updateValor(this);
     }
 }

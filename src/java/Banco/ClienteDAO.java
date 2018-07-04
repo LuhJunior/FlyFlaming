@@ -11,7 +11,7 @@ public class ClienteDAO {
     public boolean inserir(Cliente c){
         int r = 0;
         try{
-            String sql = "INSERT INTO CLIENTE (CPF, NOME, EMAIL, SENHA, CEP) VALUES(?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO CLIENTE (CPF, NOME, EMAIL, SENHA, CEP, RUA, BAIRRO, CIDADE, ESTADO) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement p = conn.prepareStatement(sql);
             p.setString(1, c.getCpf());
@@ -19,6 +19,10 @@ public class ClienteDAO {
             p.setString(3, c.getEmail());
             p.setString(4, c.getSenha());
             p.setString(5, c.getEndereco().getCEP());
+            p.setString(6, c.getEndereco().getRua());
+            p.setString(7, c.getEndereco().getBairro());
+            p.setString(8, c.getEndereco().getCidade());
+            p.setString(9, c.getEndereco().getEstado());
             r = p.executeUpdate();
             ConnectionFactory.closeConnection(conn, p);
         }
@@ -33,14 +37,18 @@ public class ClienteDAO {
     public boolean updateCliente(Cliente c){
         int r = 0;
         try{
-            String sql = "UPDATE CLIENTE SET NOME = ?, EMAIL = ?, CEP = ?"
+            String sql = "UPDATE CLIENTE SET NOME = ?, EMAIL = ?, CEP = ?, RUA = ?, BAIRRO = ?, CIDADE = ?, ESTADO = ?"
                     + " WHERE CPF=?";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement p = conn.prepareStatement(sql);
             p.setString(1, c.getNome());
             p.setString(2, c.getEmail());
             p.setString(3, c.getEndereco().getCEP());
-            p.setString(4, c.getCpf());
+            p.setString(4, c.getEndereco().getRua());
+            p.setString(5, c.getEndereco().getBairro());
+            p.setString(6, c.getEndereco().getCidade());
+            p.setString(7, c.getEndereco().getEstado());
+            p.setString(8, c.getCpf());
             r = p.executeUpdate();
             ConnectionFactory.closeConnection(conn, p);
         }
@@ -105,6 +113,10 @@ public class ClienteDAO {
                 c.setTelefone(rs.getString("T.NUMERO"));
                 c.setEndereco(new Endereco());
                 c.getEndereco().setCEP(rs.getString("C.CEP"));
+                c.getEndereco().setRua(rs.getString("C.RUA"));
+                c.getEndereco().setBairro(rs.getString("BAIRRO"));
+                c.getEndereco().setCidade(rs.getString("CIDADE"));
+                c.getEndereco().setEstado(rs.getString("ESTADO"));
             }
             ConnectionFactory.closeConnection(conn, p, rs);
         }

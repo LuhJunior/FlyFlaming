@@ -17,8 +17,8 @@
                 <!-- Navigation -->
                 <div class="android-navigation-container">
                     <nav class="android-navigation mdl-navigation GoBystrok-navigation-color">
-                        <a class="mdl-navigation__link mdl-typography--text-uppercase" href="#pesquisarPassagem">Procurar Passagem</a>
-                        <!--<a class="mdl-navigation__link mdl-typography--text-uppercase" href="#contato">Contato</a>-->
+                        <!--<a class="mdl-navigation__link mdl-typography--text-uppercase" href="#pesquisarPassagem">Procurar Passagem</a>
+                        <a class="mdl-navigation__link mdl-typography--text-uppercase" href="#contato">Contato</a>-->
                         <a class="mdl-navigation__link mdl-typography--text-uppercase" href="OpcoesPassagem">Passagem</a>
                         <a class="mdl-navigation__link mdl-typography--text-uppercase" href="reclamacao.jsp">RECLAMAÇÃO</a>
                         <a class="mdl-navigation__link mdl-typography--text-uppercase" href="#ofertasPassagens">Voo</a>
@@ -43,13 +43,10 @@
                 FlyFlaming
             </span>
             <nav class="mdl-navigation">
-                <a class="mdl-navigation__link " href="ExibirPassagens">Exibir Passagens</a>
+                <!--<a class="mdl-navigation__link " href="ExibirPassagens">Exibir Passagens</a>-->
                 <a class="mdl-navigation__link" href="OpcoesPassagem">Opções de Passagem</a>
                 <a class="mdl-navigation__link" href="ConsultarReclamacao">Acompanhar Reclamação</a> 
                 <a class="mdl-navigation__link" href="trocar-senha.jsp">Trocar Senha</a> 
-                <div class="android-drawer-separator"></div>
-                <span class="mdl-navigation__link" href="">Dúvidas</span>
-                <a class="mdl-navigation__link" href="index#contato">Contato</a>  
                 <div class="android-drawer-separator"></div>
                 <span class="mdl-navigation__link" href="">Usuário</span>
                 <a class="mdl-navigation__link" href="Perfil">Perfil</a>

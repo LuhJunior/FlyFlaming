@@ -34,7 +34,7 @@
                                             else situacao = "Resolvido";
                                         %>
                                         <td class="mdl-data-table__cell--non-numeric"><input type="hidden" name="codPassagem[<%=i%>]" value="<%=p[i].getCodigo()%>"><%=p[i].getCodigo()%></td>
-                                        <td class="mdl-data-table__cell--non-numeric"><input type="hidden" name="descricao[<%=i%>]" value="<%=p[i].getReclamacao().getDescricao()%>"><%=p[i].getReclamacao().getDescricao()%></td>
+                                        <td style="overflow: auto" class="mdl-data-table__cell--non-numeric"><input type="hidden" name="descricao[<%=i%>]" value="<%=p[i].getReclamacao().getDescricao()%>"><%=p[i].getReclamacao().getDescricao()%></td>
                                         <td class="mdl-data-table__cell--non-numeric"><input type="hidden" name="codReclamacao[<%=i%>]" value="<%=situacao%>"><%=situacao%></td>
                                         <td>
                                             <button name="submit" type="submit" value="Editar-<%=i%>" class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect">Editar</button>

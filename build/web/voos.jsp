@@ -67,7 +67,7 @@
                                 <tr>
                                     <td class="mdl-data-table__cell--non-numeric" colspan="11">Voos de Volta</td>
                                 </tr> 
-                                <%if(!v2.isEmpty()){
+                                <%if(v2 !=null && !v2.isEmpty()){
 
                                 int i=0;%>
                                 <%for(Modelo.Voo voo: v2){%>

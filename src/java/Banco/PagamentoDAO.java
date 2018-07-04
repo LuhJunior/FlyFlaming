@@ -1,6 +1,7 @@
 package Banco;
 
 import Modelo.Pagamento;
+import Modelo.Passagem;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,14 +33,15 @@ public class PagamentoDAO {
 
     }
     
-    public boolean update(Pagamento p){
+    public boolean updateValor(Passagem p){
         int r = 0;
         try{
-            String sql = "";
+            String sql = "UPDATE PAGAMENTO SET VALOR_FINAL = VALOR_FINAL * 0.1 WHERE IDPASSAGEM = ? ";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            ConnectionFactory.closeConnection(conn, ps, rs);
+            ps.setInt(1, p.getCodigo());
+            r = ps.executeUpdate();
+            ConnectionFactory.closeConnection(conn, ps);
         }
         catch(SQLException e){
             throw new RuntimeException(e);

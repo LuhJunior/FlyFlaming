@@ -72,6 +72,7 @@ public class VooDAO {
             while(rs.next()){
                 Voo auxV = new Voo();
                 auxV.setNumero(rs.getInt("NUMERO DO VOO"));
+                if(auxV.getNumero() == 0) continue;
                 auxV.setOrigem(rs.getString("CIDADE DE ORIGEM"));
                 auxV.setDestino(rs.getString("CIDADE DE DESTINO"));
                 auxV.setValor(rs.getFloat("VALOR"));

@@ -397,6 +397,28 @@ public class PassagemDAO {
         return (Passagem[]) passagens.toArray(new Passagem[passagens.size()]);
     }
     
+    public float pegarPercent(Passagem p){
+        try{
+            String sql = "SELECT ((DATEDIFF(DATE(PG.DATAHORA_SAIDA), DATE(NOW()))*10)/7)/100 AS PERCENT FROM PASSAGEM AS P INNER JOIN "
+                    + "PROGRAMACAO AS PG ON P.IDPROGRAMACAO = PG.IDPROGRAMACAO WHERE P.IDPASSAGEM = ?;";
+            Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, p.getCodigo());
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                float percent = rs.getFloat("PERCENT");
+                ConnectionFactory.closeConnection(conn, ps, rs);
+                return percent;
+            }else {
+                ConnectionFactory.closeConnection(conn, ps, rs);
+                return -1;
+            }
+         }
+        catch(SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    
     public boolean deletar(Passagem pa){
         int r = 0;
         try{

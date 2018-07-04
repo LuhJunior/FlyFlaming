@@ -8,11 +8,9 @@
     <jsp:include page="layout/navbarLogado.jsp"/>
     <div class="android-content mdl-layout__content">
         <div class="android-be-together-section">
-            <div class="formulario color-orange">     
+            <div class="formulario color-orange" style="top: 5%; height: 400px;">     
                 <div class="mdl-grid center-items color-orange">
-                    <% Modelo.Reclamacao r = (Modelo.Reclamacao) request.getAttribute("reclamacao");
-                        String Mensagem = (String) request.getAttribute("Mensagem");
-                        if(Mensagem != null){%> <script>alert("<%=Mensagem%>")</script><%}%>
+                    <% Modelo.Reclamacao r = (Modelo.Reclamacao) request.getAttribute("reclamacao");%>
                     <div class="logo-font GoBystrok-title GoBystrok-slogan">Reclamação</div>
                     <form action="AtualizarReclamacao" method="POST" name="atualizarReclamacaoForm" class="" onsubmit="">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
@@ -21,17 +19,14 @@
                             <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Descrição</label>
                         </div>
                         <div class="toolbar-section">
-                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect margin-top" 
+                            <button style="right: 60px;" class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect" 
                                     type="submit" 
                                     name="submit">Atualizar
                             </button>
                         </div>
-                        <div class="toolbar-section">
-                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect margin-top" 
-                                    type="submit" 
-                                    name="submit">Voltar
-                            </button>
-                        </div>
+                        <a style="top: -36px;" class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect">
+                            Voltar
+                        </a>
                     </form>
                 </div>
             </div>
