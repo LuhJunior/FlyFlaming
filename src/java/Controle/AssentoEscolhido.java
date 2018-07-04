@@ -50,6 +50,7 @@ public class AssentoEscolhido extends HttpServlet {
             p.setAssento(a);
             p.setProgramacao(v.getProgramacao());
             p.setValor(v.getValor());
+            if(p.getAssento().getTipo().equals("Executivo")) p.setValor(p.getValor()*1.4f);
             request.getSession().setAttribute("Passagem", p);
             RequestDispatcher dispatcher = request.getRequestDispatcher("pagamento.jsp");
             dispatcher.forward(request, response);

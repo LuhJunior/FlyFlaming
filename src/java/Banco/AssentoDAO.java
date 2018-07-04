@@ -87,13 +87,17 @@ public class AssentoDAO {
         return assentos;
     }
     
-    public static ArrayList<Assento> pegarAssentos(String aeronave){
+    public static ArrayList<Assento> pegarAssentos(String aeronave, int voo){
         ArrayList<Assento> assentos = new ArrayList<>();
         try{
-            String sql = "SELECT NUMERO, FILEIRA, CADEIRA, TIPO FROM ASSENTO WHERE AERONAVE = ?";
+            String sql = "SELECT NUMERO, FILEIRA, CADEIRA, TIPO FROM ASSENTO AS A INNER JOIN AERONAVE AS AV ON "
+                    + "AV.PREFIXO = A.AERONAVE INNER JOIN VOO AS V ON V.PREFIXO = AV.PREFIXO INNER JOIN PROGRAMACAO AS PG ON "
+                    + "PG.NUM_VOO = V.NUM_VOO WHERE AERONAVE = ? AND V.NUM_VOO = ? AND A.NUMERO "
+                    + "NOT IN (SELECT PASSAGEM.ASSENTO FROM PASSAGEM WHERE PASSAGEM.IDPROGRAMACAO=PG.IDPROGRAMACAO)";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement p = conn.prepareStatement(sql);
             p.setString(1, aeronave);
+            p.setInt(2, voo);
             ResultSet rs = p.executeQuery();            
             while(rs.next()){
                 Assento a = new Assento();

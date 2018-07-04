@@ -8,8 +8,13 @@
 <jsp:include page="layout/header.jsp"/>    
     <jsp:include page="layout/navbarDinamica.jsp"/>
 <div class="android-content mdl-layout__content">
-    <div class="android-be-together-section" style="height: 1000px;">
-        <div  class="formulario color-orange" style="right: 1%; left: 1%; overflow: auto; top: 5%;">     
+    <% ArrayList<Modelo.Voo> v = (ArrayList<Modelo.Voo>)request.getAttribute("Voos");
+        ArrayList<Modelo.Voo> v2 = (ArrayList<Modelo.Voo>)request.getAttribute("Voos2");
+        int vt = v.size();
+        int vt2 = 0;
+        if(v2 != null) vt2 = v2.size();%>
+    <div class="android-be-together-section" style="height: <%=600+120*(vt+vt2)%>px;">
+        <div  class="formulario color-orange" style="width: 1250px; right:1000px; left: 5px; overflow: auto; top: 5%;">     
             <div style="position: relative;  " class="mdl-grid center-items color-orange">
                 <div class="logo-font GoBystrok-title GoBystrok-slogan">Opções de Voos</div>
                 <form name="ComprarPassagemForm" method="POST" action="ComprarPassagem">
@@ -33,9 +38,7 @@
                             <tr>
                                 <td class="mdl-data-table__cell--non-numeric" colspan="11">Voos de Ida</td>
                             </tr> 
-                            <% ArrayList<Modelo.Voo> v = (ArrayList<Modelo.Voo>)request.getAttribute("Voos");
-                            ArrayList<Modelo.Voo> v2 = (ArrayList<Modelo.Voo>)request.getAttribute("Voos2");
-                            if(v != null && !v.isEmpty()){
+                            <%if(v != null && !v.isEmpty()){
                                 int i=0;
                                 for(Modelo.Voo voo: v){%>
                             <tr>

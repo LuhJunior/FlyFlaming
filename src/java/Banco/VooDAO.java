@@ -55,12 +55,14 @@ public class VooDAO {
                     + "C2.NOME AS 'CIDADE DE DESTINO', V.VALOR_PASSAGEM AS VALOR, DATE(P.DATAHORA_CHEGADA) "
                     + "AS 'DATA DE CHEGADA', TIME(P.DATAHORA_CHEGADA) AS 'HORA DE CHEGADA', "
                     + "DATE(P.DATAHORA_SAIDA) AS 'DATA DE SAIDA', TIME(P.DATAHORA_SAIDA) AS 'HORA DE SAIDA'"
-                    + ", P.EXEC_DISPONIVEL AS EXEC, "
-                    + "P.ECON_DISPONIVEL AS ECON FROM VOO AS V INNER JOIN PROGRAMACAO AS P " 
+                    + ", SUM(CASE WHEN A.TIPO = 'Executivo' THEN 1 END) AS EXEC, "
+                    + "SUM(CASE WHEN A.TIPO = 'Economico' THEN 1 END) AS ECON FROM VOO AS V INNER JOIN ASSENTO AS A "
+                    + "ON A.AERONAVE = V.PREFIXO INNER JOIN PROGRAMACAO AS P " 
                     + "ON V.NUM_VOO = P.NUM_VOO INNER JOIN CIDADE AS C1 " 
                     + "ON V.CID_ORIGEM = C1.IDCIDADE INNER JOIN CIDADE AS C2 "
-                    + "ON V.CID_DESTINO = C2.IDCIDADE WHERE DATE(P.DATAHORA_SAIDA) >= ?"
-                    + "AND C1.NOME = ? AND C2.NOME = ?;";
+                    + "ON V.CID_DESTINO = C2.IDCIDADE WHERE DATE(P.DATAHORA_SAIDA) = ? "
+                    + "AND C1.NOME = ? AND C2.NOME = ? AND A.NUMERO NOT IN "
+                    + "(SELECT PASSAGEM.ASSENTO FROM PASSAGEM WHERE PASSAGEM.IDPROGRAMACAO=P.IDPROGRAMACAO);";
             Connection conn = ConnectionFactory.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, dataIda);

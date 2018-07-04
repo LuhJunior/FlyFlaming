@@ -87,6 +87,7 @@ function verificarCheckarCancelar(){
     var checkin = document.getElementsByName("Checkin["+valor.value+"]");
     var cancelamento = document.getElementsByName("Cancelamento["+valor.value+"]");
     ShowMensagemErro(checkin.value);
+    ShowMensagem("teste");
     return checkin.value == "Pedente" && cancelamento.value == "Pendente";
 }
 function fMasc(objeto, mascara) {

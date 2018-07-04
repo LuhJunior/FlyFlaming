@@ -58,8 +58,8 @@ public class Assento {
         a.pegarAssento(this);
     }
     
-    public static ArrayList<Assento> pegarAssentosAeronave(String aeronave){
-        return AssentoDAO.pegarAssentos(aeronave);
+    public static ArrayList<Assento> pegarAssentosAeronave(String aeronave, int voo){
+        return AssentoDAO.pegarAssentos(aeronave, voo);
     }
     
     public static Assento procurarAssentoArray(int fileira, int coluna, ArrayList<Assento> a){

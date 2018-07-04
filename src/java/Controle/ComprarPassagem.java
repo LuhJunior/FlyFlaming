@@ -53,7 +53,7 @@ public class ComprarPassagem extends HttpServlet {
         v.getAviao().pegarAeronave();
         if(c != null){    
             request.setAttribute("Voo", v);
-            request.setAttribute("Assentos", Assento.pegarAssentosAeronave(v.getAviao().getPrefixo()));
+            request.setAttribute("Assentos", Assento.pegarAssentosAeronave(v.getAviao().getPrefixo(), v.getNumero()));
             RequestDispatcher dispatcher = request.getRequestDispatcher("EscolhendoAssento.jsp");
             dispatcher.forward(request, response);
         }
@@ -61,7 +61,7 @@ public class ComprarPassagem extends HttpServlet {
             request.setAttribute("Erro", "Login Nescessário");
             request.getSession().setAttribute("URL", "EscolhendoAssento.jsp");
             request.getSession().setAttribute("Voo", v);
-            request.getSession().setAttribute("Assentos", Assento.pegarAssentosAeronave(v.getAviao().getPrefixo()));
+            request.getSession().setAttribute("Assentos", Assento.pegarAssentosAeronave(v.getAviao().getPrefixo(), v.getNumero()));
             RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
             dispatcher.forward(request, response);
         }

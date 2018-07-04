@@ -27,8 +27,15 @@ public class Programacao {
         this.quantidadeEcon = quantidadeEcon;
     }
 
-    public String getDataChegada() {
-        return dataChegada;
+    public String getDataChegada() throws ParseException {
+        String outputText = "";
+        if(dataChegada != null){
+            SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");  
+            SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
+            java.util.Date data = fmt.parse(dataChegada); 
+            outputText = outputFormat.format(data); 
+        }
+        return outputText;
     }
 
     public void setDataChegada(String dataChegada) {
@@ -36,10 +43,13 @@ public class Programacao {
     }
 
     public String getDataSaida() throws ParseException {
-        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");  
-        SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
-        java.util.Date data = fmt.parse(dataSaida); 
-        String outputText = outputFormat.format(data); 
+        String outputText = "";
+        if(dataSaida != null){
+            SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");  
+            SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
+            java.util.Date data = fmt.parse(dataSaida); 
+            outputText = outputFormat.format(data); 
+        }
         return outputText;
     }
 

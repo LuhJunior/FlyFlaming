@@ -35,6 +35,7 @@ public class Pagar extends HttpServlet {
         pg.setSenha(request.getParameter("Senha"));
         pg.setParcelas(Integer.parseInt(request.getParameter("Parcelas")));
         pg.setPassagem((Passagem) request.getSession().getAttribute("Passagem"));
+        if(pg.getPassagem().getAssento().getTipo().equals("Executivo")) pg.getPassagem().setValor(pg.getPassagem().getValor()*1.4f);
         Passagem p = (Passagem) request.getSession().getAttribute("PassagemIda");
         RequestDispatcher dispatcher = null;
         if(pg.getPassagem().inserirPassagem(((Modelo.Cliente) request.getSession().getAttribute("clienteAutenticado")).getCpf())){

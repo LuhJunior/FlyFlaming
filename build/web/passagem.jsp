@@ -10,7 +10,7 @@
          <% Modelo.Passagem[] p = (Modelo.Passagem[]) request.getAttribute("passagens");
          if(p == null) p = new Modelo.Passagem[0];%>
         <div class="android-be-together-section" style="height: <%=500+150*p.length%>px;">
-            <div class="formulario color-orange" style="top: 5%;width: 1200px; left: 30px; height: <%=180*p.length%>px;"> 
+            <div class="formulario color-orange" style="top: 5%;width: 1200px; left: 30px; height: <%=140*p.length%>px;"> 
                 <div class="mdl-grid center-items color-orange">
                     <div class="logo-font GoBystrok-title GoBystrok-slogan">Passagens</div>
                     <div class="center-items">
