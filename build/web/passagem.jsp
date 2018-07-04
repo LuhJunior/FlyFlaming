@@ -7,15 +7,14 @@
 <jsp:include page="layout/header.jsp"/>   
     <jsp:include page="layout/navbarLogado.jsp"/>
     <div class="android-content mdl-layout__content">
-        <div class="android-be-together-section" style="height: 1000px;">
-            <div class="formulario color-orange" style="right: 7%; left: 7%; overflow: auto;"> 
+         <% Modelo.Passagem[] p = (Modelo.Passagem[]) request.getAttribute("passagens");
+         if(p == null) p = new Modelo.Passagem[0];%>
+        <div class="android-be-together-section" style="height: <%=500+150*p.length%>px;">
+            <div class="formulario color-orange" style="top: 5%;width: 1200px; left: 30px; height: <%=180*p.length%>px;"> 
                 <div class="mdl-grid center-items color-orange">
-                    <% Modelo.Passagem[] p = (Modelo.Passagem[]) request.getAttribute("passagens"); 
-                        String Mensagem = (String) request.getAttribute("Mensagem");
-                    %>
-                    <div class="logo-font GoBystrok-title GoBystrok-slogan">Opções de Passagem</div>
+                    <div class="logo-font GoBystrok-title GoBystrok-slogan">Passagens</div>
                     <div class="center-items">
-                        <form action="CheckarCancelar" method="POST" name="" class="" onsubmit="">
+                        <form action="CheckarCancelar" method="POST" name="" class="" onsubmit="return verificarCheckarCancelar()">
                             <table style="margin-top: 20px;" class="mdl-data-table mdl-shadow--2dp">
                                 <thead>
                                     <tr>
@@ -61,6 +60,11 @@
         </div>
         
 <jsp:include page="layout/footer.jsp"/> 
-<% if(Mensagem != null){%>
-    <script>swal("<%=Mensagem%>");</script>
+<% String Mensagem = (String) request.getAttribute("Mensagem");
+    String Erro = (String) request.getAttribute("Erro");
+    if(Mensagem != null){%>
+    <script>ShowMensagemSucesso("<%=Mensagem%>");</script>
+<%}
+    if(Erro != null){%>
+    <script>ShowMensagemErro("<%=Erro%>");</script>
 <%}%>

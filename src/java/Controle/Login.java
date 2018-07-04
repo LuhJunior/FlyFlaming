@@ -6,7 +6,7 @@ package Controle;
 
 import Modelo.Cliente;
 import java.io.IOException;
-import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,24 +27,31 @@ public class Login extends HttpServlet {
         if(request.getParameter("recuperar") != null ) {
             request.getRequestDispatcher("esqueci-senha.jsp").forward(request, response);
         }
-        String cpf = (String) request.getParameter("CPF");    
-        String senha = (String) request.getParameter("Senha");
-        
         Cliente c = new Cliente();
-        c.setCpf(cpf);
-        c.setSenha(senha);
+        c.setCpf(request.getParameter("CPF"));
+        c.setSenha(request.getParameter("Senha"));
         
         HttpSession session = request.getSession();        
         
         if(c.validarCliente()) {
             System.out.println("Cliente valido");
             session.setAttribute("clienteAutenticado", c.autenticarCliente());
-            response.sendRedirect("index");
+            String URL = (String)session.getAttribute("URL");
+            session.removeAttribute("URL");
+            if(URL != null) {
+                if(URL.equals("EscolhendoAssento.jsp")){
+                    request.setAttribute("Voo", request.getSession().getAttribute("Voo"));
+                    request.setAttribute("Assentos", request.getSession().getAttribute("Assentos"));
+                    request.getSession().removeAttribute("Voo");
+                    request.getSession().removeAttribute("Assentos");
+                }
+                request.getRequestDispatcher(URL).forward(request, response);
+            }
+            else response.sendRedirect("index");
         } else { 
             request.setAttribute("Erro", "Login ou Senha invalidos!");
-            response.sendRedirect("login.jsp");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

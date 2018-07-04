@@ -7,16 +7,13 @@
 
 <jsp:include page="autenticarPagina.jsp"/>
 <jsp:include page="layout/header.jsp"/>    
-    <jsp:include page="layout/navbarLogado.jsp"/>
+    <jsp:include page="layout/navbarDinamica.jsp"/>
     <div class="android-content mdl-layout__content">
-        <div class="android-be-together-section">
-            <div class="formulario color-orange">     
-                <div class="mdl-grid center-items color-orange">
-                    <% Modelo.Passagem[] p = (Modelo.Passagem[]) request.getAttribute("passagens");
-                        String Mensagem = (String) request.getAttribute("Mensagem");
-                        if(Mensagem != null){%> <script>alert("<%=Mensagem%>")</script><%}%>
+        <div class="android-be-together-section" style="height: 800px;">
+            <div class="formulario color-orange" style="width: 600px; height: 470px;">     
+                <div class="mdl-grid center-items">
                     <div class="logo-font GoBystrok-title GoBystrok-slogan">Reclamação</div>
-                    <form action="Reclamar" method="POST" name="reclamacaoForm" class="" onsubmit="return verificarCamposReclamacao()">
+                    <form style="padding-left: 100px;" action="Reclamar" method="POST" name="reclamacaoForm" class="" onsubmit="return verificarCamposReclamacao()">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
                             <input class="mdl-textfield__input color-white" type="text" name="codPassagem" id="sample3">
                             <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Código da Passagem</label>
@@ -26,7 +23,7 @@
                             <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Descrição</label>
                         </div>
 
-                        <div class="toolbar-section">
+                        <div style="position: absolute; right: 10px;" class="toolbar-section">
                             <button class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect margin-top" 
                                     type="submit" 
                                     name="submit">Enviar
@@ -41,5 +38,12 @@
             </div>
         </div>
         <div class="mdl-grid center-items color-orange"></div>
-    </div>
 <jsp:include page="layout/footer.jsp"/> 
+<% String Mensagem = (String) request.getAttribute("Mensagem");
+    String Erro = (String) request.getAttribute("Erro");
+    if(Mensagem != null){%>
+    <script>ShowMensagemSucesso("<%=Mensagem%>");</script>
+<%}
+    if(Erro != null){%>
+    <script>ShowMensagemErro("<%=Erro%>");</script>
+<%}%>

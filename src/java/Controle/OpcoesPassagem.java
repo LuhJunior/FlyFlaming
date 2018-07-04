@@ -31,13 +31,14 @@ public class OpcoesPassagem extends HttpServlet {
             throws ServletException, IOException {
         Cliente c = (Cliente) request.getSession().getAttribute("clienteAutenticado");
         if(c != null){
-            c.setPassagens(Modelo.Passagem.buscarPassagens(c.getCpf()));
+            c.setPassagens(Modelo.Passagem.buscarDados(c.getCpf()));
             if(c.getPassagens().length != 0) request.setAttribute("passagens", c.getPassagens());
             RequestDispatcher dispacher = request.getRequestDispatcher("passagem.jsp");
             dispacher.forward(request, response);
         }
         else{
-            response.sendRedirect("autenticarPagina");
+            request.setAttribute("Erro", "Login necessário");
+            response.sendRedirect("login.jsp");
         }
     }
 

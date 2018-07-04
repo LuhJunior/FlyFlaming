@@ -5,9 +5,13 @@
  */
 package Controle;
 
+import Modelo.Cliente;
 import Modelo.Reclamacao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,11 +36,16 @@ public class Reclamar extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ParseException {
+        Cliente c = (Cliente) request.getSession().getAttribute("clienteAutenticado");
         Reclamacao r = new Reclamacao();
+        Modelo.Mensagem Erro = new Modelo.Mensagem();
         r.setDescricao(request.getParameter("descricao"));
-        if(r.addOnDb(request.getParameter("codPassagem"))) request.setAttribute("Mensagem", "Que não vai dá pai");
-        else request.setAttribute("Mensagem", "Não vai dá não");
+        if(r.addOnDb(request.getParameter("codPassagem"), Erro, c.getCpf())) request.setAttribute("Mensagem", "Reclamação feita com sucesso");
+        else {
+            if(Erro.getErro() == null) request.setAttribute("Erro", "Ocorreu um erro, talvez ainda não tenha feito o checkin");
+            else request.setAttribute("Erro", "Ocorreu um erro: " + Erro.getErro());
+        }
         RequestDispatcher dispatcher = request.getRequestDispatcher("reclamacao.jsp");
         dispatcher.forward(request,response);
     }
@@ -53,7 +62,11 @@ public class Reclamar extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(Reclamar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -67,7 +80,11 @@ public class Reclamar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(Reclamar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

@@ -1,5 +1,6 @@
 package Modelo;
 
+import Banco.PassagemDAO;
 import Banco.ReclamacaoDAO;
 
 public class Reclamacao {
@@ -57,9 +58,25 @@ public class Reclamacao {
         return true;
     }
    
-    public boolean addOnDb(String id){
-        ReclamacaoDAO r = new ReclamacaoDAO(); 
-        return r.inserir(this, Integer.parseInt(id));
+    public boolean addOnDb(String id, Modelo.Mensagem Erro, String cpf){
+        Passagem p = new Passagem();
+        PassagemDAO pd = new PassagemDAO();
+        p.setCodigo(Integer.parseInt(id));
+        if(pd.verificarPassagem(p, cpf)){
+            System.out.println(p.getCheckin());
+            if(!p.getCheckin().equals("Pendente")){
+                ReclamacaoDAO r = new ReclamacaoDAO(); 
+                return r.inserir(this, Integer.parseInt(id));
+            }
+            else{
+                Erro.setErro("Checkin não foi feito");
+                return false;
+            }
+        }
+        else{
+            Erro.setErro("Passagem não pertence ao cliente ou não existe");
+            return false;
+        }
     }
     
     public boolean getFromDb(int id){

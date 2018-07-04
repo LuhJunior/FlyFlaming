@@ -275,6 +275,15 @@ a img{
   color: black !important;
 }
 
+.formulariov{
+  right: 25%;
+  left: 25%;
+  top: 150px;
+  z-index: 3;
+  background: white !important;
+  color: black !important;
+}
+
 .formulario-cadastro{
   position: absolute;
   right: 25%;

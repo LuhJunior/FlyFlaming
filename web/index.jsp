@@ -10,11 +10,11 @@
         <div class="android-content mdl-layout__content">
             <section id="pesquisarPassagem">
                 <a name="top"></a>
-                <div class="android-be-together-section mdl-typography--text-center">
+                <div class="android-be-together-section mdl-typography--text-center" style="height: 1000px;">
                     <div class="logo-font android-slogan GoBystrok-slogan">Fly Flaming</div>
                     <div class="logo-font android-sub-slogan GoBystrok-sub-slogan">Simplificando o controle da sua viagem. Como sempre deveria ter sido.</div>
 
-                    <div class="android-fab color-orange padding-form">
+                    <div class="android-fab color-orange padding-form" style="top: 370px; right: 280px; height: 500px;">
                         <div class="mdl-card__title mdl-card--expand">
                             <h2 class="mdl-card__title-text color-white">Comprar passagem</h2>
                         </div>
@@ -71,7 +71,8 @@
                     </div>
                 </div>
             </section>
-            <section style="margin-top: 120px;" id="ofertasPassagens">
+            <section id="ofertasPassagens">
+                <div class="android-customized-section-image" style="height: 2500px;">
                 <div class="android-screen-section mdl-typography--text-center GoBystrok-spacer"></div>
                 <div class="mdl-typography--display-1-color-contrast mdl-typography--text-center GoBystrok-title-section GoBystrok-title">Ofertas Imperdíveis!</div>
                     <% ArrayList<Modelo.Voo> vs = (ArrayList<Modelo.Voo> ) request.getAttribute("voosDaSemana");
@@ -98,49 +99,47 @@
                     <%}}%>
 
                     </div> <!-- ./END SECTION OFERTAS - ROW 1 -->
-                    <div style="padding-bottom: 50px;" class="mdl-grid layout-center padding-sale"></div>
-                    <div class="android-customized-section">
-                    <div class="android-customized-section-image">
-                        <div style="padding-top: 20px;" class="logo-font GoBystrok-title GoBystrok-slogan">Voos da semana</div>
+                    <div class="layout-center">
+                        <div style="left: 430px;" class="logo-font GoBystrok-title GoBystrok-slogan">Voos da semana</div>
                         <div class="GoBystrok-fab padding-form">
                             <div class="center-items">
-                            <% ArrayList<Modelo.Voo> v = (ArrayList<Modelo.Voo> ) request.getAttribute("voos");%>
-                            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp ">
-                                <thead>
-                                    <tr>
-                                        <%if(v == null || v.isEmpty()){%> <th>Voo</th><%}
-                                        else{%> <th class="mdl-data-table__cell--non-numeric">Voo</th><%}%>
-                                        <th>Origem</th>
-                                        <th>Destino</th>
-                                        <th>Data</th>
-                                        <th>Hora</th>
-                                        <th>Executivo</th>
-                                        <th>Econômico</th>
-                                        <th>Valor</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <%if(v != null && !v.isEmpty()){
-                                        for (Modelo.Voo aux: v){%>
-                                            <tr>
-                                                <td><%=aux.getNumero()%></td>
-                                                <td><%=aux.getOrigem()%></td>
-                                                <td><%=aux.getDestino()%></td>
-                                                <td><%=aux.getProgramacao().getDataSaida()%></td>
-                                                <td><%=aux.getProgramacao().getHoraSaida()%></td>
-                                                <td><%=aux.getProgramacao().getQuantidadeExec()%></td>
-                                                <td><%=aux.getProgramacao().getQuantidadeEcon()%></td>
-                                                <td><%="R$ " + aux.getValorFormat()%></td>
-                                            </tr>
-                                      <%}
-                                    }
-                                    else{%>
+                                <% ArrayList<Modelo.Voo> v = (ArrayList<Modelo.Voo> ) request.getAttribute("voos");%>
+                                <table style="left: 70px;"class="mdl-data-table mdl-js-data-table mdl-shadow--2dp ">
+                                    <thead>
                                         <tr>
-                                            <td colspan="8">Não há Voos esta Semana</td>
-                                        </tr> 
-                                    <%}%>
-                                </tbody>
-                            </table>
+                                            <%if(v == null || v.isEmpty()){%> <th>Voo</th><%}
+                                            else{%> <th class="mdl-data-table__cell--non-numeric">Voo</th><%}%>
+                                            <th>Origem</th>
+                                            <th>Destino</th>
+                                            <th>Data</th>
+                                            <th>Hora</th>
+                                            <th>Executivo</th>
+                                            <th>Econômico</th>
+                                            <th>Valor</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%if(v != null && !v.isEmpty()){
+                                            for (Modelo.Voo aux: v){%>
+                                                <tr>
+                                                    <td><%=aux.getNumero()%></td>
+                                                    <td><%=aux.getOrigem()%></td>
+                                                    <td><%=aux.getDestino()%></td>
+                                                    <td><%=aux.getProgramacao().getDataSaida()%></td>
+                                                    <td><%=aux.getProgramacao().getHoraSaida()%></td>
+                                                    <td><%=aux.getProgramacao().getQuantidadeExec()%></td>
+                                                    <td><%=aux.getProgramacao().getQuantidadeEcon()%></td>
+                                                    <td><%="R$ " + aux.getValorFormat()%></td>
+                                                </tr>
+                                          <%}
+                                        }
+                                        else{%>
+                                            <tr>
+                                                <td colspan="8">Não há Voos esta Semana</td>
+                                            </tr> 
+                                        <%}%>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

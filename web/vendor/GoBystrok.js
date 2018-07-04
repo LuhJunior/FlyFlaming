@@ -19,7 +19,7 @@ $("form[name='compraPassagem']").submit( function(event) {
 function verificarCamposLogin(){
     var Campos = "";
     if(loginForm.CPF.value == "") Campos += "CPF";
-    if(loginForm.Senha.value == "") Campos += ", Senha";
+    if(loginForm.Senha.value == ""){ if(Campos != "") Campos += ", Senha"; else Campos = "Senha";}
     if(Campos !== "") AlertPreencherCampos(Campos);
     return Campos === "";
 }
@@ -27,29 +27,24 @@ function verificarCamposLogin(){
 function verificarCamposCadastro(){
     var Campos = "";
     if(cadastrarCliente.Nome.value == "") Campos = "Nome";
-    if(cadastrarCliente.CPF.value == "") Campos += ", CPF";
-    if(cadastrarCliente.Email.value == "") Campos += ", Email";
-    if(cadastrarCliente.Telefone.value == "")Campos += ", Telefone";
-    if(cadastrarCliente.Rua.value == "") Campos += ", Rua";
-    if(cadastrarCliente.Bairro.value == "") Campos += ", Bairro";
-    if(cadastrarCliente.Cidade.value == "") Campos += ", Cidade";
-    if(cadastrarCliente.Estado.value == "") Campos += ", Estado";
-    if(cadastrarCliente.CEP.value == "") Campos += ", CEP";
+    if(cadastrarCliente.CPF.value == "") if(Campos != "") Campos += ", CPF"; else Campos = "CPF";
+    if(cadastrarCliente.Email.value == "") if(Campos != "") Campos += ", Email";  else Campos = "Email";
+    if(cadastrarCliente.Telefone.value == "") if(Campos != "") Campos += ", Telefone";  else Campos = "Telefone";
+    if(cadastrarCliente.Rua.value == "") if(Campos != "") Campos += ", Rua";  else Campos = "Rua";
+    if(cadastrarCliente.Bairro.value == "") if(Campos != "") Campos += ", Bairro";  else Campos = "Bairro";
+    if(cadastrarCliente.Cidade.value == "") if(Campos != "") Campos += ", Cidade";  else Campos = "Cidade";
+    if(cadastrarCliente.Estado.value == "") if(Campos != "") Campos += ", Estado";  else Campos = "Estado";
+    if(cadastrarCliente.CEP.value == "") if(Campos != "") Campos += ", CEP";  else Campos = "CEP";
     if(Campos !== "") AlertPreencherCampos(Campos);
     return Campos === "";
 }
 
 function verificarCamposReclamacao(){
-    var r = true;
-    if(reclamacaoForm.codPassagem.value == ""){
-        alert("O campo Código da Passagem não está preenchido");
-        r = false;
-    }
-    if(reclamacaoForm.descricao.value == ""){
-        alert("O campo Descrição não está preenchido");
-        r = false;
-    }
-    return r;
+    var Campos = "";
+    if(reclamacaoForm.codPassagem.value == "") Campos = "Código da Passagem";
+    if(reclamacaoForm.descricao.value == "") if(Campos != "") Campos += ", Descrição"; else Campos = "Descrição"
+    if(Campos !== "") AlertPreencherCampos(Campos);
+    return Campos === "";
 }
 
 function verificarCamposCheckin(){
@@ -87,6 +82,13 @@ function verificarCamposTrocarSenha(){
     return Campos === "" && trocarSenhaForm.NovaSenha.value == trocarSenhaForm.RepetirNovaSenha.value;
 }
     
+function verificarCheckarCancelar(){
+    var valor = document.getElementsByName("submit");
+    var checkin = document.getElementsByName("Checkin["+valor.value+"]");
+    var cancelamento = document.getElementsByName("Cancelamento["+valor.value+"]");
+    ShowMensagemErro(checkin.value);
+    return checkin.value == "Pedente" && cancelamento.value == "Pendente";
+}
 function fMasc(objeto, mascara) {
     obj=objeto;
     masc=mascara;

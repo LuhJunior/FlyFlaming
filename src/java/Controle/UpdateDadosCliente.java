@@ -42,12 +42,12 @@ public class UpdateDadosCliente extends HttpServlet {
             c.getEndereco().setEstado(request.getParameter("Estado"));
             c.getEndereco().setCEP(request.getParameter("CEP"));
             if(c.atualizarDados()){
-                request.setAttribute("Mensagem", "Que Não vai dá pai");
+                request.setAttribute("Mensagem", "Alteração efetuada com sucesso!");
                 RequestDispatcher dispatcher = request.getRequestDispatcher("Perfil");
                 dispatcher.forward(request, response);
             }
             else{
-                request.setAttribute("Erro", "Não vai da não");
+                request.setAttribute("Erro", "Ocorreu um erro");
                 RequestDispatcher dispatcher = request.getRequestDispatcher("Perfil");
                 dispatcher.forward(request, response);
             }

@@ -39,11 +39,11 @@ public class CheckarCancelar extends HttpServlet {
             p.setCodigo(Integer.parseInt(request.getParameter("codPassagem["+row+"]")));
             System.out.println(p.getCodigo());
             if(p.buscarDados() && p.checkin()){
-                request.setAttribute("VaiDa", "Que não vai dá oq");
+                request.setAttribute("Mensagem", "Checkin efetuado com sucesso!");
                 System.out.println("Deu bom");
             }   
             else{
-                request.setAttribute("VaiDa", "Não vai dá não");
+                request.setAttribute("Erro", "Ocorreu um erro");
                 System.out.println("Deu ruim");
             }
         }
@@ -51,15 +51,15 @@ public class CheckarCancelar extends HttpServlet {
             int row = Integer.parseInt(selected.substring(9));
             p.setCodigo(Integer.parseInt(request.getParameter("codPassagem["+row+"]")));
             if(p.buscarDados() && p.cancelar()){
-                request.setAttribute("VaiDa", "Que não vai dá oq");
+                request.setAttribute("Mensagem", "Checkin efetuado com sucesso!");
                 System.out.println("Deu bom");
             }
             else{
-                request.setAttribute("VaiDa", "Não vai dá não");
+                request.setAttribute("Erro", "Ocorreu um erro");
                 System.out.println("Deu ruim");
             }
         }
-        RequestDispatcher dispatcher = request.getRequestDispatcher("passagem.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("OpcoesPassagem");
         dispatcher.forward(request, response);
     }
 

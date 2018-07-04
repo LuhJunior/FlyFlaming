@@ -9,9 +9,9 @@
 <jsp:include page="layout/header.jsp"/>    
     <jsp:include page="layout/navbarLogado.jsp"/>
     <div class="android-content mdl-layout__content">
-        <div class="android-be-together-section" style="height: 1000px;">
-      <div class="formulario-cadastro color-orange"> 
-        <div class="mdl-grid center-items color-orange">
+        <div class="android-be-together-section" style="height: 1200px;">
+      <div class="formulario-cadastro color-orange" style="height: 920px;"> 
+        <div class="mdl-grid center-items ">
             <% Modelo.Cliente c = (Modelo.Cliente)request.getAttribute("cliente");
                         if(c == null) {
                             c = new Modelo.Cliente();
@@ -63,8 +63,8 @@
                     <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample3">Bairro</label>
                 </div>  
 
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam " value="<%=c.getEndereco().getCidade()%>">
-                    <input class="mdl-textfield__input color-white" type="text" name="Cidade" id="sample5">     
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label col-tam ">
+                    <input class="mdl-textfield__input color-white" type="text" name="Cidade" id="sample5" value="<%=c.getEndereco().getCidade()%>">   
                     <label class="mdl-textfield__label mdl-color-text--orange-50" for="sample5">Cidade</label>
                     <ul for="sample5" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
                         <li class="mdl-menu__item" data-val="BA">Salvador</li>
@@ -90,10 +90,13 @@
                     <span class="mdl-textfield__error color-white">Use somente números</span>
                 </div>
 
-                <div class="toolbar-section">
+                <div style="position: absolute; left: -135px;"class="toolbar-section">
                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect margin-top" type="submit" name="submit">Confirmar</button>
                 </div>
             </form>
+            <a style="position: absolute; left: 150px;top: 842px;" class="mdl-button mdl-js-button mdl-button--raised mdl-color--accent mdl-color-text--accent-contrast mdl-js-ripple-effect" href="Perfil">                    
+                Voltar
+            </a>
         </div>
       </div>
     </div>

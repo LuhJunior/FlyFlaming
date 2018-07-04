@@ -4,6 +4,10 @@
     Author     : hspacheco
 --%>
 
-<% if(session.getAttribute("clienteAutenticado") == null) { %>
-    <jsp:forward page="loginExigido.jsp" /> 
+<%@page import="Modelo.Tools"%>
+<% if(session.getAttribute("clienteAutenticado") == null) { 
+    request.setAttribute("Erro", "Login Necessário!");
+    request.getSession().setAttribute("URL", Tools.converterURL(request.getRequestURL().toString()));
+     %>
+    <jsp:forward page="login.jsp" /> 
 <% }%>

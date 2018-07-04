@@ -202,6 +202,7 @@ public class PassagemDAO {
             ps.setInt(1, p.getCodigo());
             ResultSet rs = ps.executeQuery();
             if(rs != null && rs.next()){
+                p.setProgramacao(new Programacao());
                 p.getProgramacao().pegarProgramacao(rs.getInt("P.IDPROGRAMACAO"));
                 p.setAssento(new Assento());
                 p.getAssento().setFileira(rs.getInt("A.FILEIRA"));
@@ -214,6 +215,44 @@ public class PassagemDAO {
                 p.setCodigoVolta(rs.getInt("P.VOLTA"));
             }
             ConnectionFactory.closeConnection(conn, ps, rs);
+        }
+        catch(SQLException e){
+            throw new RuntimeException(e);
+        }  
+    }
+    
+    public boolean verificarPassagem(Passagem p, String cpf){
+        try{
+            String sql = "SELECT P.IDPROGRAMACAO, P.VOLTA, P.DATAHORA_COMPRA, P.CHECKIN, P.CANCELAMENTO, PG.VALOR_FINAL, "
+                    + "A.FILEIRA, A.CADEIRA, A.TIPO FROM PASSAGEM AS P INNER JOIN ASSENTO AS A "
+                    + "ON P.ASSENTO = A.NUMERO INNER JOIN PAGAMENTO AS PG ON P.IDPASSAGEM=PG.IDPASSAGEM "
+                    + "WHERE P.IDPASSAGEM = ? AND P.CPF = ?";
+            Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, p.getCodigo());
+            ps.setString(2, cpf);
+            ResultSet rs = ps.executeQuery();
+            if(rs != null && rs.next()){
+                /*
+                p.setProgramacao(new Programacao());
+                p.getProgramacao().pegarProgramacao(rs.getInt("P.IDPROGRAMACAO"));
+                p.setAssento(new Assento());
+                p.getAssento().setFileira(rs.getInt("A.FILEIRA"));
+                p.getAssento().setCadeira(rs.getInt("A.CADEIRA"));
+                p.getAssento().setTipo(rs.getString("A.TIPO"));
+                p.setHoraCompra(rs.getString("P.DATAHORA_COMPRA"));
+                */
+                p.setCheckin(rs.getString("P.CHECKIN"));
+                p.setCancelamento(rs.getString("P.CANCELAMENTO"));
+                //p.setValor(rs.getFloat("PG.VALOR_FINAL"));
+                //p.setCodigoVolta(rs.getInt("P.VOLTA"));
+                ConnectionFactory.closeConnection(conn, ps, rs);
+                return true;
+            }
+            else{
+                ConnectionFactory.closeConnection(conn, ps, rs);
+                return false;
+            }
         }
         catch(SQLException e){
             throw new RuntimeException(e);

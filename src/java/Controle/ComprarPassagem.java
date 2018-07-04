@@ -38,27 +38,30 @@ public class ComprarPassagem extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         Cliente c = (Cliente) request.getSession().getAttribute("clienteAutenticado");
-        if(c != null){
-            String num = request.getParameter("Comprar");
-            int NumVoo;
-            if(num != null){
-                NumVoo = Integer.parseInt(request.getParameter("NumVoo["+num+"]"));
-            }
-            else{
-                num = request.getParameter("Comprar2");
-                NumVoo = Integer.parseInt(request.getParameter("NumVoo["+num+"]"));
-            }
-            Voo v = new Voo();
-            v.setNumero(NumVoo);
-            v.pegarVoo();
-            v.getAviao().pegarAeronave();
+        String num = request.getParameter("Comprar");
+        int NumVoo;
+        if(num != null){
+            NumVoo = Integer.parseInt(request.getParameter("NumVoo["+num+"]"));
+        }
+        else{
+            num = request.getParameter("Comprar2");
+            NumVoo = Integer.parseInt(request.getParameter("NumVoo["+num+"]"));
+        }
+        Voo v = new Voo();
+        v.setNumero(NumVoo);
+        v.pegarVoo();
+        v.getAviao().pegarAeronave();
+        if(c != null){    
             request.setAttribute("Voo", v);
             request.setAttribute("Assentos", Assento.pegarAssentosAeronave(v.getAviao().getPrefixo()));
             RequestDispatcher dispatcher = request.getRequestDispatcher("EscolhendoAssento.jsp");
             dispatcher.forward(request, response);
         }
         else{
-            request.setAttribute("Mensagem", "Login Nescessário");
+            request.setAttribute("Erro", "Login Nescessário");
+            request.getSession().setAttribute("URL", "EscolhendoAssento.jsp");
+            request.getSession().setAttribute("Voo", v);
+            request.getSession().setAttribute("Assentos", Assento.pegarAssentosAeronave(v.getAviao().getPrefixo()));
             RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
             dispatcher.forward(request, response);
         }
