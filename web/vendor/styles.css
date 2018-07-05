@@ -134,6 +134,21 @@ ol {
   animation-duration: 300ms;
   animation-fill-mode: both;
 }
+
+.seatt label {
+  display: block;
+  position: relative;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.5rem;
+  padding: 4px 0;
+  background: #dcdcdc;
+  border-radius: 5px;
+  animation-duration: 300ms;
+  animation-fill-mode: both;
+}
 .seat label:before {
   content: "";
   position: absolute;
@@ -149,6 +164,7 @@ ol {
   cursor: pointer;
   box-shadow: 0 0 0px 2px #5c6aff;
 }
+
 @-webkit-keyframes rubberBand {
   0% {
     -webkit-transform: scale3d(1, 1, 1);

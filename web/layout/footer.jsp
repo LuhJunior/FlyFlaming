@@ -15,6 +15,14 @@
         </footer>
     </div>
     </div>
+    <% String Mensagem = (String) request.getAttribute("Mensagem");
+    String Erro = (String) request.getAttribute("Erro");
+    if(Mensagem != null){%>
+    <script>ShowMensagemSucesso("<%=Mensagem%>");</script>
+    <%}
+        if(Erro != null){%>
+        <script>ShowMensagemErro("<%=Erro%>");</script>
+    <%}%>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <script type="text/javascript" src="vendor/GoBystrok.js"></script>

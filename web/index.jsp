@@ -72,7 +72,7 @@
                 </div>
             </section>
             <section id="ofertasPassagens">
-                <div class="android-customized-section-image" style="height: 2500px;">
+                <div class="" style="height: 1400px;">
                 <div class="android-screen-section mdl-typography--text-center GoBystrok-spacer"></div>
                 <div class="mdl-typography--display-1-color-contrast mdl-typography--text-center GoBystrok-title-section GoBystrok-title">Ofertas Imperdíveis!</div>
                     <% ArrayList<Modelo.Voo> vs = (ArrayList<Modelo.Voo> ) request.getAttribute("voosDaSemana");
@@ -99,6 +99,8 @@
                     <%}}%>
 
                     </div> <!-- ./END SECTION OFERTAS - ROW 1 -->
+                </div>
+                <div class="android-customized-section-image">
                     <div class="layout-center">
                         <div style="left: 430px;" class="logo-font GoBystrok-title GoBystrok-slogan">Voos da semana</div>
                         <div class="GoBystrok-fab padding-form">
@@ -146,11 +148,4 @@
                 </div>
             </section>
 <jsp:include page="layout/footer.jsp"/>  
-<% String Mensagem = (String) request.getAttribute("Mensagem");
-    String Erro = (String) request.getAttribute("Erro");
-    if(Mensagem != null){%>
-    <script>ShowMensagemSucesso("<%=Mensagem%>");</script>
-<%}
-    if(Erro != null){%>
-    <script>ShowMensagemErro("<%=Erro%>");</script>
-<%}%>
+

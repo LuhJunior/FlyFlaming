@@ -42,14 +42,14 @@
                                             %>
 
                                                 <li class="seat">
-                                                    <input type="checkbox" class="test" name="Assento" value="<%=as.getNumero()%>" id="<%=letra%>" />
+                                                    <input style="display: none;" type="radio" class="test" name="Assento" value="<%=as.getNumero()%>" id="<%=letra%>" />
                                                     <label for="<%=letra%>"><%=letra%></label>
                                                 </li>
                                                 <%}
                                                 else{%>
-                                                    <li class="seat">
-                                                        <input type="checkbox" disabled id="<%=letra%>" />
-                                                        <label for="<%=letra%>">Occupied</label>
+                                                    <li class="seat seatt">
+                                                        <input style="display: none;" type="radio" disabled id="<%=letra%>" />
+                                                        <label for="<%=letra%>">X</label>
                                                     </li>
                                                 <%}%>
                                             <%}%>

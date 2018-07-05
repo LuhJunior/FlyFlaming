@@ -13,7 +13,19 @@ $("form[name='compraPassagem']").submit( function(event) {
         ShowMensagemErro("Falta preencher o(s) campo(s).");
         event.preventDefault();
     }
-    //event.preventDefault();
+    
+    if ($("#dateIda").val() > $("#dateVolta").val()) {
+        ShowMensagemErro("A data de ida selecionada e maior do que a da volta.");
+        console.log('FALSO');
+        event.preventDefault();
+    }
+    
+    if ($("#dateIda").val() === $("#dateVolta").val()) {
+        ShowMensagemErro("A data de ida selecionada e igual a da volta.");
+        console.log('FALSO');
+        event.preventDefault();
+    }
+   
 });
 
 function verificarCamposLogin(){

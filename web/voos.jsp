@@ -102,7 +102,6 @@
             </div>
         </div>
     </div>
-    <div class="mdl-grid center-items color-orange"></div>
 <jsp:include page="layout/footer.jsp"/> 
 <% String Mensagem = (String) request.getAttribute("Mensagem");
     String Erro = (String) request.getAttribute("Erro");
