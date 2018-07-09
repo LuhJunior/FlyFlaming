@@ -14,7 +14,7 @@
                 ArrayList<Modelo.Assento> a = (ArrayList<Modelo.Assento>)request.getAttribute("Assentos");
                 Modelo.Passagem p = (Modelo.Passagem) request.getAttribute("Passagem");
             %>
-            <div  class="formulario color-orange" style="right: 25%; left: 25%; top: 3%; height: <%=140*(v.getAviao().getFileiras())%>px;">    
+            <div  class="formulario color-orange" style="right: 25%; left: 25%; top: 3%; height: <%=400+40*(v.getAviao().getFileiras())%>px;">    
                 <div style="position:relative;" class="mdl-grid center-items" style="top: 10%; right: 20%; left: 20%">
                     <div class="logo-font GoBystrok-title GoBystrok-slogan">Selecione o Assento</div>
                     <form name="formAssento" method="POST" action="AssentoEscolhido">

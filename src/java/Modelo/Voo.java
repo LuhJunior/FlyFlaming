@@ -98,7 +98,7 @@ public class Voo {
     }
     
     public static ArrayList<Voo> pegarVoosDaSemana(){
-        ArrayList<Voo> arrayVooOfertas = new ArrayList<Voo>(VooDAO.pesquisarVoosDaSemana().subList(0,9));
+        ArrayList<Voo> arrayVooOfertas = new ArrayList<Voo>(VooDAO.pesquisarVoosDaSemana().subList(0,4));
         return arrayVooOfertas;
     }
     

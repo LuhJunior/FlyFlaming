@@ -39,7 +39,7 @@ public class Passagem {
     }
 
     public void setCancelamento(String cancelada) {
-        if(cancelada == null) cancelada = "Pedente";
+        if(cancelada == null) cancelada = "Pendente";
         this.cancelamento = cancelada;
     }
 

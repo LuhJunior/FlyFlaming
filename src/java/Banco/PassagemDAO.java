@@ -203,7 +203,8 @@ public class PassagemDAO {
             ResultSet rs = ps.executeQuery();
             if(rs != null && rs.next()){
                 p.setProgramacao(new Programacao());
-                p.getProgramacao().pegarProgramacao(rs.getInt("P.IDPROGRAMACAO"));
+                p.getProgramacao().setId(rs.getInt("P.IDPROGRAMACAO"));
+                p.getProgramacao().pegarProgramacao();
                 p.setAssento(new Assento());
                 p.getAssento().setFileira(rs.getInt("A.FILEIRA"));
                 p.getAssento().setCadeira(rs.getInt("A.CADEIRA"));
@@ -271,7 +272,9 @@ public class PassagemDAO {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 Passagem p = new Passagem();
-                //p.getProgramacao().pegarProgramacao(rs.getInt("P.IDPROGRAMACAO"));
+                p.setProgramacao(new Programacao());
+                p.getProgramacao().setId(rs.getInt("P.IDPROGRAMACAO"));
+                p.getProgramacao().pegarProgramacao();
                 p.setAssento(new Assento());
                 p.getAssento().setFileira(rs.getInt("A.FILEIRA"));
                 p.getAssento().setCadeira(rs.getInt("A.CADEIRA"));

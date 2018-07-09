@@ -36,7 +36,8 @@ public class CheckarCancelar extends HttpServlet {
         if(tipo.equals("checkin")){
             int row = Integer.parseInt(selected.substring(8));
             System.out.println(row);
-            p.setCodigo(Integer.parseInt(request.getParameter("codPassagem["+row+"]")));
+            p.setCodigo(Integer.parseInt(request.getParameterValues("codPassagem[]")[row]));
+            System.out.println(p.getCodigo());
             if(p.buscarDados() && p.checkin()){
                 request.setAttribute("Mensagem", "Checkin efetuado com sucesso!");
                 System.out.println("Que não vai dá pai");
@@ -48,7 +49,7 @@ public class CheckarCancelar extends HttpServlet {
         }
         else{
             int row = Integer.parseInt(selected.substring(9));
-            p.setCodigo(Integer.parseInt(request.getParameter("codPassagem["+row+"]")));
+            p.setCodigo(Integer.parseInt(request.getParameterValues("codPassagem[]")[row]));
             if(p.buscarDados() && p.cancelar() && p.estornarValorPassagem()){
                 float valor = p.getValor();
                 p.buscarDados();

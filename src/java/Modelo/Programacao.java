@@ -98,8 +98,9 @@ public class Programacao {
         return true;
     }
     
-    public boolean pegarProgramacao(int ID){
+    public boolean pegarProgramacao(){
         ProgramacaoDAO p = new ProgramacaoDAO();
+        p.pesquisar(this);
         return true;
     }
 }

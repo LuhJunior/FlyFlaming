@@ -15,13 +15,25 @@ $("form[name='compraPassagem']").submit( function(event) {
     }
     
     if ($("#dateIda").val() > $("#dateVolta").val()) {
-        ShowMensagemErro("A data de ida selecionada e maior do que a da volta.");
+        ShowMensagemErro("A data de ida selecionada é maior do que a da volta.");
         console.log('FALSO');
         event.preventDefault();
     }
     
     if ($("#dateIda").val() === $("#dateVolta").val()) {
         ShowMensagemErro("A data de ida selecionada e igual a da volta.");
+        console.log('FALSO');
+        event.preventDefault();
+    }
+    
+    if (ComparaDataAtual($("#dateIda").val()) == 1) {
+        ShowMensagemErro("Data de ida é menor que a data atual.");
+        console.log('FALSO');
+        event.preventDefault();
+    }
+    
+    if (ComparaDataAtual($("#dateVolta").val()) == 1) {
+        ShowMensagemErro("Data de volta menor que a data atual.");
         console.log('FALSO');
         event.preventDefault();
     }
@@ -94,14 +106,72 @@ function verificarCamposTrocarSenha(){
     return Campos === "" && trocarSenhaForm.NovaSenha.value == trocarSenhaForm.RepetirNovaSenha.value;
 }
     
-function verificarCheckarCancelar(){
-    var valor = document.getElementsByName("submit");
-    var checkin = document.getElementsByName("Checkin["+valor.value+"]");
-    var cancelamento = document.getElementsByName("Cancelamento["+valor.value+"]");
-    ShowMensagemErro(checkin.value);
-    ShowMensagem("teste");
-    return checkin.value == "Pedente" && cancelamento.value == "Pendente";
+function verificarCheckarCancelar(valor){
+    var i, nome
+    if(valor.substring(0,7) == "checkin"){
+        nome = "Checkin"
+        i = valor.substring(8, valor.legth);
+    }
+    else{
+        nome = "Cancelamento"
+        i = valor.substring(9, valor.legth);
+    }
+    var checkin = document.getElementsByName("Checkin[]");
+    var cancelamento = document.getElementsByName("Cancelamento[]");
+    //ShowMensagemErro(checkin.value);
+    if(nome == "Checkin" && checkin[i].value != "Pendente") ShowMensagemErro("O checkin já foi feito!");
+    else if(nome == "Checkin" && cancelamento[i].value != "Pendente") ShowMensagemErro("Não pode fazer checkin em uma passagem cancelada!");
+    else if(nome == "Cancelamento" && cancelamento[i].value != "Pendente") ShowMensagemErro("A Passagem já está cancelada!");
+    else if(checkin[i].value != "Pendente") ShowMensagemErro("Não pode cancelar depois de ter feito checkin!");
+    else{
+        var DataSaida = document.getElementsByName("DataSaida[]");
+        var HoraSaida = document.getElementsByName("HoraSaida[]");
+        if(nome == "Checkin"){
+            if(ComparaDataHoraAtual(ToYMD(DataSaida[i].value), HoraSaida[i].value) == 1){
+                ShowMensagemErro("Não pode fazer checkin depois do horário do voo!");
+                return false;
+            }
+        }
+        else{
+            if(ComparaDataHoraAtual(ToYMD(DataSaida[i].value), HoraSaida[i].value) == 1){
+                ShowMensagemErro("Não pode cancelar depois do horário do voo!");
+                return false;
+            }
+        }
+    }
+    return checkin[i].value == "Pendente" && cancelamento[i].value == "Pendente";
 }
+
+function ComparaDataHoraAtual(Data, Hora){
+    Data = Data.split("-")
+    Hora = Hora.split(":")
+    var d = new Date(Data[0], Data[1]-1, Data[2], Hora[0], Hora[1], Hora[2]);
+    var d2 = new Date();
+    if(d2 < d) return -1
+    else if (d == d2) return 0
+    else return 1
+}
+
+function ComparaDataAtual(Data){
+    Data = Data.split("-")
+    var d = new Date(Data[0], Data[1]-1, Data[2]);
+    var d2 = new Date();
+    if(d2 < d) return -1
+    else if (d == d2) return 0
+    else return 1
+}
+
+function ToYMD(data){
+    data = data.split("/")
+    return data[2]+"-"+data[1]+"-"+data[0];
+    
+}
+
+function ToDMY(data){
+    data = data.split("-")
+    return data[2]+"-"+data[1]+"-"+data[0];
+}
+
 function fMasc(objeto, mascara) {
     obj=objeto;
     masc=mascara;
